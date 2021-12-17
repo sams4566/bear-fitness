@@ -1,0 +1,392 @@
+[
+    {
+        "pk": 1,
+        "model": "items.item",
+        "fields": {
+            "category": 1,
+            "name": "Vital Seamless Leggings",
+            "bio": "It's time to make your movement streamlined and sleek in the Vital Seamless Leggings. Wear these leggings as an essential baselayer to support you through your workout, whether it's outdoors or indoors, weights or cardio. Feel supported and comfortable with contrast textures, a slim fit design and an elasticated waistband.",
+            "sku": "A1A6F-BBF3",
+            "cost": 35.00,
+            "reviews": 4.5,
+            "image": "vital_seamless_leggings.jpg"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "items.item",
+        "fields": {
+            "category": 1,
+            "name": "Element Baselayer Long Sleeve T-Shirt",
+            "bio": "The Element Baselayer Long Sleeve T-Shirt is the ultimate in athletic performance. With sweat-wicking fabrics, a baselayer fit and a form-enhancing build, you can workout confident of support, function and focus. Element, assisting your training every rep of the way.",
+            "sku": "A1A1P-GBBC",
+            "cost": 25.00,
+            "reviews": 4.7,
+            "image": "element_baselayer_long_sleeve_tshirt.jpg"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "items.item",
+        "fields": {
+            "category": 1,
+            "name": "Free Force Seamless Long Sleeve T-Shirt",
+            "bio": "Feel empowered in the Free Force Seamless Long Sleeve T-Shirt. A seamless construction and sweat-wicking fabric give you complete freedom of movement, rep after rep. And with a strong muscle fit and physique-enhancing shading, this top makes sure you feel strong and lift strong, every time you wear it.",
+            "sku": "A1A6Y-RBBD",
+            "cost": 45.00,
+            "reviews": 4.6,
+            "image": "free_force_seamless_long_sleeve_tshirt.jpg"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "items.item",
+        "fields": {
+            "category": 1,
+            "name": "Element Baselayer Shorts",
+            "bio": "Supportive, functional and physique-enhancing, the Element Baselayer Shorts have been crafted for pristine performance. Maintain freshness and focus with sweat-wicking fabrics and maintain strength and endurance with a supportive baselayer fit. Element, assisting your training every rep of the way.",
+            "sku": "A2A7Y-TBQD",
+            "cost": 20.00,
+            "reviews": 4.0,
+            "image": "element_baselayer_shorts.jpg"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "items.item",
+        "fields": {
+            "category": 1,
+            "name": "315 T-Shirt",
+            "bio": "A lightweight t-shirt, for some seriously heavy lifts. The 315 T-Shirt is seamless, breathable, and just as prepped as you are for some big lifts. A longer length makes it perfect for pairing with your weight belt, and the subtle knurling inspired detailing gives you the ultimate sleek finish. We'll bring the precision, you bring the power.",
+            "sku": "A1A4X-GBC6",
+            "cost": 35.00,
+            "reviews": 4.9,
+            "image": "315_tshirt.jpg"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "items.item",
+        "fields": {
+            "category": 2,
+            "name": "Crest Hoodie",
+            "bio": "The Crest Hoodie is an essential layer for the workout commute or to complete any gym style. Boasting a warm cotton-blend fabric, an incredibly soft interior and a minimalist design, you can’t go wrong with Crest.",
+            "sku": "A1A1K-BBBB",
+            "cost": 30.00,
+            "reviews": 4.6,
+            "image": "crest_hoodie.jpg"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "items.item",
+        "fields": {
+            "category": 2,
+            "name": "Critical 2.0 Hoodie",
+            "bio": "The Critical 2.0 Hoodie keeps the focus on training. Whether it’s to support your pre-workout stretching or for the times you just want to sweat your way through a training session, it’s the gym pullover you’ll rely on time and time again.",
+            "sku": "A1A1I-GBCN",
+            "cost": 40.00,
+            "reviews": 4.5,
+            "image": "critical_hoodie.jpg"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "items.item",
+        "fields": {
+            "category": 2,
+            "name": "Crest Padded Jacket",
+            "bio": "Wrap up for rest day in the Crest Padded Jacket. Whether you're taking a recovery walk or out running errands, this jacket doesn't just keep you warm. It's also got open pockets for storage and hip adjusters to customise your fit, so you're ready for whatever rest day brings.",
+            "sku": "A1A1W-BBBB",
+            "cost": 60.00,
+            "reviews": 4.5,
+            "image": "crest_padded_jacket.jpg"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "items.item",
+        "fields": {
+            "category": 2,
+            "name": "Crest Sweatshirt",
+            "bio": "Rest day the Crest way in this consistently comfortable and casually stylish sweatshirt. A versatile look, you can wear it anywhere and pair it with anything with confidence. Its cotton-polyester build is both incredibly soft and reliable, so you can combine relaxation and recreation with ease.",
+            "sku": "A1A2C-EBDJ",
+            "cost": 30.00,
+            "reviews": 4.5,
+            "image": "crest_sweatshirt.jpg"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "items.item",
+        "fields": {
+            "category": 2,
+            "name": "Arrival 1/4 Zip Pullover",
+            "bio": "Arrive at your workout with purpose in the Arrival 1/4 Zip Pullover. In a sleek slim fit design with long sleeves, side paneling and lightweight material, pull on this 1/4 Zip to complete your lifting look.",
+            "sku": "A1A2E-UBCY",
+            "cost": 35.00,
+            "reviews": 4.4,
+            "image": "arrival_zip_pullover.jpg"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "items.item",
+        "fields": {
+            "category": 3,
+            "name": "Apex Joggers",
+            "bio": "The Apex Joggers hybrid a technical design with a sleek aesthetic to create bottoms that elevate your conditioning capacity, no matter your starting point. Strategic mesh paneling to heat zones keeps you cool, fresh and focused; a high-stretch insert to gusset allows for total freedom of movement; and a tapered, physique-enhancing shape accentuates the rewards of your hard work.",
+            "sku": "A1A3X-BBBB",
+            "cost": 55.00,
+            "reviews": 3.1,
+            "image": "apex_joggers.jpg"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "items.item",
+        "fields": {
+            "category": 3,
+            "name": "Arrival Woven Joggers",
+            "bio": "Give some extra power, poise and purpose to your training. The Arrival Woven Joggers are focused on performance with a supportive fit, light-stretch polyester-elastane blend and customisable wear, keeping your movement weightless and your efforts effective.",
+            "sku": "A1A1X-GBBC",
+            "cost": 30.00,
+            "reviews": 4.5,
+            "image": "arrival_woven_joggers.jpg"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "items.item",
+        "fields": {
+            "category": 3,
+            "name": "Critical 2.0 Joggers",
+            "bio": "Lift with zero distractions in the Critical 2.0 Muscle Fit Joggers. Understated, comfortable and reliable, their multi-fabric construction offers the stretch to support and endure training session upon training session.",
+            "sku": "A1A7E-EBDJ",
+            "cost": 35.00,
+            "reviews": 3.4,
+            "image": "critical_joggers.jpg"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "items.item",
+        "fields": {
+            "category": 3,
+            "name": "Crest Joggers",
+            "bio": "The Crest Joggers are a bottom layer you can’t go wrong with. Whether it’s commute, rest or even a light workout, you can have full confidence in Crest with ribbed ankle cuffs and an adjustable waistband that keep in place as you move, and a super soft interior that provides relaxation and support throughout any rest day.",
+            "sku": "A1A2A-UBCY",
+            "cost": 30.00,
+            "reviews": 4.8,
+            "image": "crest_joggers.jpg"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "items.item",
+        "fields": {
+            "category": 3,
+            "name": "Arrival Knit Joggers",
+            "bio": "Arrive to your workout with purpose and style in the Arrival Knit Joggers. These slim fit knit joggers offer a comfortable adjustable drawcord waist and a sleek tapered finish, with handy pockets to go. Perfect for the gym and your journey to and from.",
+            "sku": "A1A1Y-BBBB",
+            "cost": 30.00,
+            "reviews": 4.7,
+            "image": "arrival_knit_joggers.jpg"
+        }
+    },
+    {
+        "pk": 16,
+        "model": "items.item",
+        "fields": {
+            "category": 4,
+            "name": "Essential Shorts",
+            "bio": "Keep your training functional in the Essential Muscle Fit Shorts. These essential gym shorts are made for durability and reliability above all else, with a long-lasting material, soft and comfortable fit and staple design.",
+            "sku": "A1A2N-BBBB",
+            "cost": 25.00,
+            "reviews": 4.5,
+            "image": "essential_shorts.jpg"
+        }
+    },
+    {
+        "pk": 17,
+        "model": "items.item",
+        "fields": {
+            "category": 4,
+            "name": "Crest Shorts",
+            "bio": "If rest day were a piece of clothing, it would probably be these shorts. A staple throw-on whether you plan on spending your rest day out and about, or strictly in front of the TV. A drawcord waist, slim fit and soft fabric make them exactly what you need for next rest day.",
+            "sku": "GMSH5015-CHM",
+            "cost": 25.00,
+            "reviews": 4.5,
+            "image": "crest_shorts.jpg"
+        }
+    },
+    {
+        "pk": 18,
+        "model": "items.item",
+        "fields": {
+            "category": 4,
+            "name": "Arrival Shorts",
+            "bio": "A collection to help you realise everything you’re capable of, Arrival turns exercise into performance. Ensure maximum movement throughout your training in a lightweight, high-stretch material and stay revitalised through every action with sweat-wicking properties.",
+            "sku": "A1A2G-UBCY",
+            "cost": 20.00,
+            "reviews": 4.7,
+            "image": "arrival_shorts.jpg"
+        }
+    },
+    {
+        "pk": 19,
+        "model": "items.item",
+        "fields": {
+            "category": 4,
+            "name": "Recess Shorts",
+            "bio": "It's time for a time out. The best rest day partner? It's the Recess Shorts. Slim fit shorts with a drawcord waist, open pockets and contrast piping give your rest day look that same energy you bring to your workout 'fits.",
+            "sku": "GMSH5009-AT",
+            "cost": 30.00,
+            "reviews": 5.0,
+            "image": "recess_shorts.jpg"
+        }
+    },
+    {
+        "pk": 20,
+        "model": "items.item",
+        "fields": {
+            "category": 4,
+            "name": "Critical Shorts",
+            "bio": "Tough and ready, the Critical Shorts keep things simple and do the basics well. A high-stretch elastane material coupled with an adjustable waistband supports and enables your movement while a simple design keeps you lowkey.",
+            "sku": "A1B2Q-BBBB",
+            "cost": 25.00,
+            "reviews": 4.6,
+            "image": "critical_shorts.jpg"
+        }
+    },
+    {
+        "pk": 21,
+        "model": "items.item",
+        "fields": {
+            "category": 5,
+            "name": "Critical Stringer",
+            "bio": "Critical: the reliable core of your training wardrobe. With its liberating cut and cotton-elastane blend, the Critical Stringer has the stretch to be comfortable and durable through every rep, set and workout.",
+            "sku": "A1A2P-UBCY",
+            "cost": 20.00,
+            "reviews": 4.4,
+            "image": "critical_stringer.jpg"
+        }
+    },
+    {
+        "pk": 22,
+        "model": "items.item",
+        "fields": {
+            "category": 5,
+            "name": "Bold Stringer",
+            "bio": "The Bold Stringer is loud-and-proud lifting wear. It’s reliable, with a soft, supple blend of cotton and elastane. It’s practical, with a classic racerback shape. And it’s powerful, just look at the logo front-and-centre. Wear Bold: train big.",
+            "sku": "A1A5X-GBDG",
+            "cost": 25.00,
+            "reviews": 4.9,
+            "image": "bold_stringer.jpg"
+        }
+    },
+    {
+        "pk": 23,
+        "model": "items.item",
+        "fields": {
+            "category": 5,
+            "name": "Arrival Tank",
+            "bio": "Perform more in the classic Arrival Tank. This tank boasts fundamental performance technology for next-level results, with sweat-wicking properties and a lightweight material that enables maximum movement and exertion.",
+            "sku": "A1A2T-BBBB",
+            "cost": 15.00,
+            "reviews": 4.9,
+            "image": "arrival_tank.jpg"
+        }
+    },
+    {
+        "pk": 24,
+        "model": "items.item",
+        "fields": {
+            "category": 5,
+            "name": "Arrival Marl Tank",
+            "bio": "Ensure maximum movement in the Arrival Marl Tank. It's your favourite tank reworked with the lightweight finish of a marl print to keep you cool as you perform to the max.",
+            "sku": "GMTK5506-SPBL",
+            "cost": 15.00,
+            "reviews": 4.0,
+            "image": "arrival_marl_tank.jpg"
+        }
+    },
+    {
+        "pk": 25,
+        "model": "items.item",
+        "fields": {
+            "category": 5,
+            "name": "Sport Tank",
+            "bio": "There's no holding back in the Sport Tank. Its sweat-wicking technology is designed to be moisture-wicking and fast-drying so you can stay cool and collected no matter how you train. Because when variety is your priority, you need to be ready for anything.",
+            "sku": "A1A5W-BBC8",
+            "cost": 25.00,
+            "reviews": 4.3,
+            "image": "sport_tank.jpg"
+        }
+    },
+    {
+        "pk": 26,
+        "model": "items.item",
+        "fields": {
+            "category": 6,
+            "name": "Arrival T-Shirt",
+            "bio": "The Arrival Short Sleeve T-Shirt is your admission to a new, purposeful approach to training. Created to encourage you to aspire more, perform more and achieve more, this gym top boasts fundamental performance technology for next-level results, with sweat-wicking technology and a lightweight material that enables maximum movement and exertion.",
+            "sku": "A1A2X-BBBB",
+            "cost": 20.00,
+            "reviews": 4.5,
+            "image": "arrival_tshirt.jpg"
+        }
+    },
+    {
+        "pk": 27,
+        "model": "items.item",
+        "fields": {
+            "category": 6,
+            "name": "Crest T-Shirt",
+            "bio": "The Crest T-Shirt will make you wonder how rest day could ever be this comfy. Soft cotton fabric and a chilled regular fit mean you can relax to the max no matter how you wear it.",
+            "sku": "A1A3J-WBBM",
+            "cost": 15.00,
+            "reviews": 4.9,
+            "image": "crest_tshirt.jpg"
+        }
+    },
+    {
+        "pk": 28,
+        "model": "items.item",
+        "fields": {
+            "category": 6,
+            "name": "Oversized T-Shirt",
+            "bio": "An unquestionable essential, the Oversized T-Shirt does exactly what it says on the tin. With an oversized fit, and a range of colours available, it's a must-have for any, and every, gym bag.",
+            "sku": "A1A3E-EBDJ",
+            "cost": 20.00,
+            "reviews": 4.4,
+            "image": "oversized_tshirt.jpg"
+        }
+    },
+    {
+        "pk": 29,
+        "model": "items.item",
+        "fields": {
+            "category": 6,
+            "name": "Speed Long Sleeve T-Shirt",
+            "bio": "Take your goals in your stride in the Speed Long Sleeve T-Shirt. In a streamlined, seamless fabric designed to move with you, run in comfort and ease in this heat-mapping tee. Whatever your reason for running, Speed gets you there.",
+            "sku": "GMLT5168-BK",
+            "cost": 30.00,
+            "reviews": 4.7,
+            "image": "speed_long_sleeve_tshirt.jpg"
+        }
+    },
+    {
+        "pk": 30,
+        "model": "items.item",
+        "fields": {
+            "category": 6,
+            "name": "Critical Long Sleeve T-Shirt",
+            "bio": "The Critical Muscle Fit Long Sleeve T-Shirt is a basic-yet-functional training top that gets the job done, every single time. A zero-distraction muscle fit and multi-fabric construction supports every movement, however you train.",
+            "sku": "A1A1R-UBCY",
+            "cost": 25.00,
+            "reviews": 4.9,
+            "image": "critical_long_sleeve_tshirt.jpg"
+        }
+    },
+]
