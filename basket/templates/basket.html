@@ -9,6 +9,7 @@
             {% for product in basket_items %}
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="..." /></div>
             <div class="col-md-6">
+                {{ basket_items }}
                 <div class="small mb-1">SKU: {{ product.item.sku }}</div>
                 <h1 class="display-5 fw-bolder">{{ product.item.name }}</h1>
                 <h1 class="display-5 fw-bolder">{{ product.quantity }}</h1>
