@@ -6,14 +6,16 @@ def basket_contents(request):
     total = 0
     basket = request.session.get('basket', {})
 
-    for item_id, quantity in basket.items():
+    for item_id, item_info in basket.items():
         item = get_object_or_404(Item, pk=item_id)
-        total = item.cost
-        basket_items.append({
-            'item': item,
-            'item_id': item_id,
-            'quantity': quantity,
-        })
+        for size, quantity in item_info['chosen_sizes'].items():
+            total = item.cost
+            basket_items.append({
+                'item': item,
+                'item_id': item_id,
+                'size': size,
+                'quantity': quantity,
+            })
 
     context = {
         'basket_items': basket_items,
