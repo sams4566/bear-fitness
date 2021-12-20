@@ -6,6 +6,6 @@ def all_items(request):
     items = Item.objects.all()
     
     context = {
-        'items': items
+        'items': items,
     }
     return render(request, 'all_items.html', context)

@@ -4,7 +4,7 @@
         "model": "items.category",
         "fields": {
             "name": "base_layers",
-            "display_name": "Base Layers",
+            "display_name": "Base Layers"
         }
     },
     {
@@ -12,8 +12,7 @@
         "model": "items.category",
         "fields": {
             "name": "hoodies_jackets",
-            "display_name": "Hoodies & Jackets",
-            "gender":1,
+            "display_name": "Hoodies & Jackets"
         }
     },
     {
@@ -21,7 +20,7 @@
         "model": "items.category",
         "fields": {
             "name": "joggers",
-            "display_name": "Joggers",
+            "display_name": "Joggers"
         }
     },
     {
@@ -29,7 +28,7 @@
         "model": "items.category",
         "fields": {
             "name": "shorts",
-            "display_name": "Shorts",
+            "display_name": "Shorts"
         }
     },
     {
@@ -37,7 +36,7 @@
         "model": "items.category",
         "fields": {
             "name": "tanks_stringers",
-            "display_name": "Tanks & Stringers",
+            "display_name": "Tanks & Stringers"
         }
     },
     {
@@ -45,7 +44,7 @@
         "model": "items.category",
         "fields": {
             "name": "tshirts",
-            "display_name": "T-Shirts & Tops",
+            "display_name": "T-Shirts & Tops"
         }
-    },
+    }
 ]

@@ -11288,15 +11288,19 @@ textarea.form-control-lg {
 }
 
 .home-footer {
-    width: 100%;
-    bottom: 0;
-    position: absolute;
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+}
+
+.footer-padding {
+  padding-bottom: 2000px;
 }
 
 .home-background {
-    background: no-repeat center center;;
-    background-image: url("/media/cover-photo.jpg");
-    min-height: 100% !important;
-    height: 1000px;
-    background-size: cover;
+  background: no-repeat center center;
+  background-image: url("/media/cover-photo.jpg");
+  min-height: 100% !important;
+  height: 1000px;
+  background-size: cover;
 }
