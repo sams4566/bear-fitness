@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="container">
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <div class="row">
+                {% for product in basket_items %}
+                    <h1 class="display-5 fw-bolder">{{ product.item.name }}</h1>
+                    <h1 class="display-5 fw-bolder">{{ product.quantity }}</h1>
+                    <h1 class="display-5 fw-bolder">{{ product.item_id }}</h1>
+                    <h1 class="display-5 fw-bolder">{{ product.size }}</h1>
+                    <h1 class="display-5 fw-bolder">{{ product.item.cost }}</h1>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <form action="{% url 'checkout' %}" method="POST">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>User Information</legend>
+                    <h6>Full name</h6>
+                    {{ order_form.customer_name }}
+                    <h6>Phone Number</h6>
+                    {{ order_form.telephone }}
+                    <h6>Email</h6>
+                    {{ order_form.email }}
+                </fieldset>
+                <fieldset>
+                    <legend>Postal Address</legend>
+                    <h6>Address Line 1</h6>
+                    {{ order_form.address_line1 }}
+                    <h6>Address Line 2</h6>
+                    {{ order_form.address_line2 }}
+                    <h6>City</h6>
+                    {{ order_form.city }}
+                    <h6>County</h6>
+                    {{ order_form.county }}
+                    <h6>Country</h6>
+                    {{ order_form.country }}
+                    <h6>Postcode</h6>
+                    {{ order_form.postcode }}
+                </fieldset>
+                <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                    Complete Payment
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
