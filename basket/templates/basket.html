@@ -36,6 +36,13 @@
                     </button>
                     <input type="hidden" name="size_id" value="{{ product.size }}">
                 </form>
+                <form class="d-flex" action="{% url 'delete_basket_item' product.item_id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                        Delete
+                    </button>
+                    <input type="hidden" name="size_id" value="{{ product.size }}">
+                </form>
                 <div class="fs-5 mb-5">
                     <span>£{{ product.item.cost }}</span>
                 </div>
@@ -47,4 +54,3 @@
 </section>
 
 {% endblock %}
-

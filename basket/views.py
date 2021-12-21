@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponse
 
 
 
@@ -37,6 +37,21 @@ def update_basket(request, item_id):
     else:
         basket[item_id]['chosen_sizes'][size] = quantity
         del basket[item_id]['chosen_sizes'][current_size]
+        if not basket[item_id]['chosen_sizes']:
+            basket.pop(item_id)
+
+    request.session['basket'] = basket
+
+    return redirect(reverse('current_basket'))
+
+
+def delete_basket_item(request, item_id):
+    size = request.POST['size_id']
+    basket = request.session.get('basket', {})
+
+    del basket[item_id]['chosen_sizes'][size]
+    if not basket[item_id]['chosen_sizes']:
+        basket.pop(item_id)
 
     request.session['basket'] = basket
 
