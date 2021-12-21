@@ -43,7 +43,11 @@
                     <h6>Postcode</h6>
                     {{ order_form.postcode }}
                 </fieldset>
-                <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                <fieldset>
+                    <legend>Card Details</legend>
+                    <div id="card-element"></div>
+                </fieldset>
+                <button class="btn btn-outline-dark flex-shrink-0 my-3" type="submit">
                     Complete Payment
                 </button>
             </form>
@@ -51,4 +55,37 @@
     </div>
 </section>
 
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"var_stripe_public_key" }}
+    <script type="text/javascript">
+        var stripePublicKey = $('#var_stripe_public_key').text().slice(1, -1)
+        var stripe = Stripe(stripePublicKey);
+        var elements = stripe.elements();
+        var card = elements.create('card', {
+            style: {
+                base: {
+                    iconColor: '#000000',
+                    color: '#000000',
+                    fontWeight: '500',
+                    fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+                    fontSize: '16px',
+                    fontSmoothing: 'antialiased',
+                    ':-webkit-autofill': {
+                        color: '#000000',
+                    },
+                    '::placeholder': {
+                        color: '#000000'
+                    }
+                },
+                invalid: {
+                    iconColor: '#000000',
+                    color: '#000000',
+                }
+            },
+        });
+        card.mount('#card-element')
+    </script>
 {% endblock %}
