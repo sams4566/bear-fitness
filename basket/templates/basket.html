@@ -17,6 +17,25 @@
                 <h1 class="display-5 fw-bolder">{{ product.item.name }}</h1>
                 <h1 class="display-5 fw-bolder">{{ product.quantity }}</h1>
                 <h1 class="display-5 fw-bolder">{{ product.item_id }}</h1>
+                <h1 class="display-5 fw-bolder">{{ product.size }}</h1>
+                <a class="btn btn-edit delete-product">Update</a>
+                <form class="d-flex" action="{% url 'update_basket' product.item_id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="col-6">
+                        <h3>Sizes:</h3>
+                        <select name="item_size">
+                            <option value="xs">XS</option>
+                            <option value="s">S</option>
+                            <option value="m">M</option>
+                            <option value="l">L</option>
+                            <option value="xl">XL</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                        Update
+                    </button>
+                    <input type="hidden" name="size_id" value="{{ product.size }}">
+                </form>
                 <div class="fs-5 mb-5">
                     <span>£{{ product.item.cost }}</span>
                 </div>
@@ -28,3 +47,4 @@
 </section>
 
 {% endblock %}
+
