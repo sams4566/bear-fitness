@@ -25,9 +25,18 @@ class Order(models.Model):
     def _create_order_number(self):
         return uuid.uuid4().hex.upper()
 
+    def add_order_number(self, *args, **kwargs):
+        if not self.order_number:
+            self.order_number = self._create_order_number()
+        super().save(*args, **kwargs)
+
+
 class OrderItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, blank=False, null=False)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=False, null=False, related_name='orderitems')
     item_size = models.CharField(max_length=3, null=False, blank=False)
     item_cost = models.DecimalField(max_digits=6, decimal_places=2, editable=False, blank=False, null=False)
     quantity = models.IntegerField(blank=False, null=False, default=0)
+
+    def __str__(self):
+        return f'Order Number: {self.order.order_number} SKU: {self.item.sku}'

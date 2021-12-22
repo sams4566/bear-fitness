@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .forms import OrderForm
 from django.conf import settings
 from basket.contexts import basket_contents
 from items.models import Item
-from .models import OrderItem
+from .models import OrderItem, Order
 
 import stripe
 
@@ -24,6 +24,7 @@ def checkout(request):
         )
         basket = request.session.get('basket', {})
         order_form = OrderForm()
+        print(intent)
 
     else:
         basket = request.session.get('basket', {})
@@ -41,21 +42,42 @@ def checkout(request):
         }
         order_form = OrderForm(form_info)
         if order_form.is_valid():
-            order = order_form.save()
+            order = order_form.save(commit=False)
+            order_form.order_number = order.add_order_number()
+            order_cost = 0
             for item_id, item_info in basket.items():
                 item = get_object_or_404(Item, pk=item_id)
                 for size, quantity in item_info['chosen_sizes'].items():
+                    item_cost = item.cost
+                    order_cost += item_cost
                     order_item = OrderItem(
                         item=item,
-                        size=size,
+                        item_size=size,
                         quantity=quantity,
                         order=order,
+                        item_cost=item_cost,
                     )
+                    order_item.save()
+            order.order_cost = order_cost
+            order = order_form.save()
+            order_number = order.order_number
+        return redirect('checkout_confirmation', order_number=order_number)
 
     template = 'checkout/checkout.html'
     context = {
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
+    }
+    return render(request, template, context)
+
+
+def checkout_confirmation(request, order_number):
+    del request.session['basket']
+    order = get_object_or_404(Order, order_number=order_number)
+
+    template = 'checkout/checkout_confirmation.html'
+    context = {
+        'order': order,
     }
     return render(request, template, context)
