@@ -6,6 +6,7 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
+            <a class="btn btn-outline-dark flex-shrink-0" href="{% url 'checkout' %}">Checkout</a>
             {% for product in basket_items %}
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="..." /></div>
             <div class="col-md-6">
