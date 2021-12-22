@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-12 col-lg-6">
-            <form action="{% url 'checkout' %}" method="POST">
+            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
                 <fieldset>
                     <legend>User Information</legend>
@@ -47,7 +47,7 @@
                     <legend>Card Details</legend>
                     <div id="card-element"></div>
                 </fieldset>
-                <button class="btn btn-outline-dark flex-shrink-0 my-3" type="submit">
+                <button class="btn btn-outline-dark flex-shrink-0 my-3" type="submit" id="submit-button">
                     Complete Payment
                 </button>
             </form>
@@ -59,8 +59,10 @@
 
 {% block postloadjs %}
     {{ block.super }}
+    {{ client_secret|json_script:"var_client_secret" }}
     {{ stripe_public_key|json_script:"var_stripe_public_key" }}
     <script type="text/javascript">
+        // Create payment input
         var stripePublicKey = $('#var_stripe_public_key').text().slice(1, -1)
         var stripe = Stripe(stripePublicKey);
         var elements = stripe.elements();
@@ -87,5 +89,26 @@
             },
         });
         card.mount('#card-element')
+
+        // Create payment submission
+        var form = document.getElementById('payment-form');
+        var clientSecret = $('#var_client_secret').text().slice(1, -1);
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: card,
+                }
+            }).then(function(result) {
+                if (result.error) {
+                    console.log(result.error.message);
+                } else {
+                    if (result.paymentIntent.status === 'succeeded') {
+                        form.submit();
+                    }
+                }
+            });
+        });
+
     </script>
 {% endblock %}
