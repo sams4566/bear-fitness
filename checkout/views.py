@@ -1,11 +1,21 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import HttpResponse, render, get_object_or_404, redirect, reverse
 from .forms import OrderForm
+from django.views.decorators.http import require_POST
 from django.conf import settings
 from basket.contexts import basket_contents
 from items.models import Item
 from .models import OrderItem, Order
 
 import stripe
+
+@require_POST
+def save_checkout_info(request):
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    pid = request.POST.get('client_secret').split('_secret')[0]
+    stripe.PaymentIntent.modify(pid, metadata={
+        'basket': json.dumps(request.session.get('basket', {})),
+    })
+    return HttpResponse(status=200)
 
 
 def checkout(request):

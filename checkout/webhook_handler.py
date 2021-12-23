@@ -11,6 +11,10 @@ class WebhookHandler:
             status=200)
 
     def payment_intent_succeeded(self, event):
+        intent = event.data.object
+        payment_id = intent.id
+        basket = intent.metadata.basket
+
         return HttpResponse(
             content=f'PaymentIntent was successful: {event["type"]}',
             status=200)
