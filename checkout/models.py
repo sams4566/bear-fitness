@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Sum
 from django.conf import settings
+from django_countries.fields import CountryField
 from items.models import Item
 import uuid
 
@@ -15,7 +16,7 @@ class Order(models.Model):
     address_line2 = models.CharField(max_length=100, blank=True, null=True)
     city = models.CharField(max_length=50, blank=False, null=False)
     county = models.CharField(max_length=100, blank=True, null=True)
-    country = models.CharField(max_length=50, blank=False, null=False)
+    country = CountryField(blank=False, null=False, blank_label='Country *')
     postcode = models.CharField(max_length=15, blank=False, null=False)
 
     def adjust_total(self):
