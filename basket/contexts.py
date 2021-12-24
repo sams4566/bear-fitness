@@ -9,7 +9,8 @@ def basket_contents(request):
     for item_id, item_info in basket.items():
         item = get_object_or_404(Item, pk=item_id)
         for size, quantity in item_info['chosen_sizes'].items():
-            total = item.cost
+            item_cost = item.cost
+            total += item_cost
             basket_items.append({
                 'item': item,
                 'item_id': item_id,
