@@ -11304,3 +11304,7 @@ textarea.form-control-lg {
   height: 1000px;
   background-size: cover;
 }
+
+#sizes_selection {
+  text-transform: capitalize;
+}

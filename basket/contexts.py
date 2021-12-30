@@ -11,10 +11,12 @@ def basket_contents(request):
         for size, quantity in item_info['chosen_sizes'].items():
             item_cost = item.cost
             total += item_cost
+            placeholder_size = size.upper()
             basket_items.append({
                 'item': item,
                 'item_id': item_id,
                 'size': size,
+                'placeholder_size': placeholder_size,
                 'quantity': quantity,
             })
 

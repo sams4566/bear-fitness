@@ -21,7 +21,7 @@ def add_to_wishlist(request, item_id):
     if request.method == 'POST':
         item = get_object_or_404(Item, pk=item_id)
         wishlist_form = Wishlist()
-        wishlist_form.item_size = request.POST['item_size']
+        wishlist_form.size = request.POST['item_size']
         wishlist_form.item = item
         wishlist_form.customer_name = request.user
         wishlist_form.quantity = 1

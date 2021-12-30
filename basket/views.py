@@ -10,6 +10,9 @@ def add_to_basket(request, item_id):
 
     quantity = 1
     size = request.POST['item_size']
+    print('hello')
+    print(size)
+    print('hello')
     basket = request.session.get('basket', {})
 
     if item_id in list(basket.keys()):

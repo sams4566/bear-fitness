@@ -4,52 +4,52 @@
 {% block content %}
 
 <section class="py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <a class="btn btn-outline-dark flex-shrink-0" href="{% url 'checkout' %}">Checkout</a>
-            {% for product in basket_items %}
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="..." /></div>
-            <div class="col-md-6">
-                {{ basket_items }}
-                <br>
-                <br>
-                {{ request.session.basket }}
-                <div class="small mb-1">SKU: {{ product.item.sku }}</div>
-                <h1 class="display-5 fw-bolder">{{ product.item.name }}</h1>
-                <h1 class="display-5 fw-bolder">{{ product.quantity }}</h1>
-                <h1 class="display-5 fw-bolder">{{ product.item_id }}</h1>
-                <h1 class="display-5 fw-bolder">{{ product.size }}</h1>
-                <a class="btn btn-edit delete-product">Update</a>
-                <form class="d-flex" action="{% url 'update_basket' product.item_id %}" method="POST">
-                    {% csrf_token %}
-                    <div class="col-6">
-                        <h3>Sizes:</h3>
-                        <select name="item_size">
-                            <option value="xs">XS</option>
-                            <option value="s">S</option>
-                            <option value="m">M</option>
-                            <option value="l">L</option>
-                            <option value="xl">XL</option>
-                        </select>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                {% for product in basket_items %}
+                <div class="row py-2">
+                    <div class="col-4"><img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="..." /></div>
+                    <div class="col-8">
+                        <div class="small mb-1 row">SKU: {{ product.item.sku }}</div>
+                        <h2 class="display-5 fw-bolder row">{{ product.item.name }}</h2>
+                        <h5>£{{ product.item.cost }}</h5>
+                        <form class="d-flex row" action="{% url 'update_basket' product.item_id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <h3 class="col-3">Sizes:</h3>
+                                <select name="item_size" class="col-2">
+                                    <option value="none" selected disabled hidden><p id="sizes_selection">{{ product.placeholder_size }}</p></option>
+                                    <option value="xs">XS</option>
+                                    <option value="s">S</option>
+                                    <option value="m">M</option>
+                                    <option value="l">L</option>
+                                    <option value="xl">XL</option>
+                                </select>
+                                <button class="btn btn-outline-dark flex-shrink-0 col-3 offset-1" type="submit">
+                                    Update Size
+                                </button>
+                            </div>
+                            <input type="hidden" name="size_id" value="{{ product.size }}">
+                        </form>
+                        <form class="d-flex" action="{% url 'delete_basket_item' product.item_id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                                Delete
+                            </button>
+                            <input type="hidden" name="size_id" value="{{ product.size }}">
+                        </form>
                     </div>
-                    <button class="btn btn-outline-dark flex-shrink-0" type="submit">
-                        Update
-                    </button>
-                    <input type="hidden" name="size_id" value="{{ product.size }}">
-                </form>
-                <form class="d-flex" action="{% url 'delete_basket_item' product.item_id %}" method="POST">
-                    {% csrf_token %}
-                    <button class="btn btn-outline-dark flex-shrink-0" type="submit">
-                        Delete
-                    </button>
-                    <input type="hidden" name="size_id" value="{{ product.size }}">
-                </form>
-                <div class="fs-5 mb-5">
-                    <span>£{{ product.item.cost }}</span>
                 </div>
-                <p class="lead">{{ product.item.bio }}</p>
+                {% endfor %}
             </div>
-            {% endfor %}
+            <div class="col-4">
+                <div class="row">
+                    <h1>Total cost:</h1>
+                    <h2>{{ total }}</h2>
+                    <a class="btn btn-outline-dark flex-shrink-0" href="{% url 'checkout' %}">Checkout</a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
