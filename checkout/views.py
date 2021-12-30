@@ -5,6 +5,7 @@ from django.conf import settings
 from basket.contexts import basket_contents
 from items.models import Item
 from .models import OrderItem, Order
+from django.contrib.auth.models import User
 
 import json
 import stripe
@@ -94,5 +95,15 @@ def checkout_confirmation(request, order_number):
     template = 'checkout/checkout_confirmation.html'
     context = {
         'order': order,
+    }
+    return render(request, template, context)
+
+
+def profile(request, customer_name_id):
+    orders = Order.objects.all().filter(customer_name_id=customer_name_id)
+
+    template = 'checkout/profile.html'
+    context = {
+        'orders': orders,
     }
     return render(request, template, context)

@@ -3,12 +3,13 @@ from django.db.models import Sum
 from django.conf import settings
 from django_countries.fields import CountryField
 from items.models import Item
+from django.contrib.auth.models import User
 import uuid
 
 class Order(models.Model):
     order_number = models.CharField(max_length=40, editable=False, null=False)
     stripe_payment_id = models.CharField(max_length=250, default='', blank=False, null=False)
-    customer_name = models.CharField(max_length=55, blank=False, null=False)
+    customer_name = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     order_cost = models.DecimalField(max_digits=15, decimal_places=2, default=0, null=False)
     email = models.EmailField(max_length=250, blank=False, null=False)
