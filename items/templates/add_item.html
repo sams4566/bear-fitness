@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Header-->
+<header class="bg-dark py-5 header-photo">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Add Product</h1>
+        </div>
+    </div>
+</header>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <form action="{{ views.add_item }}" method="POST">
+            {% csrf_token %}
+            <div class="row pt-3">SKU:</div>
+            <div class="row">{{ form.sku }}</div>
+            <div class="btn btn-primary content-width mx-auto" type="submit">Add Item</div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

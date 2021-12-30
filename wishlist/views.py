@@ -15,7 +15,7 @@ def wishlist(request, user_id):
     }
     return render(request, template, context)
 
-
+ 
 def add_to_wishlist(request, item_id):
     if request.method == 'POST':
         item = get_object_or_404(Item, pk=item_id)

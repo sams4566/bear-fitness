@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Item, Category
+from .forms import ItemForm
 
 
 def all_items(request):
@@ -37,3 +38,11 @@ def item_info(request, item_id):
         'similar_items': similar_items,
     }
     return render(request, 'item_info.html', context)
+
+
+def add_item(request):
+    form = ItemForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'add_item.html', context)
