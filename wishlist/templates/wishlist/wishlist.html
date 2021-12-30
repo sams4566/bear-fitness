@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="container">
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <div class="row">
+                {% for item in wishlist_items %}
+                    <h1 class="display-5 fw-bolder">{{ item.item.name }}</h1>
+                    <h1 class="display-5 fw-bolder">{{ item.quantity }}</h1>
+                    <h1 class="display-5 fw-bolder">{{ item.item_id }}</h1>
+                    <h1 class="display-5 fw-bolder">{{ item.size }}</h1>
+                    <h1 class="display-5 fw-bolder">{{ item.item.cost }}</h1>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

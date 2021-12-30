@@ -27,6 +27,10 @@
                             <option value="xl">XL</option>
                         </select>
                     </div>
+                    <button class="btn btn-outline-dark flex-shrink-0" type="submit" formaction="{% url 'add_to_wishlist' item.id %}">
+                        <i class="bi-cart-fill me-1"></i>
+                        Add to wishlist
+                    </button>
                     <button class="btn btn-outline-dark flex-shrink-0" type="submit">
                         <i class="bi-cart-fill me-1"></i>
                         Add to basket
