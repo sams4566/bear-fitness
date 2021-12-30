@@ -8,11 +8,14 @@
         <div class="col-12 col-lg-6">
             <div class="row">
                 {% for product in basket_items %}
-                    <h1 class="display-5 fw-bolder">{{ product.item.name }}</h1>
-                    <h1 class="display-5 fw-bolder">{{ product.quantity }}</h1>
-                    <h1 class="display-5 fw-bolder">{{ product.item_id }}</h1>
-                    <h1 class="display-5 fw-bolder">{{ product.size }}</h1>
-                    <h1 class="display-5 fw-bolder">{{ product.item.cost }}</h1>
+                <div class="row py-2">
+                    <div class="col-4"><img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="..." /></div>
+                    <div class="col-8">
+                        <div class="small mb-1 row">SKU: {{ product.item.sku }}</div>
+                        <h2 class="display-5 fw-bolder row">{{ product.item.name }}</h2>
+                        <h5>£{{ product.item.cost }}</h5>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
         </div>

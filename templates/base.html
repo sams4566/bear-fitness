@@ -28,11 +28,11 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% if user.is_authenticated %}
                             <li><a class="dropdown-item" href="#!">My Details</a></li>
-                            <li><a class="dropdown-item" href="#!">My Orders</a></li>
-                            <li><a class="dropdown-item" href="#!">Logout</a></li>
+                            <li><a class="dropdown-item" href="{% url 'profile' user.id %}">My Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                             {% else %}
-                            <li><a class="dropdown-item" href="#!">Sign up</a></li>
-                            <li><a class="dropdown-item" href="#!">Login</a></li>
+                            <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign up</a></li>
+                            <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
                             {% endif %}
                         </ul>
                     </li>
@@ -41,12 +41,12 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{% url 'all_items' %}">All Products</a></li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#!">Base Layers</a></li>
-                            <li><a class="dropdown-item" href="#!">Hoodies & Jackets</a></li>
-                            <li><a class="dropdown-item" href="#!">Joggers</a></li>
-                            <li><a class="dropdown-item" href="#!">Shorts</a></li>
-                            <li><a class="dropdown-item" href="#!">Tanks & Stringers</a></li>
-                            <li><a class="dropdown-item" href="#!">T-Shirts & Tops</a></li>
+                            <li><a class="dropdown-item" href="{% url 'all_items' %}?category=base_layers">Base Layers</a></li>
+                            <li><a class="dropdown-item" href="{% url 'all_items' %}?category=hoodies_jackets">Hoodies & Jackets</a></li>
+                            <li><a class="dropdown-item" href="{% url 'all_items' %}?category=joggers">Joggers</a></li>
+                            <li><a class="dropdown-item" href="{% url 'all_items' %}?category=shorts">Shorts</a></li>
+                            <li><a class="dropdown-item" href="{% url 'all_items' %}?category=tanks_stringers">Tanks & Stringers</a></li>
+                            <li><a class="dropdown-item" href="{% url 'all_items' %}?category=tshirts">T-Shirts & Tops</a></li>
                         </ul>
                     </li>
                 </ul>
