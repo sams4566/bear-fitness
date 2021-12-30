@@ -5,7 +5,6 @@ from items.models import Item
 from django.shortcuts import get_object_or_404, redirect
 
 
-# Create your views here.
 def wishlist(request, user_id):
     print(user_id)
     wishlist_items = Wishlist.objects.all().filter(customer_name_id=user_id)
@@ -29,3 +28,10 @@ def add_to_wishlist(request, item_id):
         wishlist_form.save()
         user_id = request.user.id
         return redirect('wishlist', user_id=user_id)
+
+
+def delete_wishlist_item(request, wishlist_item_id):
+    wishlist_item = get_object_or_404(Wishlist, id=wishlist_item_id)
+    user_id = wishlist_item.customer_name.id
+    wishlist_item.delete()
+    return redirect('wishlist', user_id=user_id)

@@ -38,6 +38,13 @@
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'item_info' product.item.id %}">View item</a></div>
                     </div>
+                    <form class="d-flex" action="{% url 'delete_wishlist_item' product.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                            Delete
+                        </button>
+                        <input type="hidden" name="size_id" value="{{ product.size }}">
+                    </form>
                 </div>
             </div>
             {% endfor %}
