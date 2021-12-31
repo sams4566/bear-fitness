@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Item, Category
-from .forms import AddItemForm
+from .forms import ItemForm
 
 
 def all_items(request):
@@ -41,22 +41,40 @@ def item_info(request, item_id):
 
 
 def add_item(request):
-    form = AddItemForm()
+    form = ItemForm()
     if request.method == "POST":
-        form = AddItemForm(request.POST, request.FILES)
+        form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            items = list(Item.objects.all())
-            def sort_item(item):
-                return item.name
-            items.sort(key=sort_item)
-            all_products_category = 'All Products'
+            item = form.save()
+            category = item.category
+            similar_items = Item.objects.all().filter(category=category)
             context = {
-                'items': items,
-                'all_products_category': all_products_category,
+                'item': item,
+                'similar_items': similar_items,
             }
-            return render(request, 'all_items.html', context)
+            return render(request, 'item_info.html', context)
     context = {
         'form': form,
     }
     return render(request, 'add_item.html', context)
+
+
+def edit_item(request, item_id):
+    item = get_object_or_404(Item, pk=item_id)
+    form = ItemForm(instance=item)
+    if request.method == "POST":
+        form = ItemForm(request.POST, request.FILES, instance=item)
+        if form.is_valid():
+            item = form.save()
+            category = item.category
+            similar_items = Item.objects.all().filter(category=category)
+            context = {
+                'item': item,
+                'similar_items': similar_items,
+            }
+            return render(request, 'item_info.html', context)
+    context = {
+        'form': form,
+        'item': item,
+    }
+    return render(request, 'edit_item.html', context)
