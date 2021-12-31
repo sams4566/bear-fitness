@@ -10,6 +10,7 @@ class Order(models.Model):
     order_number = models.CharField(max_length=40, editable=False, null=False)
     stripe_payment_id = models.CharField(max_length=250, default='', blank=False, null=False)
     customer_name = models.ForeignKey(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=50, blank=False, null=False)
     date = models.DateTimeField(auto_now_add=True)
     order_cost = models.DecimalField(max_digits=15, decimal_places=2, default=0, null=False)
     email = models.EmailField(max_length=250, blank=False, null=False)

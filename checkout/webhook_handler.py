@@ -52,7 +52,7 @@ class WebhookHandler:
         else:
             order = None
             order = Order.objects.create(
-                customer_name=billing_details.name,
+                full_name=billing_details.name,
                 email=billing_details.email,
                 telephone=billing_details.phone,
                 address_line1=billing_details.address.line1,

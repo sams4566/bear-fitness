@@ -10,10 +10,10 @@ class OrderItemAdmin(admin.TabularInline):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('order_number', 'stripe_payment_id', 'order_cost', 
-                    'customer_name', 'date',)
+                    'customer_name', 'full_name', 'date',)
 
     fields = ('order_number', 'stripe_payment_id', 'customer_name', 
-              'date', 'order_cost', 'email', 'telephone', 
+              'full_name', 'date', 'order_cost', 'email', 'telephone', 
               'address_line1', 'address_line2', 'city', 'county', 
               'country', 'postcode',)
 

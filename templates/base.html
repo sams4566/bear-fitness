@@ -29,11 +29,11 @@
                             {% if user.is_superuser %}
                             <li><a class="dropdown-item" href="{% url 'add_item' %}">Add Item</a></li>
                             <li><a class="dropdown-item" href="#!">My Details</a></li>
-                            <li><a class="dropdown-item" href="{% url 'profile' user.id %}">My Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'orders' user.id %}">My Orders</a></li>
                             <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                             {% elif user.is_authenticated %}
                             <li><a class="dropdown-item" href="#!">My Details</a></li>
-                            <li><a class="dropdown-item" href="{% url 'profile' user.id %}">My Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'orders' user.id %}">My Orders</a></li>
                             <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                             {% else %}
                             <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign up</a></li>

@@ -43,7 +43,8 @@ def checkout(request):
         basket = request.session.get('basket', {})
 
         form_info = {
-            'customer_name': request.POST['customer_name'],
+            'customer_name': request.user,
+            'full_name': request.POST['full_name'],
             'telephone': request.POST['telephone'],
             'email': request.POST['email'],
             'address_line1': request.POST['address_line1'],
@@ -99,10 +100,10 @@ def checkout_confirmation(request, order_number):
     return render(request, template, context)
 
 
-def profile(request, customer_name_id):
+def orders(request, customer_name_id):
     orders = Order.objects.all().filter(customer_name_id=customer_name_id)
 
-    template = 'checkout/profile.html'
+    template = 'checkout/orders.html'
     context = {
         'orders': orders,
     }
