@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                {% for product in order_items %}
+                <div class="row py-2">
+                    <div class="col-4"><img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="..." /></div>
+                    <div class="col-8">
+                        <div class="small mb-1 row">SKU: {{ product.item.sku }}</div>
+                        <h2 class="display-5 fw-bolder row">{{ product.item.name }}</h2>
+                        <h5>£{{ product.item_cost }}</h5>
+                        <h5>{{ product.item_size }}</h5>
+                        <h5>{{ product.quantity }}</h5>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-4">
+                {% for x in order %}
+                <div class="row">
+                    <h1>Total cost:</h1>
+                    <h4>£{{ x.order_cost }}</h4>
+                    <h6>Full Name</h6>
+                    <h4>{{ x.full_name }}</h4>
+                    <h6>Date</h6>
+                    <h4>{{ x.date }}</h4>
+                    <h6>Email</h6>
+                    <h4>{{ x.email }}</h4>
+                    <h6>Phone Number</h6>
+                    <h4>{{ x.telephone }}</h4>
+                    <h6>Address Line 1</h6>
+                    <h4>{{ x.address_line1 }}</h4>
+                    <h6>Address Line 4</h6>
+                    <h4>{{ x.address_line2 }}</h4>
+                    <h6>City</h6>
+                    <h4>{{ x.city }}</h4>
+                    <h6>County</h6>
+                    <h4>{{ x.county }}</h4>
+                    <h6>Country</h6>
+                    <h4>{{ x.country }}</h4>
+                    <h6>Postcode</h6>
+                    <h4>{{ x.postcode }}</h4>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

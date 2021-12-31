@@ -92,6 +92,9 @@ def checkout(request):
 def checkout_confirmation(request, order_number):
     del request.session['basket']
     order = get_object_or_404(Order, order_number=order_number)
+    print('hello')
+    print(order)
+    print('hello')
 
     template = 'checkout/checkout_confirmation.html'
     context = {
@@ -106,5 +109,18 @@ def orders(request, customer_name_id):
     template = 'checkout/orders.html'
     context = {
         'orders': orders,
+    }
+    return render(request, template, context)
+
+
+def order_summary(request, order_number):
+    order = Order.objects.all().filter(order_number=order_number)
+    order1 = get_object_or_404(Order, order_number=order_number)
+    order_items = order1.orderitems.all()
+
+    template = 'checkout/order_summary.html'
+    context = {
+        'order': order,
+        'order_items': order_items,
     }
     return render(request, template, context)
