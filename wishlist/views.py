@@ -3,6 +3,7 @@ from wishlist.models import Wishlist
 from django.contrib.auth.models import User
 from items.models import Item
 from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
 
 
 def wishlist(request, user_id):
@@ -17,9 +18,26 @@ def wishlist(request, user_id):
 
  
 def add_to_wishlist(request, item_id):
+    user_id = request.user.id
+    wishlist_items = list(Wishlist.objects.all().filter(customer_name_id=user_id))
     if request.method == 'POST':
         item = get_object_or_404(Item, pk=item_id)
         wishlist_form = Wishlist()
+        for product in wishlist_items:
+            item_size = request.POST['item_size']
+            product_id = int(product.item.id)
+            if product_id == int(item_id):
+                if product.size == item_size:
+                    messages.add_message(
+                        request,
+                        messages.INFO, 
+                        "That size is already in your wishlist.", 
+                    )
+                    template = 'wishlist/wishlist.html'
+                    context = {
+                        'wishlist_items': wishlist_items,
+                    }
+                    return render(request, template, context)
         wishlist_form.size = request.POST['item_size']
         wishlist_form.item = item
         wishlist_form.customer_name = request.user
