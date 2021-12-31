@@ -124,3 +124,10 @@ def order_summary(request, order_number):
         'order_items': order_items,
     }
     return render(request, template, context)
+
+
+def user_details(request):
+    template = 'checkout/user_details.html'
+    context = {
+    }
+    return render(request, template, context)

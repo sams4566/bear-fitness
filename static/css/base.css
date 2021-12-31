@@ -11308,3 +11308,10 @@ textarea.form-control-lg {
 #sizes_selection {
   text-transform: capitalize;
 }
+
+.background-photo { 
+  background: no-repeat center center;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
