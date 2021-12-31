@@ -14,11 +14,23 @@
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-        <form action="{{ views.add_item }}" method="POST">
+        <form action="{% url 'add_item' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row pt-3">SKU:</div>
             <div class="row">{{ form.sku }}</div>
-            <div class="btn btn-primary content-width mx-auto" type="submit">Add Item</div>
+            <div class="row pt-3">Category:</div>
+            <div class="row">{{ form.category }}</div>
+            <div class="row pt-3">Item Name:</div>
+            <div class="row">{{ form.name }}</div>
+            <div class="row pt-3">Summary:</div>
+            <div class="row">{{ form.bio }}</div>
+            <div class="row pt-3">Cost:</div>
+            <div class="row">{{ form.cost }}</div>
+            <div class="row pt-3">Review Rating:</div>
+            <div class="row">{{ form.reviews }}</div>
+            <div class="row pt-3">Image:</div>
+            <div class="row">{{ form.image }}</div>
+            <button class="btn btn-primary content-width mx-auto" type="submit">Add Item</button>
         </form>
     </div>
 </section>

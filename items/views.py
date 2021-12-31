@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Item, Category
-from .forms import ItemForm
+from .forms import AddItemForm
 
 
 def all_items(request):
@@ -41,7 +41,21 @@ def item_info(request, item_id):
 
 
 def add_item(request):
-    form = ItemForm()
+    form = AddItemForm()
+    if request.method == "POST":
+        form = AddItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            items = list(Item.objects.all())
+            def sort_item(item):
+                return item.name
+            items.sort(key=sort_item)
+            all_products_category = 'All Products'
+            context = {
+                'items': items,
+                'all_products_category': all_products_category,
+            }
+            return render(request, 'all_items.html', context)
     context = {
         'form': form,
     }

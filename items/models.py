@@ -6,7 +6,7 @@ class Category(models.Model):
     display_name = models.CharField(max_length=250, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.display_name
 
 class Item(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
