@@ -12,6 +12,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Quattrocento&display=swap" rel="stylesheet">
+
     <title>Iron Fitness</title>
 </head>
 <body class="body-container">
@@ -82,12 +87,12 @@
     </div>
     {% block content %}
     {% endblock %}
-    <!-- <div class="footer-padding"></div> -->
+    <div class="footer-padding"></div>
 
     <!-- Footer-->
-    <!-- <footer class="py-5 bg-dark home-footer">
+    <footer class="py-5 bg-dark" id="home-footer">
         <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Iron Fitness 2021</p></div>
-    </footer> -->
+    </footer>
 
     <!-- Optional JavaScript: jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -106,5 +111,5 @@
     
     {% block postloadjs %}
     {% endblock %}
-  </body>
+</body>
 </html>
