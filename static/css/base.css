@@ -11328,3 +11328,12 @@ p {
   height: 100%;
   width: 100%;
 }
+
+.center-text {
+  text-align: center;
+}
+
+.content-width {
+  width: max-content;
+}
+
