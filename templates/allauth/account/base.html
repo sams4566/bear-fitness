@@ -1,1 +1,15 @@
 {% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-10 offset-md-1">
+            {% block inner_content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -4,8 +4,8 @@
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
-{% block content %}
-<div class="container">
+{% block inner_content %}
+
   <div class="row pt-3 mx-auto">
     <h1 class="center-text">{% trans "Sign Up" %}</h1>
   </div>
@@ -14,7 +14,7 @@
         in</a>.{% endblocktrans %}</p>
   </div>
   <div class="row mx-auto">
-    <div class="col-12 col-md-4 offset-md-4">
+    <div class="col-12 col-md-6 offset-md-3">
       <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
         <div class="row">
@@ -56,6 +56,6 @@
       </form>
     </div>
   </div>
-</div>
+
 
 {% endblock %}
