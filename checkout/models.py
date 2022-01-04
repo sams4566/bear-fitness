@@ -29,7 +29,7 @@ class Order(models.Model):
     def _create_order_number(self):
         return uuid.uuid4().hex.upper()
 
-    def add_order_number(self, *args, **kwargs):
+    def save(self, *args, **kwargs):
         if not self.order_number:
             self.order_number = self._create_order_number()
         super().save(*args, **kwargs)
@@ -44,3 +44,8 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f'Order Number: {self.order.order_number} SKU: {self.item.sku}'
+
+    def save(self, *args, **kwargs):
+        self.item_cost = self.item.cost
+        super().save(*args, **kwargs)
+    

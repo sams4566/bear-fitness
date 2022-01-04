@@ -55,7 +55,6 @@ class TestItemViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'items/edit_item.html')
 
-
     def test_deleting_item(self):
         category = Category.objects.create(name='test_category', display_name='Test Category')
         item = Item.objects.create(
@@ -68,5 +67,4 @@ class TestItemViews(TestCase):
         self.assertRedirects(response, '/items/')
         list_of_items = Item.objects.filter(id=item.id)
         self.assertFalse(list_of_items)
-
 

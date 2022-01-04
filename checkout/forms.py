@@ -7,3 +7,4 @@ class OrderForm(forms.ModelForm):
         model = Order
         fields = ('customer_name', 'full_name', 'email', 'telephone', 'address_line1',
                   'address_line2', 'city', 'county', 'country', 'postcode',)
+
