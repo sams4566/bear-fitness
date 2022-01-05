@@ -9,7 +9,6 @@ class OrderItemAdmin(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    inlines = (OrderItemAdmin,)
 
     list_display = ('order_number', 'order_cost', 
                     'customer_name', 'full_name', 'date',)
@@ -21,3 +20,4 @@ class OrderAdmin(admin.ModelAdmin):
 
     readonly_fields = ('order_number', 'date', 'order_cost', 'stripe_payment_id',)
 
+    inlines = (OrderItemAdmin,)

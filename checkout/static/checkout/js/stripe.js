@@ -31,6 +31,8 @@ var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(event) {
     event.preventDefault();
+    $('#payment-form').fadeToggle(110);
+    $('#loading-background').fadeToggle(110);
 
     var clientSecret = $('#var_client_secret').text().slice(1, -1);
 
@@ -62,6 +64,8 @@ form.addEventListener('submit', function(event) {
         }).then(function(result) {
             if (result.error) {
                 console.log(result.error.message);
+                $('#payment-form').fadeToggle(110);
+                $('#loading-background').fadeToggle(110);
             } else {
                 if (result.paymentIntent.status === 'succeeded') {
                     form.submit();
