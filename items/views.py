@@ -60,6 +60,11 @@ def edit_item(request, item_id):
     form = ItemForm(instance=item)
     if request.method == "POST":
         form = ItemForm(request.POST, request.FILES, instance=item)
+        print('form is valid', form.is_valid())
+        print(request.POST)
+        print(form)
+        print(dir(form))
+        print(form.data)
         if form.is_valid():
             form.instance.name = request.POST.get('name')
             item = form.save()

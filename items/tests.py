@@ -2,6 +2,7 @@ from django.test import TestCase
 from .models import Item, Category
 from .forms import ItemForm
 from django.shortcuts import reverse
+from urllib.parse import urlencode
 
 
 class TestItemModel(TestCase):
@@ -55,6 +56,7 @@ class TestItemViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'items/edit_item.html')
 
+
     def test_deleting_item(self):
         category = Category.objects.create(name='test_category', display_name='Test Category')
         item = Item.objects.create(
@@ -68,4 +70,29 @@ class TestItemViews(TestCase):
         list_of_items = Item.objects.filter(id=item.id)
         self.assertFalse(list_of_items)
 
+
+    def test_edited_item(self):
+        category = Category.objects.create(name='test_category', display_name='Test Category')
+        item = Item.objects.create(
+            name='Test Item',
+            cost='50',
+            reviews='4',
+            category=category,
+            sku='123',
+            image='/media/dumbbell.jpg',
+            bio='Test bio',
+        )
+        data = urlencode({
+            'name': 'Item name edited',
+            'cost': '50',
+            'reviews': '4',
+            'category': category.id,
+            'sku': '123',
+            'image': 'dumbbell.jpg',
+            'bio': 'Test bio',
+        })
+        response = self.client.post(f'/items/edit/{item.id}/', data, content_type="application/x-www-form-urlencoded")
+        self.assertRedirects(response, f'/items/{item.id}/')
+        edited_item = Item.objects.get(id=item.id)
+        self.assertEqual(edited_item.name, 'Item name edited')
 
