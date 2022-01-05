@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import Item, Category
-from .forms import ItemForm
+from .models import Item, Category, Review
+from .forms import ItemForm, ReviewForm 
 
 
 def all_items(request):
@@ -33,10 +33,23 @@ def item_info(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     category = item.category
     similar_items = Item.objects.all().filter(category=category).exclude(id=item_id)
+    reviews = item.item_review.order_by('review_date')
+    form = ReviewForm()
     template = 'items/item_info.html'
+    if request.method == "POST": 
+        form = ReviewForm(request.POST, instance=item)
+        if form.is_valid():
+            review = Review()
+            review.item = item
+            review.user = request.user
+            review.body = form.cleaned_data["body"]
+            review.save()
+            return redirect('item_info', item_id=item_id)
     context = {
         'item': item,
         'similar_items': similar_items,
+        'reviews': reviews,
+        'form': form,
     }
     return render(request, template, context)
 

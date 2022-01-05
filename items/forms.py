@@ -1,4 +1,4 @@
-from .models import Item
+from .models import Item, Review
 from django import forms
 
 
@@ -8,3 +8,8 @@ class ItemForm(forms.ModelForm):
         fields = ('category', 'name', 'bio',
                   'sku', 'cost', 'reviews',
                   'image',)
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ('body',)
