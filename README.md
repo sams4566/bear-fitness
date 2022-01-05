@@ -1,108 +1,132 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Iron Fitness
 
-Welcome sams4566,
+The Iron Fitness is a site that provides men's fitness clothing at a competitive price. User's can browse different styles and see a variety of different sizes in each. User's have the option to buy items quickly through adding their chosen items to their basket and proceeding to the checkout where they pay for the item through an online payment. Users can also save items to a wishlist if they want to browse the store and potentially buy them at another time.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+![Welcome Image](http)
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+## User stories
 
-## Gitpod Reminders
+### Epics
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+Below are some of the epics I had throughout the project:
 
-`python3 -m http.server`
+#### Epic 1:
+  - User Story 1: 
+    - Task 1:
 
-A blue button should appear to click: _Make Public_,
+### Story points
+- Below is a diagram that shows the user stories for the projects timebox and breaks down the number of story points allocated to each:
 
-Another blue button should appear to click: _Open Browser_.
+![Story Points](http)
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+- User stories were also documented throughout the project using the 'Issues' tab in the github repository. Below is a screenshot of the table used:
 
-A blue button should appear to click: _Make Public_,
+![User Stories](http)
 
-Another blue button should appear to click: _Open Browser_.
+## Data Model
+### Schema
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+![Schema](http)
 
-To log into the Heroku toolbelt CLI:
+### Site layout
+- __Theme__
+  - To work out the layout of the site I researched lots of the different bootstraps themes and looked at many clothing sites such as ASOS and Gymshark. 
+  - I decided on the 'Shop Homepage' theme (image below) from Start Bootstraps as it made the navigations of the site easy and was similar to other sites I had researched.
+  
+![Theme](http)
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+- __Icons__
+  - I used font awesome for some of the icons as they appear as text rather than an image which limits the icon from being altered at different screen sizes.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+## Features
+- __Header and Footer__
+  - Both the header and footer are styled to allow users to easily navigate the site and are stuck at the top and bottom of each page.
 
-------
+![Header and Footer](http)
 
-## Release History
+### Future features
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+## Technologies used
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+### Languages
+  - **HTML** - I used html to create the content and main layout of each page
+  - **CSS** - CSS was used to style the html elements and make the site more appealing to users. It was also used to allow the website to respond to different screen sizes.
+  - **JavaScript** - I used JavaScript to enhance some of the front end functionality.
+  - **Python** - I used python as the main back end language. It was used to write all of the different functions that occur when requested by the user.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+### Extentions
+  - **Django** - The site was built using the Django full-stack framework where I used many of the built in shortcuts and variables to create the websites backend. Out of the django extentions I used both AllAuth and Coverage. AllAuth was used to confirm authentication with users on the site and Coverage was used to find out how much of the back end code I had automatically tested.
+  - **Bootstraps** - I used bootstraps to allow the site to be structured and built quickly. 
+  - **jQuery** - jQuery was chosen to allow the javascript code to be implemented easily. 
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+## Testing
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+### Bugs
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+#### Bug 1
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+#### Bug 2
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+#### Bug 3
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+### Automated Testing
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+The site was tested using the built-in django 'TestCase' library in the items/tests.py file. I ran ##### tests to test the sites basic functionality including testing:
+  - Information was successfully entered into the items/models.py data models.
+  - Form data couldn't be left empty
+  - Items could be added, edited and deleted#########
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+To run the tests you can type: `python3 manage.py test`
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+The coverage report for how much of the code I've covered with tests is below:
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+![Coverage](http)
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+### Manuel Testing
+I tested the site on several occations throughout its development to make sure all the apps and urls were working correctly.
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+### User Testing
 
-------
+### Security
 
-## FAQ about the uptime script
+- **Authentication** - I used Django's AllAuth package to ensure users have to login to make edits to the site.
 
-**Why have you added this script?**
+- **Debug** - When the site is in production on Heroku debug is set to `False` ensuring the user doesn't get information about the certain urls aren't working.
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+### Validators 
 
-**How will this affect me?**
+  - HTML
+    - [W3C Validator](https://validator.w3.org/)
+  - CSS
+    - [(Jigsaw) Validator](https://jigsaw.w3.org/css-validator/)
+  - JavaScript
+    - [JSHint JavaScript Validator](https://jigsaw.w3.org/css-validator/)
+  - Python
+    - [PEP8 Online](http://pep8online.com/)
+  - Accessibility
+    - 
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+![Accessibility](http)
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+## Development
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+### Cloning the repository
 
-**So….?**
+  - Navigate to the main page of this repository
+  - Click on the 'Code dropdown menu to the left of the green 'Gitpod' button.
+  - Copy the HTTPS url and then open your own workspace.
+  - Go to the terminal of your new workspace and type `git clone` + 'copied url'.
+  - To install all of the required modules use `pip3 freeze --local > requirements.txt` in the terminal.
+  - Type `python manage.py runserver` to run the site.
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+### Deployment to Heroku
 
-**Can I opt out?**
+## Credits
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+### Content/Tutorials
+  - [The Django Documentation](https://docs.djangoproject.com/en/4.0/)
+  - Bootstrap Themes - [Shop Homepage](https://startbootstrap.com/template/shop-homepage) and [Shop Item](https://startbootstrap.com/template/shop-item)
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+### Media
+  - [Gymshark](https://uk.gymshark.com/) - for items images and information.
 
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
