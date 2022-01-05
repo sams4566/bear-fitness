@@ -93,3 +93,10 @@ def delete_item(request, item_id):
     product = get_object_or_404(Item, pk=item_id)
     product.delete()
     return redirect(reverse('all_items'))
+
+
+def delete_review(request, review_id):
+    review = get_object_or_404(Review, pk=review_id)
+    item_id = review.item_id
+    review.delete()
+    return redirect('item_info', item_id=item_id)

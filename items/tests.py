@@ -65,7 +65,7 @@ class TestItemViews(TestCase):
             reviews='4',
             category=category,
         )
-        response = self.client.get(f'/items/delete/{item.id}/')
+        response = self.client.get(f'/items/delete_item/{item.id}/')
         self.assertRedirects(response, '/items/')
         list_of_items = Item.objects.filter(id=item.id)
         self.assertFalse(list_of_items)
@@ -117,7 +117,7 @@ class TestItemViews(TestCase):
             reviews='4',
             category=category,
         )
-        response = self.client.get(f'/items/delete/{item.id}/')
+        response = self.client.get(f'/items/delete_item/{item.id}/')
         self.assertRedirects(response, '/items/')
         list_of_items = Item.objects.filter(id=item.id)
         self.assertFalse(list_of_items)

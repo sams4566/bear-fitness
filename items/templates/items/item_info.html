@@ -104,6 +104,9 @@
                                 {{ review.body }}
                             </div>
                         </div>
+                        {% if user == review.user %}
+                        <a href="{% url 'delete_review' review.id %}" class="btn btn-danger mb-1">Delete Review</a>
+                        {% endif %}
                     </div>
                     {% endfor %}
                 </div>
