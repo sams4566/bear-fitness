@@ -11356,3 +11356,7 @@ p {
   justify-content: center;
   align-items: center;
 }
+
+.review-list {
+  display: none;
+}

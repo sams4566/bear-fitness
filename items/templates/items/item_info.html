@@ -109,6 +109,11 @@
                         {% endif %}
                     </div>
                     {% endfor %}
+                    {% if reviews.count > 4 %}
+                    <div class="row">
+                        <button id="load-reviews" class="btn btn-primary content-width mt-2 mx-auto">More Reviews</button>
+                    </div>
+                    {% endif %}
                 </div>
                 {% if user.is_authenticated %}
                 <div class="col-12 col-md-5 pe-4 card-body">
@@ -130,4 +135,8 @@
     </div>
 </section>
 
+{% endblock %}
+
+{% block postloadjs %}
+    <script src="{% static 'items/js/reviews.js' %}"></script>
 {% endblock %}
