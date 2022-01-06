@@ -23,8 +23,11 @@ class Item(models.Model):
 
 class Rating(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_rating')
-    one_star = models.ManyToManyField(User, blank=True, related_name='item_one_star')
-    two_stars = models.ManyToManyField(User, blank=True, related_name='item_two_stars')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rating_user')
+    one_star = models.IntegerField(blank=False, null=False, default=0)
+
+    def __str__(self):
+        return self.item.name
 
 class Review(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_review')

@@ -11360,3 +11360,7 @@ p {
 .review-list {
   display: none;
 }
+
+.star-green {
+  background-color: green;
+}

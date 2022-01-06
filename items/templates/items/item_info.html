@@ -26,8 +26,14 @@
                         {% if user.is_authenticated %}
                         <form action="{% url 'one_star' item.id %}" method="POST">
                             {% csrf_token %}
-                            <button class="text-dark upvote"><i class="far fa-star"></i></button>
+                            {% if one_star %}
+                            <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                            {% else %}
+                            <button class="text-dark"><i class="far fa-star"></i></button>
+                            {% endif %}
                         </form>
+                        {% else %}
+                        <button class="text-dark"><i class="far fa-star"></i></button>
                         {% endif %}
                     </div>
                 </div>
@@ -36,7 +42,7 @@
                         {% if user.is_authenticated %}
                         <form action="{% url 'two_stars' item.id %}" method="POST">
                             {% csrf_token %}
-                            <button class="text-dark upvote"><i class="far fa-star"></i></button>
+                            <button class="text-dark"><i class="far fa-star"></i></button>
                         </form>
                         {% endif %}
                     </div>

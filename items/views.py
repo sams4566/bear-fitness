@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import Item, Category, Review
+from .models import Item, Category, Review, Rating
 from .forms import ItemForm, ReviewForm 
 
 
@@ -32,6 +32,7 @@ def all_items(request):
 def item_info(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     category = item.category
+    user_id = request.user
     similar_items = Item.objects.all().filter(category=category).exclude(id=item_id)
     reviews = item.item_review.order_by('review_date')
     form = ReviewForm()
@@ -45,13 +46,71 @@ def item_info(request, item_id):
             review.body = form.cleaned_data["body"]
             review.save()
             return redirect('item_info', item_id=item_id)
+    if Rating.objects.filter(user=user_id).exists():
+        rating = item.item_rating.order_by('one_star')[0]
+        one_star = False
+        if rating.one_star == 1:
+            one_star = True
+    else: 
+        one_star = False
     context = {
         'item': item,
         'similar_items': similar_items,
         'reviews': reviews,
         'form': form,
+        'one_star': one_star,
     }
     return render(request, template, context)
+
+
+def one_star(request, item_id):
+    item = get_object_or_404(Item, pk=item_id)
+    user_id = request.user
+    if request.method == "POST":
+        if not Rating.objects.filter(user=user_id).exists():
+            rating = Rating()
+            rating.item = item
+            rating.user = request.user
+            rating.one_star = 0
+            rating.name = 'one'
+            rating.save()
+        rating_id = item.item_rating.order_by('one_star')[0].id
+        rating = get_object_or_404(Rating, pk=rating_id)
+        if rating.one_star == 0:
+            rating.one_star = 1
+            rating.save()
+        else:
+            rating.one_star = 0
+            rating.save()
+    return redirect('item_info', item_id=item_id)
+
+
+def two_stars(request, item_id):
+    return redirect('item_info', item_id=item_id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def add_item(request):
@@ -99,11 +158,4 @@ def delete_review(request, review_id):
     review = get_object_or_404(Review, pk=review_id)
     item_id = review.item_id
     review.delete()
-    return redirect('item_info', item_id=item_id)
-
-
-def one_star(request, item_id):
-    return redirect('item_info', item_id=item_id)
-
-def two_stars(request, item_id):
     return redirect('item_info', item_id=item_id)
