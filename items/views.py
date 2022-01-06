@@ -100,3 +100,10 @@ def delete_review(request, review_id):
     item_id = review.item_id
     review.delete()
     return redirect('item_info', item_id=item_id)
+
+
+def one_star(request, item_id):
+    return redirect('item_info', item_id=item_id)
+
+def two_stars(request, item_id):
+    return redirect('item_info', item_id=item_id)

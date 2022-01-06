@@ -18,6 +18,29 @@
                 <div class="fs-5 mb-5">
                     <span>£{{ item.cost }}</span>
                 </div>
+                <div class="row">
+                    <i class="far fa-star"></i> 4/5
+                </div>
+                <div class="row mb-3">
+                    <div class="one-star pe-4 me-2">
+                        {% if user.is_authenticated %}
+                        <form action="{% url 'one_star' item.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="text-dark upvote"><i class="far fa-star"></i></button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="two-stars ps-4 ms-2">
+                        {% if user.is_authenticated %}
+                        <form action="{% url 'two_stars' item.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="text-dark upvote"><i class="far fa-star"></i></button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
                 <p class="lead">{{ item.bio }}</p>
                 <form class="d-flex" action="{% url 'add_to_basket' item.id %}" method="POST">
                     {% csrf_token %}

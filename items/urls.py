@@ -8,4 +8,7 @@ urlpatterns = [
     path('edit/<item_id>/', views.edit_item, name='edit_item'),
     path('delete_item/<item_id>/', views.delete_item, name='delete_item'),
     path('delete_review/<review_id>/', views.delete_review, name='delete_review'),
+    path('one_star/<item_id>/', views.one_star, name='one_star'),
+    path('two_stars/<item_id>/', views.two_stars, name='two_stars'),
+
 ]
