@@ -25,9 +25,15 @@ class Rating(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_rating')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rating_user')
     one_star = models.IntegerField(blank=False, null=False, default=0)
+    two_stars = models.IntegerField(blank=False, null=False, default=0)
+    rating_total = models.IntegerField(blank=False, null=False, default=0)
 
     def __str__(self):
         return self.item.name
+
+    def adjust_rating_total(self):
+        self.rating_total = self.aggregate(Sum('one_star'))['one_star__sum'] or 0
+        self.save()    
 
 class Review(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_review')

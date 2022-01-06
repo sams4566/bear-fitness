@@ -46,19 +46,27 @@ def item_info(request, item_id):
             review.body = form.cleaned_data["body"]
             review.save()
             return redirect('item_info', item_id=item_id)
-    if Rating.objects.filter(user=user_id).exists():
-        rating = item.item_rating.order_by('one_star')[0]
-        one_star = False
-        if rating.one_star == 1:
-            one_star = True
-    else: 
-        one_star = False
+    if not Rating.objects.filter(user=user_id).exists():
+        rating = Rating()
+        rating.item = item
+        rating.user = request.user
+        rating.one_star = 0
+        rating.save()
+    rating_id = item.item_rating.order_by('one_star')[0].id
+    rating = get_object_or_404(Rating, pk=rating_id)
+    one_star = False
+    two_stars = False
+    if rating.one_star == 1:
+        one_star = True
+    if rating.two_stars == 1:
+        two_stars = True
     context = {
         'item': item,
         'similar_items': similar_items,
         'reviews': reviews,
         'form': form,
         'one_star': one_star,
+        'two_stars': two_stars,
     }
     return render(request, template, context)
 
@@ -66,26 +74,30 @@ def item_info(request, item_id):
 def one_star(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     user_id = request.user
-    if request.method == "POST":
-        if not Rating.objects.filter(user=user_id).exists():
-            rating = Rating()
-            rating.item = item
-            rating.user = request.user
-            rating.one_star = 0
-            rating.name = 'one'
-            rating.save()
-        rating_id = item.item_rating.order_by('one_star')[0].id
-        rating = get_object_or_404(Rating, pk=rating_id)
-        if rating.one_star == 0:
-            rating.one_star = 1
-            rating.save()
-        else:
-            rating.one_star = 0
-            rating.save()
+    rating_id = item.item_rating.order_by('one_star')[0].id
+    rating = get_object_or_404(Rating, pk=rating_id)
+    if rating.one_star == 0:
+        rating.one_star = 1
+        rating.two_stars = 0
+        rating.save()
+    else:
+        rating.one_star = 0
+        rating.save()
     return redirect('item_info', item_id=item_id)
 
 
 def two_stars(request, item_id):
+    item = get_object_or_404(Item, pk=item_id)
+    user_id = request.user
+    rating_id = item.item_rating.order_by('two_stars')[0].id
+    rating = get_object_or_404(Rating, pk=rating_id)
+    if rating.two_stars == 0:
+        rating.two_stars = 1
+        rating.one_star = 0
+        rating.save()
+    else:
+        rating.two_stars = 0
+        rating.save()
     return redirect('item_info', item_id=item_id)
 
 
