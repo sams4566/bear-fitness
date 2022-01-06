@@ -10,5 +10,7 @@ urlpatterns = [
     path('delete_review/<review_id>/', views.delete_review, name='delete_review'),
     path('one_star/<item_id>/', views.one_star, name='one_star'),
     path('two_stars/<item_id>/', views.two_stars, name='two_stars'),
-
+    path('three_stars/<item_id>/', views.three_stars, name='three_stars'),
+    path('four_stars/<item_id>/', views.four_stars, name='four_stars'),
+    path('five_stars/<item_id>/', views.five_stars, name='five_stars'),
 ]

@@ -55,10 +55,19 @@ def item_info(request, item_id):
     rating = get_object_or_404(Rating, pk=rating_id)
     one_star = False
     two_stars = False
+    three_stars = False
+    four_stars = False
+    five_stars = False
     if rating.one_star == 1:
         one_star = True
     if rating.two_stars == 2:
         two_stars = True
+    if rating.three_stars == 3:
+        three_stars = True
+    if rating.four_stars == 4:
+        four_stars = True
+    if rating.five_stars == 5:
+        five_stars = True
     context = {
         'item': item,
         'similar_items': similar_items,
@@ -66,64 +75,11 @@ def item_info(request, item_id):
         'form': form,
         'one_star': one_star,
         'two_stars': two_stars,
+        'three_stars': three_stars,
+        'four_stars': four_stars,
+        'five_stars': five_stars,
     }
     return render(request, template, context)
-
-
-def one_star(request, item_id):
-    item = get_object_or_404(Item, pk=item_id)
-    user_id = request.user
-    rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
-    rating = get_object_or_404(Rating, pk=rating_id)
-    if rating.one_star == None:
-        rating.one_star = 1
-        rating.two_stars = 0
-        rating.save()
-    else:
-        rating.one_star = None
-        rating.two_stars = None
-        rating.save()
-    return redirect('item_info', item_id=item_id)
-
-
-def two_stars(request, item_id):
-    item = get_object_or_404(Item, pk=item_id)
-    user_id = request.user
-    rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
-    rating = get_object_or_404(Rating, pk=rating_id)
-    if rating.two_stars == None:
-        rating.two_stars = 2
-        rating.one_star = 0
-        rating.save()
-    else:
-        rating.two_stars = None
-        rating.one_star = None
-        rating.save()
-    return redirect('item_info', item_id=item_id)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def add_item(request):
@@ -166,9 +122,115 @@ def delete_item(request, item_id):
     product.delete()
     return redirect(reverse('all_items'))
 
-
 def delete_review(request, review_id):
     review = get_object_or_404(Review, pk=review_id)
     item_id = review.item_id
     review.delete()
+    return redirect('item_info', item_id=item_id)
+
+def one_star(request, item_id):
+    item = get_object_or_404(Item, pk=item_id)
+    user_id = request.user
+    rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
+    rating = get_object_or_404(Rating, pk=rating_id)
+    if rating.one_star == None or rating.one_star == 0:
+        rating.one_star = 1
+        rating.two_stars = 0
+        rating.three_stars = 0
+        rating.four_stars = 0
+        rating.five_stars = 0
+        rating.save()
+    else:
+        rating.one_star = None
+        rating.two_stars = None
+        rating.three_stars = None
+        rating.four_stars = None
+        rating.five_stars = None
+        rating.save()
+    return redirect('item_info', item_id=item_id)
+
+
+def two_stars(request, item_id):
+    item = get_object_or_404(Item, pk=item_id)
+    user_id = request.user
+    rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
+    rating = get_object_or_404(Rating, pk=rating_id)
+    if rating.two_stars == None or rating.two_stars == 0:
+        rating.two_stars = 2
+        rating.one_star = 0
+        rating.three_stars = 0
+        rating.four_stars = 0
+        rating.five_stars = 0
+        rating.save()
+    else:
+        rating.one_star = None
+        rating.two_stars = None
+        rating.three_stars = None
+        rating.four_stars = None
+        rating.five_stars = None
+        rating.save()
+    return redirect('item_info', item_id=item_id)
+
+
+def three_stars(request, item_id):
+    item = get_object_or_404(Item, pk=item_id)
+    user_id = request.user
+    rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
+    rating = get_object_or_404(Rating, pk=rating_id)
+    if rating.three_stars == None or rating.three_stars == 0:
+        rating.three_stars = 3
+        rating.one_star = 0
+        rating.two_stars = 0
+        rating.four_stars = 0
+        rating.five_stars = 0
+        rating.save()
+    else:
+        rating.one_star = None
+        rating.two_stars = None
+        rating.three_stars = None
+        rating.four_stars = None
+        rating.five_stars = None
+        rating.save()
+    return redirect('item_info', item_id=item_id)
+
+def four_stars(request, item_id):
+    item = get_object_or_404(Item, pk=item_id)
+    user_id = request.user
+    rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
+    rating = get_object_or_404(Rating, pk=rating_id)
+    if rating.four_stars == None or rating.four_stars == 0:
+        rating.four_stars = 4
+        rating.one_star = 0
+        rating.two_stars = 0
+        rating.three_stars = 0
+        rating.five_stars = 0
+        rating.save()
+    else:
+        rating.one_star = None
+        rating.two_stars = None
+        rating.three_stars = None
+        rating.four_stars = None
+        rating.five_stars = None
+        rating.save()
+    return redirect('item_info', item_id=item_id)
+
+def five_stars(request, item_id):
+    item = get_object_or_404(Item, pk=item_id)
+    user_id = request.user
+    rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
+    rating = get_object_or_404(Rating, pk=rating_id)
+    if rating.five_stars == None or rating.five_stars == 0:
+        rating.five_stars = 5
+        rating.one_star = 0
+        rating.two_stars = 0
+        rating.three_stars = 0
+        rating.four_stars = 0
+        rating.save()
+    else:
+        rating.one_star = None
+        rating.two_stars = None
+        rating.three_stars = None
+        rating.four_stars = None
+        rating.five_stars = None
+        rating.save()
     return redirect('item_info', item_id=item_id)

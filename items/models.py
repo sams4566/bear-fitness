@@ -26,7 +26,10 @@ class Item(models.Model):
     def adjust_rating_total(self):
         self.one_star_total = self.item_rating.aggregate(Avg('one_star'))['one_star__avg'] or 0
         self.two_stars_total = self.item_rating.aggregate(Avg('two_stars'))['two_stars__avg'] or 0
-        self.rating_total = self.one_star_total + self.two_stars_total
+        self.three_stars_total = self.item_rating.aggregate(Avg('three_stars'))['three_stars__avg'] or 0
+        self.four_stars_total = self.item_rating.aggregate(Avg('four_stars'))['four_stars__avg'] or 0
+        self.five_stars_total = self.item_rating.aggregate(Avg('five_stars'))['five_stars__avg'] or 0
+        self.rating_total = self.one_star_total + self.two_stars_total + self.three_stars_total + self.four_stars_total + self.five_stars_total
         self.save()
 
 class Rating(models.Model):
@@ -34,6 +37,9 @@ class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rating_user')
     one_star = models.IntegerField(blank=True, null=True)
     two_stars = models.IntegerField(blank=True, null=True)
+    three_stars = models.IntegerField(blank=True, null=True)
+    four_stars = models.IntegerField(blank=True, null=True)
+    five_stars = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.item.name 
