@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Sum, Count, Avg
 
 
 class Category(models.Model):
@@ -17,23 +18,25 @@ class Item(models.Model):
     cost = models.DecimalField(decimal_places=2, max_digits=6)
     reviews = models.DecimalField(decimal_places=1, max_digits=3)
     image = models.ImageField(null=True, blank=True)
+    rating_total = models.DecimalField(max_digits=4, decimal_places=2, blank=False, null=False, default=0)
 
     def __str__(self):
         return self.name
 
+    def adjust_rating_total(self):
+        self.one_star_total = self.item_rating.aggregate(Avg('one_star'))['one_star__avg'] or 0
+        self.two_stars_total = self.item_rating.aggregate(Avg('two_stars'))['two_stars__avg'] or 0
+        self.rating_total = self.one_star_total + self.two_stars_total
+        self.save()
+
 class Rating(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_rating')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rating_user')
-    one_star = models.IntegerField(blank=False, null=False, default=0)
-    two_stars = models.IntegerField(blank=False, null=False, default=0)
-    rating_total = models.IntegerField(blank=False, null=False, default=0)
+    one_star = models.IntegerField(blank=True, null=True)
+    two_stars = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return self.item.name
-
-    def adjust_rating_total(self):
-        self.rating_total = self.aggregate(Sum('one_star'))['one_star__sum'] or 0
-        self.save()    
+        return self.item.name 
 
 class Review(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_review')
