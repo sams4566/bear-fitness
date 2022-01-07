@@ -6,8 +6,7 @@ class ItemForm(forms.ModelForm):
     class Meta: 
         model = Item
         fields = ('category', 'name', 'bio',
-                  'sku', 'cost', 'reviews',
-                  'image',)
+                  'sku', 'cost', 'image',)
 
 class ReviewForm(forms.ModelForm):
     class Meta:

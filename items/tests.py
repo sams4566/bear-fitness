@@ -3,6 +3,7 @@ from .models import Item, Category
 from .forms import ItemForm
 from django.shortcuts import reverse
 from urllib.parse import urlencode
+from django.contrib.auth.models import User
 
 
 class TestItemModel(TestCase):
@@ -12,7 +13,6 @@ class TestItemModel(TestCase):
         item = Item.objects.create(
             name='Test Item',
             cost='50',
-            reviews='4',
             category=category
         )
         self.assertEqual(str(item), 'Test Item')
@@ -25,7 +25,6 @@ class TestItemForm(TestCase):
         form = ItemForm({
             'name': '',
             'cost': '50',
-            'reviews': '4',
             'category': category
             })
         self.assertFalse(form.is_valid())
@@ -49,7 +48,6 @@ class TestItemViews(TestCase):
         item = Item.objects.create(
             name='Test Item',
             cost='50',
-            reviews='4',
             category=category,
         )
         response = self.client.get(f'/items/edit/{item.id}/')
@@ -62,7 +60,6 @@ class TestItemViews(TestCase):
         item = Item.objects.create(
             name='Test Item',
             cost='50',
-            reviews='4',
             category=category,
         )
         response = self.client.get(f'/items/delete_item/{item.id}/')
@@ -71,38 +68,50 @@ class TestItemViews(TestCase):
         self.assertFalse(list_of_items)
 
     def test_item_added(self):
+        user = User.objects.create_user(
+            username='brian',
+            email='brian@gmail.com',
+            password='hello1'
+        )
+        login = self.client.login(username='brian', password='hello1')
         category = Category.objects.create(name='test_category', display_name='Test Category')
         data = urlencode({
             'name': 'Item name edited',
             'cost': '50',
-            'reviews': '4',
             'category': category.id,
             'sku': '123',
             'image': 'dumbbell.jpg',
             'bio': 'Test bio',
+            'rating_total': '1',
         })
         response = self.client.post('/items/add/', data, content_type="application/x-www-form-urlencoded")
         self.assertRedirects(response, '/items/1/')
 
     def test_edited_item(self):
+        user = User.objects.create_user(
+            username='brian',
+            email='brian@gmail.com',
+            password='hello1'
+        )
+        login = self.client.login(username='brian', password='hello1')
         category = Category.objects.create(name='test_category', display_name='Test Category')
         item = Item.objects.create(
             name='Test Item',
             cost='50',
-            reviews='4',
             category=category,
             sku='123',
             image='/media/dumbbell.jpg',
             bio='Test bio',
+            rating_total='1',
         )
         data = urlencode({
             'name': 'Item name edited',
             'cost': '50',
-            'reviews': '4',
             'category': category.id,
             'sku': '123',
             'image': 'dumbbell.jpg',
             'bio': 'Test bio',
+            'rating_total': '1',
         })
         response = self.client.post(f'/items/edit/{item.id}/', data, content_type="application/x-www-form-urlencoded")
         self.assertRedirects(response, f'/items/{item.id}/')
@@ -114,7 +123,6 @@ class TestItemViews(TestCase):
         item = Item.objects.create(
             name='Test Item',
             cost='50',
-            reviews='4',
             category=category,
         )
         response = self.client.get(f'/items/delete_item/{item.id}/')

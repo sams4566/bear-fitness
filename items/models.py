@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Sum, Count, Avg
+from django.db.models import Avg
 
 
 class Category(models.Model):
@@ -16,7 +16,6 @@ class Item(models.Model):
     bio = models.TextField()
     sku = models.CharField(max_length=250, blank=True, null=True)
     cost = models.DecimalField(decimal_places=2, max_digits=6)
-    reviews = models.DecimalField(decimal_places=1, max_digits=3)
     image = models.ImageField(null=True, blank=True)
     rating_total = models.DecimalField(max_digits=4, decimal_places=2, blank=False, null=False, default=0)
 

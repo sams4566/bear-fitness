@@ -68,11 +68,13 @@ def item_info(request, item_id):
         four_stars = True
     if rating.five_stars == 5:
         five_stars = True
+    rating_total = item.rating_total
     context = {
         'item': item,
         'similar_items': similar_items,
         'reviews': reviews,
         'form': form,
+        'rating_total': rating_total,
         'one_star': one_star,
         'two_stars': two_stars,
         'three_stars': three_stars,
@@ -84,9 +86,16 @@ def item_info(request, item_id):
 
 def add_item(request):
     form = ItemForm()
+    user_id = request.user
     if request.method == "POST":
         form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
+            # print('form is valid', form.is_valid())
+            # print(request.POST)
+            # print(form)
+            # print(dir(form))
+            # print(form.data)
+            # print(user_id)
             item = form.save()
             return redirect('item_info', item_id=item.id)
     template = 'items/add_item.html'
@@ -101,11 +110,6 @@ def edit_item(request, item_id):
     form = ItemForm(instance=item)
     if request.method == "POST":
         form = ItemForm(request.POST, request.FILES, instance=item)
-        # print('form is valid', form.is_valid())
-        # print(request.POST)
-        # print(form)
-        # print(dir(form))
-        # print(form.data)
         if form.is_valid():
             item = form.save()
             return redirect('item_info', item_id=item.id)
