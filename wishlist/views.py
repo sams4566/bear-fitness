@@ -13,6 +13,7 @@ def wishlist(request, user_id):
     template = 'wishlist/wishlist.html'
     context = {
         'wishlist_items': wishlist_items,
+        'user_id': user_id,
     }
     return render(request, template, context)
 

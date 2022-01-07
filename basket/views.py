@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponse
 from django.contrib import messages
+from wishlist.views import delete_wishlist_item
 
 
 def current_basket(request):
@@ -7,7 +8,9 @@ def current_basket(request):
 
 
 def add_to_basket(request, item_id):
-
+    wishlist_item_id = request.POST['wishlist_item_id']
+    if wishlist_item_id:
+        delete_wishlist_item(request, wishlist_item_id)
     quantity = 1
     size = request.POST['item_size']
     basket = request.session.get('basket', {})

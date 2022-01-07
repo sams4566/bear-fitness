@@ -27,13 +27,14 @@
                         </div>
                     </div>
                     <!-- Product actions-->
-                    <form class="d-flex" action="{% url 'add_to_basket' product.item_id %}" method="POST">
+                    <form class="d-flex" action="{% url 'add_to_basket' product.item_id %}" onsubmit="/items/delete_item/{product.id}/" method="POST" id="move-to-basket">
                         {% csrf_token %}
-                        <input type="hidden" name="item_size" value="{{ product.size }}">
                         <button class="btn btn-outline-dark flex-shrink-0" type="submit">
                             <i class="bi-cart-fill me-1"></i>
-                            Add to basket
+                            Move to basket
                         </button>
+                        <input type="hidden" name="wishlist_item_id" value="{{ product.id }}">
+                        <input type="hidden" name="item_size" value="{{ product.size }}">
                     </form>
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'item_info' product.item.id %}">View item</a></div>
@@ -43,7 +44,6 @@
                         <button class="btn btn-outline-dark flex-shrink-0" type="submit">
                             Delete
                         </button>
-                        <input type="hidden" name="size_id" value="{{ product.size }}">
                     </form>
                 </div>
             </div>
