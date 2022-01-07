@@ -11295,6 +11295,35 @@ p {
   font-family: 'Quattrocento', sans-serif;
 }
 
+nav li, nav a, nav ul {
+  color: white !important;
+}
+
+.dropdown-item:hover {
+  background: grey;
+}
+
+.nav-link:hover {
+  background: grey;
+  border-radius: 0.25rem;
+}
+
+.dropdown-menu {
+  background: black;
+  border-color: grey;
+  border-width: 2px;
+}
+
+.dropdown-divider {
+  opacity: 1;
+  border-width: 2px;
+  color: white;
+}
+
+nav .btn-outline-light:hover {
+  background: grey;
+}
+
 .body-container {
   min-height: 100vh;
   position: relative;

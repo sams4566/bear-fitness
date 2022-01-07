@@ -56,7 +56,7 @@ def checkout(request):
         order_form = OrderForm(form_info)
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            order_form.order_number = order.add_order_number()
+            order_form.order_number = order.save()
             payment_id = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_payment_id = payment_id
             order_cost = 0
@@ -117,12 +117,5 @@ def order_summary(request, order_number):
     context = {
         'order': order,
         'order_items': order_items,
-    }
-    return render(request, template, context)
-
-
-def user_details(request):
-    template = 'checkout/user_details.html'
-    context = {
     }
     return render(request, template, context)

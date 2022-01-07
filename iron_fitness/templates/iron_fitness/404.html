@@ -1,1 +1,13 @@
-<h1>Hello 404 Success</h1>
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>404</h1>
+
+<h3>Sorry we can't find that page!</h3>
+<h2>Either something went wrong or that page doesn't exist anymore.</h2>
+
+<a href="{% url 'all_items' %}">Products page</a>
+
+{% endblock %}

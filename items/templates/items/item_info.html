@@ -4,7 +4,7 @@
 {% block content %}
 
 <!-- Product section-->
-<section class="py-5">
+<section class="py-1">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             {% if item.image %}
@@ -13,93 +13,92 @@
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." /></div>
             {% endif %}
             <div class="col-md-6">
-                <div class="small mb-1">SKU: {{ item.sku }}</div>
-                <h1 class="display-5 fw-bolder">{{ item.name }}</h1>
-                <div class="fs-5 mb-5">
-                    <span>£{{ item.cost }}</span>
-                </div>
+                <div class="badge bg-dark text-white row">{{ item.category.display_name }}</div>
+                <div class="small mb-1 row">SKU: {{ item.sku }}</div>
+                <h1 class="display-5 fw-bolder row">{{ item.name }}</h1>
+                <div class="fs-5 mb-1 row">£{{ item.cost }}</div>
                 <div class="row">
-                    <i class="far fa-star"></i>{{ rating_total }}/5
-                </div>
-                <div class="row mb-3">
-                    <div class="pe-4 me-2">
-                        {% if user.is_authenticated %}
-                        <form action="{% url 'one_star' item.id %}" method="POST">
-                            {% csrf_token %}
-                            {% if one_star %}
-                            <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                    <div class="col-1">
+                        <div class="">
+                            {% if user.is_authenticated %}
+                            <form action="{% url 'one_star' item.id %}" method="POST">
+                                {% csrf_token %}
+                                {% if one_star %}
+                                <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                                {% else %}
+                                <button class="text-dark"><i class="far fa-star"></i></button>
+                                {% endif %}
+                            </form>
                             {% else %}
                             <button class="text-dark"><i class="far fa-star"></i></button>
                             {% endif %}
-                        </form>
-                        {% else %}
-                        <button class="text-dark"><i class="far fa-star"></i></button>
-                        {% endif %}
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="pe-4 me-2">
-                        {% if user.is_authenticated %}
-                        <form action="{% url 'two_stars' item.id %}" method="POST">
-                            {% csrf_token %}
-                            {% if two_stars %}
-                            <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                    <div class="col-1">
+                        <div class="">
+                            {% if user.is_authenticated %}
+                            <form action="{% url 'two_stars' item.id %}" method="POST">
+                                {% csrf_token %}
+                                {% if two_stars %}
+                                <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                                {% else %}
+                                <button class="text-dark"><i class="far fa-star"></i></button>
+                                {% endif %}
+                            </form>
                             {% else %}
                             <button class="text-dark"><i class="far fa-star"></i></button>
                             {% endif %}
-                        </form>
-                        {% else %}
-                        <button class="text-dark"><i class="far fa-star"></i></button>
-                        {% endif %}
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="pe-4 me-2">
-                        {% if user.is_authenticated %}
-                        <form action="{% url 'three_stars' item.id %}" method="POST">
-                            {% csrf_token %}
-                            {% if three_stars %}
-                            <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                    <div class="col-1">
+                        <div class="">
+                            {% if user.is_authenticated %}
+                            <form action="{% url 'three_stars' item.id %}" method="POST">
+                                {% csrf_token %}
+                                {% if three_stars %}
+                                <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                                {% else %}
+                                <button class="text-dark"><i class="far fa-star"></i></button>
+                                {% endif %}
+                            </form>
                             {% else %}
                             <button class="text-dark"><i class="far fa-star"></i></button>
                             {% endif %}
-                        </form>
-                        {% else %}
-                        <button class="text-dark"><i class="far fa-star"></i></button>
-                        {% endif %}
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="pe-4 me-2">
-                        {% if user.is_authenticated %}
-                        <form action="{% url 'four_stars' item.id %}" method="POST">
-                            {% csrf_token %}
-                            {% if four_stars %}
-                            <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                    <div class="col-1">
+                        <div class="">
+                            {% if user.is_authenticated %}
+                            <form action="{% url 'four_stars' item.id %}" method="POST">
+                                {% csrf_token %}
+                                {% if four_stars %}
+                                <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                                {% else %}
+                                <button class="text-dark"><i class="far fa-star"></i></button>
+                                {% endif %}
+                            </form>
                             {% else %}
                             <button class="text-dark"><i class="far fa-star"></i></button>
                             {% endif %}
-                        </form>
-                        {% else %}
-                        <button class="text-dark"><i class="far fa-star"></i></button>
-                        {% endif %}
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="pe-4 me-2">
-                        {% if user.is_authenticated %}
-                        <form action="{% url 'five_stars' item.id %}" method="POST">
-                            {% csrf_token %}
-                            {% if five_stars %}
-                            <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                    <div class="col-1">
+                        <div class="">
+                            {% if user.is_authenticated %}
+                            <form action="{% url 'five_stars' item.id %}" method="POST">
+                                {% csrf_token %}
+                                {% if five_stars %}
+                                <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                                {% else %}
+                                <button class="text-dark"><i class="far fa-star"></i></button>
+                                {% endif %}
+                            </form>
                             {% else %}
                             <button class="text-dark"><i class="far fa-star"></i></button>
                             {% endif %}
-                        </form>
-                        {% else %}
-                        <button class="text-dark"><i class="far fa-star"></i></button>
-                        {% endif %}
+                        </div>
                     </div>
+                    <div class="col-1">{{ rating_total }}/5</div>
                 </div>
                 <p class="lead">{{ item.bio }}</p>
                 <form class="d-flex" action="{% url 'add_to_basket' item.id %}" method="POST">

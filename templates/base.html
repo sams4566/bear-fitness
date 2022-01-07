@@ -24,11 +24,11 @@
 </head>
 <body class="body-container">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="{% url 'home' %}">Iron Fitness</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="navbar-brand text-white" href="{% url 'home' %}">Iron Fitness</a>
+            <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse bg-dark" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'all_items' %}">Home</a></li>
                     <li class="nav-item dropdown">
@@ -36,7 +36,6 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% if user.is_superuser %}
                             <li><a class="dropdown-item" href="{% url 'add_item' %}">Add Item</a></li>
-                            <li><a class="dropdown-item" href="{% url 'user_details' %}">My Details</a></li>
                             <li><a class="dropdown-item" href="{% url 'orders' user.id %}">My Orders</a></li>
                             <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                             {% elif user.is_authenticated %}
@@ -64,15 +63,15 @@
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <a class="btn btn-outline-dark" href="{% url 'wishlist' user.id %}">
+                    <a class="btn btn-outline-light" href="{% url 'wishlist' user.id %}">
                         Wishlist
                     </a>
                 </form>
                 <form class="d-flex">
-                    <a class="btn btn-outline-dark" href="{% url 'current_basket' %}">
+                    <a class="btn btn-outline-light" href="{% url 'current_basket' %}">
                         <i class="bi-cart-fill me-1"></i>
                         Basket
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        <span class="badge bg-white text-black ms-1 rounded-pill">0</span>
                     </a>
                 </form>
             </div>
