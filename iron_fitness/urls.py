@@ -27,3 +27,5 @@ urlpatterns = [
     path('checkout/', include('checkout.urls')),
     path('wishlist/', include('wishlist.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'iron_fitness.views.my_custom_page_not_found_view'
