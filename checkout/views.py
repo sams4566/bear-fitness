@@ -36,10 +36,9 @@ def checkout(request):
         )
         basket = request.session.get('basket', {})
         order_form = OrderForm()
-        print(intent)
+        # print(intent)
 
     else:
-        print('hello there')
         basket = request.session.get('basket', {})
 
         form_info = {
@@ -75,7 +74,7 @@ def checkout(request):
                     )
                     order_item.save()
             order.order_cost = order_cost
-            print(order.order_cost)
+            # print(order.order_cost)
             order = order_form.save()
             order_number = order.order_number
         return redirect('checkout_confirmation', order_number=order_number)
@@ -92,10 +91,6 @@ def checkout(request):
 def checkout_confirmation(request, order_number):
     del request.session['basket']
     order = get_object_or_404(Order, order_number=order_number)
-    print('hello')
-    print(order)
-    print('hello')
-
     template = 'checkout/checkout_confirmation.html'
     context = {
         'order': order,

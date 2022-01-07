@@ -7,7 +7,6 @@ from django.contrib import messages
 
 
 def wishlist(request, user_id):
-    print(user_id)
     wishlist_items = Wishlist.objects.all().filter(customer_name_id=user_id)
 
     template = 'wishlist/wishlist.html'
@@ -48,6 +47,30 @@ def add_to_wishlist(request, item_id):
         user_id = request.user.id
         return redirect('wishlist', user_id=user_id)
 
+def update_wishlist(request, item_id):
+    current_size = request.POST['size_id']
+    size = request.POST.get('item_size')
+    user_id = request.user.id
+    if current_size == size:
+        messages.add_message(
+                    request,
+                    messages.INFO, 
+                    "That size is already in your wishlist.", 
+        )
+    else:
+        item = get_object_or_404(Item, pk=item_id)
+        wishlist_form = Wishlist()
+        wishlist_form.size = size
+        wishlist_form.item = item
+        wishlist_form.customer_name = request.user
+        wishlist_form.quantity = 1
+        wishlist_form.item_cost = item.cost
+        wishlist_form.save()
+        wishlist_items = list(Wishlist.objects.all().filter(customer_name_id=user_id))
+        for product in wishlist_items:
+            if product.size == current_size:
+                product.delete()
+    return redirect('wishlist', user_id=user_id)
 
 def delete_wishlist_item(request, wishlist_item_id):
     wishlist_item = get_object_or_404(Wishlist, id=wishlist_item_id)

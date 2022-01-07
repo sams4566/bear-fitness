@@ -25,6 +25,26 @@
                             <p>{{ product.item.cost }}</p>
                             <p>{{ product.size }}</p>
                         </div>
+                        {% with product.size|upper as placeholder_size %}
+                        <form class="d-flex row" action="{% url 'update_wishlist' product.item_id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <h3 class="col-3">Sizes:</h3>
+                                <select name="item_size" class="row">
+                                    <option value="none" selected disabled hidden><p id="sizes_selection">{{ placeholder_size }}</p></option>
+                                    <option value="xs">XS</option>
+                                    <option value="s">S</option>
+                                    <option value="m">M</option>
+                                    <option value="l">L</option>
+                                    <option value="xl">XL</option>
+                                </select>
+                                <button class="btn btn-outline-dark flex-shrink-0 col-3 offset-1 row" type="submit">
+                                    Update Size
+                                </button>
+                            </div>
+                            <input type="hidden" name="size_id" value="{{ product.size }}">
+                        </form>
+                        {% endwith %}
                     </div>
                     <!-- Product actions-->
                     <form class="d-flex" action="{% url 'add_to_basket' product.item_id %}" onsubmit="/items/delete_item/{product.id}/" method="POST" id="move-to-basket">

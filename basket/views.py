@@ -24,7 +24,7 @@ def add_to_basket(request, item_id):
         basket[item_id] = {'chosen_sizes': {size: quantity}}
 
     request.session['basket'] = basket
-    print(request.session['basket'])
+    # print(request.session['basket'])
 
     return redirect(reverse('current_basket'))
 

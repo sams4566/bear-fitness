@@ -19,7 +19,7 @@ class WebhookHandler:
 
     def payment_intent_succeeded(self, event):
         intent = event.data.object
-        print(intent)
+        # print(intent)
         payment_id = intent.id
         billing_details = intent.charges.data[0].billing_details
         order_total = format(intent.charges.data[0].amount / 100, '.2f')
