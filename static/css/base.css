@@ -11391,5 +11391,12 @@ nav .btn-outline-light:hover {
 }
 
 .star-green {
-  background-color: green;
+  color: green;
+  font-size: 1.5rem;
+}
+
+.star-icon {
+  border: none;
+  background: inherit;
+  font-size: 1.5rem;
 }

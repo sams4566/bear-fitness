@@ -24,13 +24,13 @@
                             <form action="{% url 'one_star' item.id %}" method="POST">
                                 {% csrf_token %}
                                 {% if one_star %}
-                                <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                                <button class="text-dark star-icon"><i class="fas fa-star star-green"></i></button>
                                 {% else %}
-                                <button class="text-dark"><i class="far fa-star"></i></button>
+                                <button class="text-dark star-icon"><i class="far fa-star"></i></button>
                                 {% endif %}
                             </form>
                             {% else %}
-                            <button class="text-dark"><i class="far fa-star"></i></button>
+                            <button class="text-dark star-icon"><i class="far fa-star"></i></button>
                             {% endif %}
                         </div>
                     </div>
@@ -40,13 +40,13 @@
                             <form action="{% url 'two_stars' item.id %}" method="POST">
                                 {% csrf_token %}
                                 {% if two_stars %}
-                                <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                                <button class="text-dark star-icon"><i class="fas fa-star star-green"></i></button>
                                 {% else %}
-                                <button class="text-dark"><i class="far fa-star"></i></button>
+                                <button class="text-dark star-icon"><i class="far fa-star"></i></button>
                                 {% endif %}
                             </form>
                             {% else %}
-                            <button class="text-dark"><i class="far fa-star"></i></button>
+                            <button class="text-dark star-icon"><i class="far fa-star"></i></button>
                             {% endif %}
                         </div>
                     </div>
@@ -56,13 +56,13 @@
                             <form action="{% url 'three_stars' item.id %}" method="POST">
                                 {% csrf_token %}
                                 {% if three_stars %}
-                                <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                                <button class="text-dark star-icon"><i class="fas fa-star star-green"></i></button>
                                 {% else %}
-                                <button class="text-dark"><i class="far fa-star"></i></button>
+                                <button class="text-dark star-icon"><i class="far fa-star"></i></button>
                                 {% endif %}
                             </form>
                             {% else %}
-                            <button class="text-dark"><i class="far fa-star"></i></button>
+                            <button class="text-dark star-icon"><i class="far fa-star"></i></button>
                             {% endif %}
                         </div>
                     </div>
@@ -72,13 +72,13 @@
                             <form action="{% url 'four_stars' item.id %}" method="POST">
                                 {% csrf_token %}
                                 {% if four_stars %}
-                                <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                                <button class="text-dark star-icon"><i class="fas fa-star star-green"></i></button>
                                 {% else %}
-                                <button class="text-dark"><i class="far fa-star"></i></button>
+                                <button class="text-dark star-icon"><i class="far fa-star"></i></button>
                                 {% endif %}
                             </form>
                             {% else %}
-                            <button class="text-dark"><i class="far fa-star"></i></button>
+                            <button class="text-dark star-icon"><i class="far fa-star"></i></button>
                             {% endif %}
                         </div>
                     </div>
@@ -88,46 +88,62 @@
                             <form action="{% url 'five_stars' item.id %}" method="POST">
                                 {% csrf_token %}
                                 {% if five_stars %}
-                                <button class="text-dark star-green"><i class="far fa-star"></i></button>
+                                <button class="text-dark star-icon"><i class="fas fa-star star-green"></i></button>
                                 {% else %}
-                                <button class="text-dark"><i class="far fa-star"></i></button>
+                                <button class="text-dark star-icon"><i class="far fa-star"></i></button>
                                 {% endif %}
                             </form>
                             {% else %}
-                            <button class="text-dark"><i class="far fa-star"></i></button>
+                            <button class="text-dark star-icon"><i class="far fa-star"></i></button>
                             {% endif %}
                         </div>
                     </div>
                     <div class="col-1">{{ rating_total }}/5</div>
                 </div>
-                <p class="lead">{{ item.bio }}</p>
-                <form class="d-flex" action="{% url 'add_to_basket' item.id %}" method="POST">
-                    {% csrf_token %}
-                    <div class="col-6">
-                        <h3>Sizes:</h3>
-                        <select name="item_size">
-                            <option value="xs">XS</option>
-                            <option value="s">S</option>
-                            <option value="m">M</option>
-                            <option value="l">L</option>
-                            <option value="xl">XL</option>
-                        </select>
+                <p class="lead row">{{ item.bio }}</p>
+                <div class="row">
+                    <div class="col-12">
+                        <form action="{% url 'add_to_basket' item.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="row pb-4">
+                                <h3 class="col-2">Sizes:</h3>
+                                <select class="col-2" name="item_size">
+                                    <option value="xs">XS</option>
+                                    <option value="s">S</option>
+                                    <option value="m">M</option>
+                                    <option value="l">L</option>
+                                    <option value="xl">XL</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 content-width">
+                                    <button class="btn btn-outline-dark flex-shrink-0 row" type="submit"
+                                        formaction="{% url 'add_to_wishlist' item.id %}">
+                                        Add to wishlist
+                                    </button>
+                                </div>
+                                <div class="col-3 content-width">
+                                    <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                                        <i class="fas fa-shopping-basket me-1"></i>
+                                        Add to basket
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <button class="btn btn-outline-dark flex-shrink-0" type="submit" formaction="{% url 'add_to_wishlist' item.id %}">
-                        <i class="bi-cart-fill me-1"></i>
-                        Add to wishlist
-                    </button>
-                    <button class="btn btn-outline-dark flex-shrink-0" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
-                        Add to basket
-                    </button>
-                </form>
-                <a class="btn btn-outline-dark flex-shrink-0" href="{% url 'edit_item' item.id %}">
-                    Edit Item
-                </a>
-                <a class="btn btn-outline-dark flex-shrink-0" href="{% url 'delete_item' item.id %}">
-                    Delete Item
-                </a>
+                </div>
+                <div class="row pt-4">
+                    <div class="col-3 content-width">
+                        <a class="btn btn-info" href="{% url 'edit_item' item.id %}">
+                            Edit Item
+                        </a>
+                    </div>
+                    <div class="col-3 content-width">
+                        <a class="btn btn-danger" href="{% url 'delete_item' item.id %}">
+                            Delete Item
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -12,8 +12,6 @@
             {% for product in wishlist_items %}
             <div class="col mb-5">
                 <div class="card h-100">
-                    <!-- Sale badge-->
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                     <!-- Product image-->
                     <img class="card-img-top" src="{{ product.item.image.url }}" alt="..." />
                     <!-- Product details-->
@@ -22,35 +20,46 @@
                             <!-- Product name-->
                             <h5 class="fw-bolder">{{ product.item.name }}</h5>
                             <!-- Product price-->
-                            <p>{{ product.item.cost }}</p>
+                            <p>£{{ product.item.cost }}</p>
                             <p>{{ product.size }}</p>
                         </div>
                         {% with product.size|upper as placeholder_size %}
-                        <form class="d-flex row" action="{% url 'update_wishlist' product.item_id %}" method="POST">
-                            {% csrf_token %}
-                            <div class="row">
-                                <h3 class="col-3">Sizes:</h3>
-                                <select name="item_size" class="row">
-                                    <option value="none" selected disabled hidden><p id="sizes_selection">{{ placeholder_size }}</p></option>
-                                    <option value="xs">XS</option>
-                                    <option value="s">S</option>
-                                    <option value="m">M</option>
-                                    <option value="l">L</option>
-                                    <option value="xl">XL</option>
-                                </select>
-                                <button class="btn btn-outline-dark flex-shrink-0 col-3 offset-1 row" type="submit">
-                                    Update Size
-                                </button>
+                        <div class="row">
+                            <div class="col-12">
+                                <form action="{% url 'update_wishlist' product.item_id %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <h3 class="col-4">Size:</h3>
+                                        <select name="item_size" class="row col-4">
+                                            <option value="none" selected disabled hidden>
+                                                <p id="sizes_selection">{{ placeholder_size }}</p>
+                                            </option>
+                                            <option value="xs">XS</option>
+                                            <option value="s">S</option>
+                                            <option value="m">M</option>
+                                            <option value="l">L</option>
+                                            <option value="xl">XL</option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-10 offset-1 content-width">
+                                            <button class="btn btn-outline-dark  col-3 offset-1 row"
+                                                type="submit">
+                                                Update Size
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="size_id" value="{{ product.size }}">
+                                </form>
                             </div>
-                            <input type="hidden" name="size_id" value="{{ product.size }}">
-                        </form>
+                        </div>
                         {% endwith %}
                     </div>
                     <!-- Product actions-->
                     <form class="d-flex" action="{% url 'add_to_basket' product.item_id %}" onsubmit="/items/delete_item/{product.id}/" method="POST" id="move-to-basket">
                         {% csrf_token %}
                         <button class="btn btn-outline-dark flex-shrink-0" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
+                            <i class="fas fa-shopping-basket me-1"></i>
                             Move to basket
                         </button>
                         <input type="hidden" name="wishlist_item_id" value="{{ product.id }}">

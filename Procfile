@@ -1,0 +1,1 @@
+web: gunicorn iron_fitness.wsgi:application
