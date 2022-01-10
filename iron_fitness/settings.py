@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4l$#^0=riw-(*x_==$_$qe^s99(y*k2^5j(s&8*e)75$c+me(8'
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = ['iron-fitness1.herokuapp.com', 'localhost']
 
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'basket',
     'checkout',
     'wishlist',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -177,6 +178,14 @@ STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET', '')
 STRIPE_CURRENCY = 'gbp'
+
+
+if 'USE_AWS' in os.environ:
+    AWS_STORAGE_BUCKET_NAME = 'iron-fitness1'
+    AWS_S3_REGION_NAME = 'eu-west-2'
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
