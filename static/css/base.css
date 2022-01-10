@@ -11400,3 +11400,7 @@ nav .btn-outline-light:hover {
   background: inherit;
   font-size: 1.5rem;
 }
+
+.rating-total {
+  font-size: 1.5rem;
+}

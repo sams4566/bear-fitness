@@ -17,7 +17,7 @@ class Item(models.Model):
     sku = models.CharField(max_length=250, blank=True, null=True)
     cost = models.DecimalField(decimal_places=2, max_digits=6)
     image = models.ImageField(null=True, blank=True)
-    rating_total = models.DecimalField(max_digits=4, decimal_places=2, blank=False, null=False, default=0)
+    rating_total = models.DecimalField(max_digits=4, decimal_places=1, blank=False, null=False, default=0)
 
     def __str__(self):
         return self.name

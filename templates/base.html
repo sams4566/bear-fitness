@@ -70,7 +70,13 @@
                     <a class="btn btn-outline-light" href="{% url 'current_basket' %}">
                         <i class="fas fa-shopping-basket me-1"></i>
                         Basket
-                        <span class="badge bg-white text-black ms-1 rounded-pill">0</span>
+                        <span class="badge bg-white text-black ms-1 rounded-pill">
+                            {% if basket_items %}
+                                {{ basket_items|length }}
+                            {% else %}
+                                0
+                            {% endif %}
+                        </span>
                     </a>
                 </form>
             </div>
@@ -92,7 +98,10 @@
 
     <!-- Footer-->
     <footer class="py-5 bg-dark" id="home-footer">
-        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Iron Fitness 2021</p></div>
+        <div class="container">
+            <p class="m-0 text-center text-white row">Follow us on Facebook</p>
+            <a class="m-0 text-center text-white row">Privacy Policy</a>
+        </div>
     </footer>
 
     <!-- Optional JavaScript: jQuery first, then Popper.js, then Bootstrap JS -->

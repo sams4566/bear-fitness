@@ -4,9 +4,9 @@
 {% block content %}
 
 <!-- Header-->
-<header class="bg-dark py-5 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url({{ MEDIA_URL }}deadlift.jpg);">
+<header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
     <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
+        <div class="text-center text-black">
             <h1 class="display-4 fw-bolder">{{ all_products_category }}{{ category.display_name }}</h1>
         </div>
     </div>
@@ -14,7 +14,7 @@
 
 <!-- Section-->
 <section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
+    <div class="container px-4 px-lg-5 mt-2">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for item in items %}
             <div class="col mb-5">

@@ -3,11 +3,16 @@
 
 {% block content %}
 
+<header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-black">
+            <h1 class="display-4 fw-bolder">Wishlist</h1>
+        </div>
+    </div>
+</header>
+
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-        <div class="row">
-            <h1>Wishlist</h1>
-        </div>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for product in wishlist_items %}
             <div class="col mb-5">
@@ -56,7 +61,7 @@
                         {% endwith %}
                     </div>
                     <!-- Product actions-->
-                    <form class="d-flex" action="{% url 'add_to_basket' product.item_id %}" onsubmit="/items/delete_item/{product.id}/" method="POST" id="move-to-basket">
+                    <form class="d-flex" action="{% url 'add_to_basket2' product.item_id %}" onsubmit="/items/delete_item/{product.id}/" method="POST" id="move-to-basket">
                         {% csrf_token %}
                         <button class="btn btn-outline-dark flex-shrink-0" type="submit">
                             <i class="fas fa-shopping-basket me-1"></i>
