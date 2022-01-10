@@ -39,7 +39,6 @@
                             <li><a class="dropdown-item" href="{% url 'orders' user.id %}">My Orders</a></li>
                             <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                             {% elif user.is_authenticated %}
-                            <li><a class="dropdown-item" href="{% url 'user_details' %}">My Details</a></li>
                             <li><a class="dropdown-item" href="{% url 'orders' user.id %}">My Orders</a></li>
                             <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                             {% else %}
