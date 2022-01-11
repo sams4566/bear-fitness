@@ -1,0 +1,24 @@
+Hi {{ order.full_name }},
+
+Thank you for your order!
+
+Below are the details of your order:
+
+Order Number: {{ order.order_number }}
+Order Total: £{{ order.order_cost }}
+Date Purchased: {{ order.date }}
+Email: {{ order.email }}
+Phone number: {{ order.telephone }}
+
+Shipping details
+Address Line 1: {{ order.address_line1 }}
+Address Line 2: {{ order.address_line2 }}
+City: {{ order.city }}
+County: {{ order.county }}
+Country: {{ order.country }} 
+Postcode: {{ order.postcode }}
+
+Feel free to contact {{ business_email }} if you have any queries.
+
+Kind regards,
+Iron Fitness

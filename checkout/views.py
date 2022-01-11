@@ -16,6 +16,7 @@ def save_checkout_info(request):
     payment_id = request.POST.get('client_secret').split('_secret')[0]
     stripe.PaymentIntent.modify(payment_id, metadata={
         'basket': json.dumps(request.session.get('basket', {})),
+        # 'username': request.user,
     })
     return HttpResponse(status=200)
 
@@ -42,7 +43,7 @@ def checkout(request):
         basket = request.session.get('basket', {})
 
         form_info = {
-            'customer_name': request.user,
+            # 'customer_name': request.user,
             'full_name': request.POST['full_name'],
             'telephone': request.POST['telephone'],
             'email': request.POST['email'],
@@ -56,9 +57,9 @@ def checkout(request):
         order_form = OrderForm(form_info)
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            order_form.order_number = order.save()
             payment_id = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_payment_id = payment_id
+            order.save()
             order_cost = 0
             for item_id, item_info in basket.items():
                 item = get_object_or_404(Item, pk=item_id)
@@ -75,7 +76,7 @@ def checkout(request):
                     order_item.save()
             order.order_cost = order_cost
             # print(order.order_cost)
-            order = order_form.save()
+            order.save()
             order_number = order.order_number
         return redirect('checkout_confirmation', order_number=order_number)
 
@@ -91,6 +92,9 @@ def checkout(request):
 def checkout_confirmation(request, order_number):
     del request.session['basket']
     order = get_object_or_404(Order, order_number=order_number)
+    order.customer_name = request.user
+    order.save()
+
     template = 'checkout/checkout_confirmation.html'
     context = {
         'order': order,
@@ -99,7 +103,8 @@ def checkout_confirmation(request, order_number):
 
 
 def orders(request, customer_name_id):
-    orders = Order.objects.all().filter(customer_name_id=customer_name_id)
+    user_id = request.user.id
+    orders = Order.objects.all().filter(customer_name_id=user_id)
 
     template = 'checkout/orders.html'
     context = {

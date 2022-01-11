@@ -1,7 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
 from .models import Order, OrderItem
 from items.models import Item
 import time
@@ -11,19 +14,43 @@ class WebhookHandler:
 
     def __init__(self, request):
         self.request = request
+    
+    def _user_email_confirmation(self, order):
+        business_email = settings.DEFAULT_FROM_EMAIL
+        message = render_to_string(
+            'checkout/email_confirmations/message.txt',
+            {'order': order, 'business_email': business_email})
+        title = render_to_string(
+            'checkout/email_confirmations/title.txt',
+            {'order': order})
+        user_email = order.email
+        send_mail(
+            title,
+            message,
+            business_email,
+            [user_email],
+        )
 
     def event_handle(self, event):
         return HttpResponse(
             content='Unhandled event type: {}'.format(event.type),
             status=200)
 
+            
+    def payment_intent_intent_failed(self, event):
+        return HttpResponse(
+            content='Payment failed: {}'.format(event.type),
+            status=200)
+
     def payment_intent_succeeded(self, event):
+        print('payment success')
         intent = event.data.object
-        # print(intent)
+        print(intent)
         payment_id = intent.id
         billing_details = intent.charges.data[0].billing_details
         order_total = format(intent.charges.data[0].amount / 100, '.2f')
         basket = intent.metadata.basket
+        # customer_name = intent.metadata.username
 
         order_created = False
         try_order = 1
@@ -31,7 +58,7 @@ class WebhookHandler:
             try:
                 order = Order.objects.get(
                     stripe_payment_id=payment_id,
-                    customer_name__iexact=billing_details.name,
+                    full_name__iexact=billing_details.name,
                     email__iexact=billing_details.email,
                     telephone__iexact=billing_details.phone,
                     address_line1__iexact=billing_details.address.line1,
@@ -46,10 +73,13 @@ class WebhookHandler:
                 try_order += 1
                 time.sleep(1)
         if order_created:
+            self._user_email_confirmation(order)
+            print('payment success1')
             return HttpResponse(
                 content='Order already created: {}'.format(event.type),
                 status=200)
         else:
+            print('payment success2')
             order = None
             order = Order.objects.create(
                 full_name=billing_details.name,
@@ -62,8 +92,8 @@ class WebhookHandler:
                 country=billing_details.address.country,
                 order_cost=order_total,
                 stripe_payment_id=payment_id,
+                # customer_name=customer_name,
             )
-            order_number = order.add_order_number()
             order.save()
             for item_id, item_info in json.loads(basket).items():
                 item = get_object_or_404(Item, pk=item_id)
@@ -77,11 +107,7 @@ class WebhookHandler:
                         item_cost=item_cost,
                     )
                     order_item.save()
+            self._user_email_confirmation(order)
             return HttpResponse(
                 content='PaymentIntent was successful: {}'.format(event.type),
                 status=200)
-
-    def payment_intent_intent_failed(self, event):
-        return HttpResponse(
-            content='Payment failed: {}'.format(event.type),
-            status=200)

@@ -7,3 +7,13 @@ $(function() {
         }
     });
 });
+
+$(function() {
+    $(".order-list").slice(0, 4).show();
+    $("#load-orders").on('click', function() {
+        $(".order-list:hidden").slice(0, 4).slideDown();
+        if ($(".order-list:hidden").length == 0) {
+            $("#load-orders").hide();
+        }
+    });
+});
