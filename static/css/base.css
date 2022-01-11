@@ -11391,7 +11391,7 @@ nav .btn-outline-light:hover {
 }
 
 .basket-list {
-  display: none;
+  /* display: none; */
 }
 
 .checkout-list {
