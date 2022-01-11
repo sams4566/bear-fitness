@@ -55,6 +55,11 @@
                     <h4>{{ x.postcode }}</h4>
                 </div>
                 {% endfor %}
+                <div class="row">
+                    <a class="btn btn-outline-dark flex-shrink-0" href="{% url 'orders' user_id %}">
+                        Back to Orders
+                    </a>
+                </div>
             </div>
         </div>
     </div>

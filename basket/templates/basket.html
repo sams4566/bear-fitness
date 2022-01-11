@@ -16,50 +16,76 @@
         <div class="row">
             <div class="col-8">
                 {% for product in basket_items %}
-                <div class="row py-2">
-                    <div class="col-4"><img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="..." /></div>
-                    <div class="col-8">
-                        <div class="small mb-1 row">SKU: {{ product.item.sku }}</div>
-                        <h2 class="display-5 fw-bolder row">{{ product.item.name }}</h2>
-                        <h5>£{{ product.item.cost }}</h5>
-                        <form class="d-flex row" action="{% url 'update_basket' product.item_id %}" method="POST">
-                            {% csrf_token %}
-                            <div class="row">
-                                <h3 class="col-3">Sizes:</h3>
-                                <select name="item_size" class="col-2">
-                                    <option value="none" selected disabled hidden><p id="sizes_selection">{{ product.placeholder_size }}</p></option>
-                                    <option value="xs">XS</option>
-                                    <option value="s">S</option>
-                                    <option value="m">M</option>
-                                    <option value="l">L</option>
-                                    <option value="xl">XL</option>
-                                </select>
-                                <button class="btn btn-outline-dark flex-shrink-0 col-3 offset-1" type="submit">
-                                    Update Size
+                <div class="basket-list">
+                    <div class="row py-2">
+                        <div class="col-3 offset-3"><img class="card-img-top mb-5 mb-md-0"
+                                src="{{ product.item.image.url }}" alt="..." /></div>
+                        <div class="col-6">
+                            <h6 class="small mb-1 row">SKU: {{ product.item.sku }}</h6>
+                            <h5 class="fw-bolder row">{{ product.item.name }}</h5>
+                            <h6 class="row">£{{ product.item.cost }}</h6>
+                            <form class="row" action="{% url 'update_basket' product.item_id %}" method="POST">
+                                {% csrf_token %}
+                                <div class="col-12">
+                                    <div class="row">
+                                        <select name="item_size" class="col-1 basket-selector">
+                                            <option value="none" selected disabled hidden>
+                                                <p id="sizes_selection">{{ product.placeholder_size }}</p>
+                                            </option>
+                                            <option value="xs">XS</option>
+                                            <option value="s">S</option>
+                                            <option value="m">M</option>
+                                            <option value="l">L</option>
+                                            <option value="xl">XL</option>
+                                        </select>
+                                        <div class="col-3">
+                                            <button
+                                                class="btn btn-outline-dark flex-shrink-0 content-width basket-select-update"
+                                                type="submit">
+                                                Update Size
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="size_id" value="{{ product.size }}">
+                            </form>
+                            <form class="d-flex row pt-2" action="{% url 'delete_basket_item' product.item_id %}"
+                                method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-danger flex-shrink-0 basket-delete" type="submit">
+                                    Delete
                                 </button>
-                            </div>
-                            <input type="hidden" name="size_id" value="{{ product.size }}">
-                        </form>
-                        <form class="d-flex" action="{% url 'delete_basket_item' product.item_id %}" method="POST">
-                            {% csrf_token %}
-                            <button class="btn btn-outline-dark flex-shrink-0" type="submit">
-                                Delete
-                            </button>
-                            <input type="hidden" name="size_id" value="{{ product.size }}">
-                        </form>
+                                <input type="hidden" name="size_id" value="{{ product.size }}">
+                            </form>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
+                {% if basket_items|length > 4 %}
+                <div class="row">
+                    <button id="load-basket-items" class="btn btn-primary content-width mt-2 mx-auto">More
+                        Items</button>
+                </div>
+                {% endif %}
             </div>
             <div class="col-4">
                 <div class="row">
                     <h1>Total cost:</h1>
-                    <h2>{{ total }}</h2>
+                    <h2>£{{ total }}</h2>
                     <a class="btn btn-outline-dark flex-shrink-0" href="{% url 'checkout' %}">Checkout</a>
+                </div>
+                <div class="row">
+                    <a class="btn btn-outline-dark flex-shrink-0" href="{% url 'all_items' %}">
+                        Continue Shopping
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+{% endblock %}
+
+{% block postloadjs %}
+    <script src="{% static 'basket/js/basket.js' %}"></script>
 {% endblock %}

@@ -112,10 +112,12 @@ def order_summary(request, order_number):
     order = Order.objects.all().filter(order_number=order_number)
     order1 = get_object_or_404(Order, order_number=order_number)
     order_items = order1.orderitems.all()
+    user_id = request.user.id
 
     template = 'checkout/order_summary.html'
     context = {
         'order': order,
         'order_items': order_items,
+        'user_id': user_id,
     }
     return render(request, template, context)

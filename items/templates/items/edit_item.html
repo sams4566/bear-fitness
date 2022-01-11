@@ -32,6 +32,11 @@
             <div class="row">{{ form.image }}</div>
             <button class="btn btn-primary content-width mx-auto" type="submit">Update Item</button>
         </form>
+        <div class="row">
+            <a class="btn btn-outline-dark flex-shrink-0" href="{% url 'item_info' item.id %}">
+                Cancel
+            </a>
+        </div>
     </div>
 </section>
 
