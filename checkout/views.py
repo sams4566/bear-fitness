@@ -106,7 +106,7 @@ def checkout_confirmation(request, order_number):
 
 def orders(request, customer_name_id):
     user_id = request.user.id
-    orders = Order.objects.all().filter(customer_name_id=user_id)
+    orders = Order.objects.all().filter(customer_name_id=user_id).order_by('-date')
 
     template = 'checkout/orders.html'
     context = {

@@ -11490,3 +11490,14 @@ nav .btn-outline-light:hover {
   color: #404040;
   font-weight: bold;
 }
+
+.clickable:hover {
+  background-color: lightgrey;
+  cursor: pointer
+}
+
+@media screen and (max-width: 600px) {
+  .table-column{
+    display: none;
+  }
+}

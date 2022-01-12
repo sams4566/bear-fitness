@@ -11,40 +11,50 @@
     </div>
 </header>
 
-<section class="container pb-5">
+<section class="container pb-5 pt-3 px-4 px-lg-2">
     <div class="row">
-        {% for order in orders %}
-        <div class="col-md-10 offset-md-1 order-list">
-            <div class="row">
-                <div class="col-2">
-                    <div class="small mb-1">Date Ordered: {{ order.date }}</div>
-                </div>
-                <div class="col-2">
-                    <div class="small mb-1">Order Number: {{ order.order_number }}</div>
-                </div>
-                <div class="col-2">
-                    <span>£{{ order.order_cost }}</span>
-                </div>
-                <div class="col-2">
-                    {% for item in order.orderitems.all %}
-                        <p>{{ item.item.name }}-{{ item.item_size }}-£{{ item.item_cost }}</p>
-                    {% endfor %}
-                </div>
-                <div class="col-2">
-                    <span>{{ order.email }}</span>
-                </div>
-                <a class="btn btn-outline-dark flex-shrink-0 col-2" href="{% url 'order_summary' order.order_number %}">
-                    View Order
-                </a>
+        <div class="offset-md-1 col-md-10">
+            <div class="row d-flex justify-content-center">
+                <table class="table border">
+                    <thead>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Date</th>
+                            <th>Total Cost</th>
+                            <th class="table-column">Items</th>
+                            <th class="table-column">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr class="order-list clickable" onclick="window.location='{% url 'order_summary' order.order_number %}'">
+                            <td>
+                                {{ order.order_number|truncatechars:10 }}
+                            </td>
+                            <td>
+                                {{ order.date|date:"j M, y" }}
+                            </td>
+                            <td>£{{ order.order_cost }}</td>
+                            <td class="text-uppercase table-column">
+                                {% for item in order.orderitems.all %}
+                                    <h6 class="p-0 m-0">{{ item.item.name }}-{{ item.item_size }}</h6>
+                                {% endfor %}
+                            </td>
+                            <td class="table-column">
+                                {{ order.email }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
+            {% if orders|length > 4 %}
+            <div class="row">
+                <button id="load-orders" class="btn btn-primary content-width mt-2 mx-auto">More
+                    Orders</button>
+            </div>
+            {% endif %}
         </div>
-        {% endfor %}
-        {% if orders|length > 4 %}
-        <div class="row">
-            <button id="load-orders" class="btn btn-primary content-width mt-2 mx-auto">More
-                Orders</button>
-        </div>
-        {% endif %}
     </div>
 </section>
 
