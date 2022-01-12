@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'checkout',
     'wishlist',
     'storages',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ROOT_URLCONF = 'iron_fitness.urls'
 
@@ -83,6 +86,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'basket.contexts.basket_contents',
             ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]

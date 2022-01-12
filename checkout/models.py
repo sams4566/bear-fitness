@@ -20,7 +20,7 @@ class Order(models.Model):
     city = models.CharField(max_length=50, blank=False, null=False)
     county = models.CharField(max_length=100, blank=True, null=True)
     country = CountryField(blank=False, null=False, blank_label='Country *')
-    postcode = models.CharField(max_length=15, blank=False, null=False)
+    postcode = models.CharField(max_length=15, blank=True, null=True)
 
     def adjust_total(self):
         self.order_cost = self.orderitems.aggregate(Sum('item_cost'))['item_cost__sum'] or 0

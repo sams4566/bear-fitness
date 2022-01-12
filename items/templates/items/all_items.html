@@ -21,9 +21,13 @@
                 <div class="card h-100">
                     <!-- Product image-->
                     {% if item.image %}
-                    <img class="card-img-top" src="{{ item.image.url }}" alt="..." />
+                    <a href="{% url 'item_info' item.id %}">
+                        <img class="card-img-top" src="{{ item.image.url }}" alt="..." />
+                    </a>
                     {% else %}
-                    <img class="card-img-top" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
+                    <a href="{% url 'item_info' item.id %}">
+                        <img class="card-img-top" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
+                    </a>
                     {% endif %}
                     <!-- Product details-->
                     <div class="card-body p-4">
@@ -33,10 +37,6 @@
                             <!-- Product price-->
                             £{{ item.cost }}
                         </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'item_info' item.id %}">View item</a></div>
                     </div>
                 </div>
             </div>

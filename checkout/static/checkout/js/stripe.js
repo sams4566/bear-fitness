@@ -15,7 +15,7 @@ var card = elements.create('card', {
                 color: '#000000',
             },
             '::placeholder': {
-                color: '#000000'
+                color: 'grey'
             }
         },
         invalid: {

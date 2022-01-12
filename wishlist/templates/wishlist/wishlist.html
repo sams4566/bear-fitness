@@ -18,7 +18,9 @@
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <img class="card-img-top" src="{{ product.item.image.url }}" alt="..." />
+                    <a href="{% url 'item_info' product.item.id %}">
+                        <img class="card-img-top" src="{{ product.item.image.url }}" alt="..." />
+                    </a>
                     <!-- Product details-->
                     <div class="card-body p-4 col-12">
                         <!-- Product name-->
@@ -60,10 +62,6 @@
                         {% endwith %}
 
                         <!-- Product actions-->
-                        <div class="pt-2 row">
-                            <div class="text-center"><a class="btn btn-primary mt-auto"
-                                    href="{% url 'item_info' product.item.id %}">View item</a></div>
-                        </div>
                         <form class="d-flex row pt-2" action="{% url 'add_to_basket2' product.item_id %}" method="POST" id="move-to-basket">
                             {% csrf_token %}
                             <div class="text-center">

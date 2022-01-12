@@ -11450,3 +11450,20 @@ nav .btn-outline-light:hover {
   color: red;
   font-weight: bold;
 }
+
+#card-element {
+  padding: 5px;
+  color: black;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 3px;
+}
+
+.form-control {
+  padding: 5px;
+  color: black;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+}

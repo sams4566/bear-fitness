@@ -18,8 +18,9 @@
                 {% for product in basket_items %}
                 <div class="basket-list">
                     <div class="row py-2">
-                        <div class="col-3 offset-3"><img class="card-img-top mb-5 mb-md-0"
-                                src="{{ product.item.image.url }}" alt="..." /></div>
+                        <a href="{% url 'item_info' product.item_id %}" class="col-3 offset-3">
+                            <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="..." />
+                        </a>
                         <div class="col-6">
                             <h6 class="small mb-1 row">SKU: {{ product.item.sku }}</h6>
                             <h5 class="fw-bolder row">{{ product.item.name }}</h5>
@@ -71,13 +72,19 @@
             <div class="col-4">
                 <div class="row">
                     <h1>Total cost:</h1>
-                    <h2>£{{ total }}</h2>
-                    <a class="btn btn-outline-dark flex-shrink-0" href="{% url 'checkout' %}">Checkout</a>
                 </div>
                 <div class="row">
-                    <a class="btn btn-outline-dark flex-shrink-0" href="{% url 'all_items' %}">
-                        Continue Shopping
-                    </a>
+                    <h2>£{{ total }}</h2>
+                </div>
+                <div class="row pt-2">
+                    <a class="btn btn-info flex-shrink-0" href="{% url 'checkout' %}">Checkout</a>
+                </div>
+                <div class="row pt-4">
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-primary center-text" href="{% url 'all_items' %}">
+                            Continue Shopping
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

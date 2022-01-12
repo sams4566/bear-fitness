@@ -13,69 +13,73 @@
 
 <section class="container">
     <div class="row pb-5">
-        <div class="col-12 col-lg-6 pb-5">
+        <div class="col-12 col-lg-6 pb-1">
+            <div class="row pt-2">
+                <h1>Total cost:</h1>
+            </div>
+            <div class="row">
+                <h2>£{{ total }}</h2>
+            </div>
+            <hr>
             <div class="row">
                 {% for product in basket_items %}
                 <div class="checkout-list">
                     <div class="row py-2">
-                        <div class="col-4"><img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="..." /></div>
+                        <a href="{% url 'item_info' product.item_id %}" class="col-4">
+                            <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="..." />
+                        </a>
                         <div class="col-8">
                             <div class="small mb-1 row">SKU: {{ product.item.sku }}</div>
-                            <h2 class="display-5 fw-bolder row">{{ product.item.name }}</h2>
-                            <h5>£{{ product.item.cost }}</h5>
+                            <h3 class="fw-bolder row">{{ product.item.name }}</h3>
+                            <h5 class="row">£{{ product.item.cost }}</h5>
+                            <h5 class="text-uppercase row">{{ product.size }}</h5>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-                {% if basket_items|length > 4 %}
-                <div class="row">
+                {% if basket_items|length > 2 %}
+                <div class="row pt-1">
                     <button id="load-checkout-items" class="btn btn-primary content-width mt-2 mx-auto">More
                         Items</button>
                 </div>
                 {% endif %}
+                <div class="row pt-4">
+                    <hr>
+                </div>
             </div>
         </div>
-        <div class="col-12 col-lg-6 pb-5">
+        <div class="col-12 col-lg-6 pb-5 pt-lg-1 pt-0">
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
                 <fieldset>
                     <legend>User Information</legend>
-                    <h6>Full Name</h6>
-                    {{ order_form.full_name }}
-                    <h6>Phone Number</h6>
-                    {{ order_form.telephone }}
-                    <h6>Email</h6>
-                    {{ order_form.email }}
+                    {{ order_form.full_name | as_crispy_field}}
+                    {{ order_form.telephone | as_crispy_field }}
+                    {{ order_form.email | as_crispy_field }}
                 </fieldset>
                 <fieldset>
                     <legend>Postal Address</legend>
-                    <h6>Address Line 1</h6>
-                    {{ order_form.address_line1 }}
-                    <h6>Address Line 2</h6>
-                    {{ order_form.address_line2 }}
-                    <h6>City</h6>
-                    {{ order_form.city }}
-                    <h6>County</h6>
-                    {{ order_form.county }}
-                    <h6>Country</h6>
-                    {{ order_form.country }}
-                    <h6>Postcode</h6>
-                    {{ order_form.postcode }}
+                    {{ order_form.address_line1 | as_crispy_field }}
+                    {{ order_form.address_line2 | as_crispy_field }}
+                    {{ order_form.city | as_crispy_field }}
+                    {{ order_form.county | as_crispy_field }}
+                    {{ order_form.country | as_crispy_field }}
+                    {{ order_form.postcode | as_crispy_field }}
                 </fieldset>
                 <fieldset>
                     <legend>Card Details</legend>
                     <div id="card-element"></div>
                     <input type="hidden" name="client_secret" value="{{ client_secret }}">
                 </fieldset>
-                <button class="btn btn-outline-dark flex-shrink-0 my-3" type="submit" id="submit-button">
+                <button class="btn btn-success flex-shrink-0 my-3" type="submit" id="submit-button">
                     Complete Payment
                 </button>
                 <div class="payment-error"></div>
-                <div class="row">
-                    <a class="btn btn-outline-dark flex-shrink-0" href="{% url 'current_basket' %}">
-                        Change Basket
-                    </a>
-                </div>
+                
+                <a class="btn btn-primary flex-shrink-0 content-width" href="{% url 'current_basket' %}">
+                    Change Basket
+                </a>
+                
             </form>
         </div>
     </div>
