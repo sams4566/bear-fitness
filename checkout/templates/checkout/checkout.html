@@ -4,7 +4,7 @@
 {% block content %}
 
 <header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
-    <div class="container px-4 px-lg-5 my-5">
+    <div class="container px-4 px-lg-5 my-4">
         <div class="text-center text-black">
             <h1 class="display-4 fw-bolder">Checkout</h1>
         </div>
@@ -43,10 +43,8 @@
                         Items</button>
                 </div>
                 {% endif %}
-                <div class="row pt-4">
-                    <hr>
-                </div>
             </div>
+            <hr>
         </div>
         <div class="col-12 col-lg-6 pb-5 pt-lg-1 pt-0">
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
@@ -79,7 +77,6 @@
                 <a class="btn btn-primary flex-shrink-0 content-width" href="{% url 'current_basket' %}">
                     Change Basket
                 </a>
-                
             </form>
         </div>
     </div>

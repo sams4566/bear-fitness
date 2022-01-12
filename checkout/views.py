@@ -94,10 +94,12 @@ def checkout_confirmation(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
     order.customer_name = request.user
     order.save()
+    order_items = order.orderitems.all()
 
     template = 'checkout/checkout_confirmation.html'
     context = {
         'order': order,
+        'order_items': order_items,
     }
     return render(request, template, context)
 

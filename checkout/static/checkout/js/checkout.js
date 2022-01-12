@@ -17,3 +17,23 @@ $(function() {
         }
     });
 });
+
+$(function() {
+    $(".order-summary-list").slice(0, 2).show();
+    $("#load-order-summary-items").on('click', function() {
+        $(".order-summary-list:hidden").slice(0, 2).slideDown();
+        if ($(".order-summary-list:hidden").length == 0) {
+            $("#load-order-summary-items").hide();
+        }
+    });
+});
+
+$(function() {
+    $(".order-confirmation-list").slice(0, 2).show();
+    $("#load-order-confirmation-items").on('click', function() {
+        $(".order-confirmation-list:hidden").slice(0, 2).slideDown();
+        if ($(".order-confirmation-list:hidden").length == 0) {
+            $("#load-order-confirmation-items").hide();
+        }
+    });
+});
