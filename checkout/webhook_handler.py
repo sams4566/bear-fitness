@@ -36,12 +36,11 @@ class WebhookHandler:
             content='Unhandled event type: {}'.format(event.type),
             status=200)
 
-            
-    def payment_intent_intent_failed(self, event):
+    def payment_intent_payment_failed(self, event):
         return HttpResponse(
             content='Payment failed: {}'.format(event.type),
             status=200)
-
+            
     def payment_intent_succeeded(self, event):
         print('payment success')
         intent = event.data.object
@@ -50,7 +49,8 @@ class WebhookHandler:
         billing_details = intent.charges.data[0].billing_details
         order_total = format(intent.charges.data[0].amount / 100, '.2f')
         basket = intent.metadata.basket
-        # customer_name = intent.metadata.username
+        username = intent.metadata.username
+        user = User.objects.get(username=username)
 
         order_created = False
         try_order = 1
@@ -92,7 +92,7 @@ class WebhookHandler:
                 country=billing_details.address.country,
                 order_cost=order_total,
                 stripe_payment_id=payment_id,
-                # customer_name=customer_name,
+                customer_name=user,
             )
             order.save()
             for item_id, item_info in json.loads(basket).items():

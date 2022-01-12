@@ -16,7 +16,7 @@ def save_checkout_info(request):
     payment_id = request.POST.get('client_secret').split('_secret')[0]
     stripe.PaymentIntent.modify(payment_id, metadata={
         'basket': json.dumps(request.session.get('basket', {})),
-        # 'username': request.user,
+        'username': request.user,
     })
     return HttpResponse(status=200)
 

@@ -33,7 +33,7 @@ def my_webhook_view(request):
 
     event_route = {
         'payment_intent.succeeded': handler.payment_intent_succeeded,
-        'payment_intent.payment_failed': handler.payment_intent_intent_failed
+        'payment_intent.payment_failed': handler.payment_intent_payment_failed
     }
 
     event_handler = event_route.get(event_type, handler.event_handle)

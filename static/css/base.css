@@ -11445,3 +11445,8 @@ nav .btn-outline-light:hover {
   padding-left: 5px;
   padding-right: 5px;
 }
+
+.payment-error {
+  color: red;
+  font-weight: bold;
+}

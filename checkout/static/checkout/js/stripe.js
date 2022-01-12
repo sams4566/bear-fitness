@@ -63,6 +63,9 @@ form.addEventListener('submit', function(event) {
             }
         }).then(function(result) {
             if (result.error) {
+                var paymentError = document.getElementsByClassName('payment-error')
+                var html = `<p>${result.error.message}</p>`
+                $(paymentError).html(html)
                 console.log(result.error.message);
                 $('#payment-form').fadeToggle(110);
                 $('#loading-background').fadeToggle(110);
