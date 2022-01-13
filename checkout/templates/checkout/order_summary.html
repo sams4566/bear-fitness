@@ -62,7 +62,11 @@
                     <div class="order-summary-list">
                         <div class="row py-2">
                             <a href="{% url 'item_info' product.item_id %}" class="col-4">
-                                <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="..." />
+                                {% if product.item.image %}
+                                <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
+                                {% else %}
+                                <img class="card-img-top mb-5 mb-md-0" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
+                                {% endif %}
                             </a>
                             <div class="col-8">
                                 <div class="small mb-1 row">SKU: {{ product.item.sku }}</div>

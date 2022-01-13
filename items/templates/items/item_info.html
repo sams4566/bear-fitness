@@ -8,7 +8,7 @@
     <div class="container px-4 px-lg-5 mb-5 mt-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             {% if item.image %}
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ item.image.url }}" alt="..." /></div>
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ item.image.url }}" alt="{{ item.name }}" /></div>
             {% else %}
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." /></div>
             {% endif %}
@@ -208,7 +208,7 @@
                     <!-- Product image-->
                     {% if product.image %}
                     <a href="{% url 'item_info' product.id %}">
-                        <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                        <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}" />
                     </a>
                     {% else %}
                     <a href="{% url 'item_info' product.id %}">

@@ -14,13 +14,29 @@
 <section class="pt-3 pb-5">
     <div class="container">
         {% if user.is_authenticated %}
+        {% if not basket_items %}
+        <div class="row pb-5">
+            <div class="col-12">
+                <div class="row pt-5">
+                    <h2 class="text-center">You basket is currently empty</h2>
+                </div>
+                <div class="row pt-4 d-flex justify-content-center">
+                    <a class="btn btn-primary content-width" href="{% url 'all_items' %}">View Products</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
         <div class="row">
             <div class="col-12 col-md-8 pb-3">
                 {% for product in basket_items %}
                 <div class="basket-list">
                     <div class="row py-2">
                         <a href="{% url 'item_info' product.item_id %}" class="col-4 offset-2">
-                            <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="..." />
+                            {% if product.item.image %}
+                            <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
+                            {% else %}
+                            <img class="card-img-top mb-5 mb-md-0" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
+                            {% endif %}
                         </a>
                         <div class="col-6">
                             <h6 class="small mb-1 row">SKU: {{ product.item.sku }}</h6>
@@ -100,6 +116,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         {% else %}
         <div class="row pb-5">
             <div class="col-12">

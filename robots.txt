@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /basket/
+Disallow: /accounts/
+Sitemap: https://iron-fitness1.herokuapp.com/sitemap.xml

@@ -13,13 +13,29 @@
 
 <section class="py-3">
     <div class="container px-4 px-lg-5 mt-3">
+        {% if not wishlist_items %}
+        <div class="row pb-5">
+            <div class="col-12">
+                <div class="row pt-5">
+                    <h2 class="text-center">You wishlist is currently empty</h2>
+                </div>
+                <div class="row pt-4 d-flex justify-content-center">
+                    <a class="btn btn-primary content-width" href="{% url 'all_items' %}">View Products</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for product in wishlist_items %}
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
                     <a href="{% url 'item_info' product.item.id %}">
-                        <img class="card-img-top" src="{{ product.item.image.url }}" alt="..." />
+                        {% if product.item.image %}
+                        <img class="card-img-top" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
+                        {% else %}
+                        <img class="card-img-top" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
+                        {% endif %}
                     </a>
                     <!-- Product details-->
                     <div class="card-body p-4 col-12">
@@ -86,6 +102,7 @@
             </div>
             {% endfor %}
         </div>
+        {% endif %}
     </div>
 </section>
 
