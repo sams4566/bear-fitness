@@ -3,11 +3,27 @@
 
 {% block content %}
 
-<h1>404</h1>
-
-<h3>Sorry we can't find that page!</h3>
-<h2>Either something went wrong or that page doesn't exist anymore.</h2>
-
-<a href="{% url 'all_items' %}" class="btn btn-primary">Products page</a>
+<header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
+    <div class="container px-4 px-lg-5 my-4">
+        <div class="text-center text-black">
+            <h1 class="display-4 fw-bolder">404</h1>
+        </div>
+    </div>
+</header>
+<section class="container">
+    <div class="row pb-5">
+        <div class="col-12">
+            <div class="row pt-5">
+                <h2 class="text-center">Sorry we can't find that page!</h2>
+            </div>
+            <div class="row">
+                <h4 class="text-center">Either something went wrong or that page doesn't exist anymore.</h4>
+            </div>
+            <div class="row pt-4 d-flex justify-content-center">
+                <a href="{% url 'all_items' %}" class="btn btn-primary content-width">Products page</a>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

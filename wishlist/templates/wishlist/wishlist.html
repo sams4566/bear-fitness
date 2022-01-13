@@ -36,8 +36,8 @@
                             <div class="col-12">
                                 <form action="{% url 'update_wishlist' product.item_id %}" method="POST">
                                     {% csrf_token %}
-                                    <div class="row pb-1">
-                                        <select name="item_size" class="col-1 offset-2 wishlist-selector content-width">
+                                    <div class="row pb-1 d-flex justify-content-center">
+                                        <select name="item_size" class="col-1 col-md-1 offset-md-2 wishlist-selector content-width">
                                             <option value="none" selected disabled hidden>
                                                 <p id="sizes_selection">{{ placeholder_size }}</p>
                                             </option>
@@ -47,7 +47,7 @@
                                             <option value="l">L</option>
                                             <option value="xl">XL</option>
                                         </select>
-                                        <div class="col-6">
+                                        <div class="col-md-6 pt-2 pt-md-0 d-flex justify-content-center">
                                             <button class="btn btn-outline-dark wishlist-select-update" type="submit">
                                                 Update Size
                                             </button>
@@ -65,7 +65,7 @@
                         <form class="d-flex row pt-2" action="{% url 'add_to_basket2' product.item_id %}" method="POST" id="move-to-basket">
                             {% csrf_token %}
                             <div class="text-center">
-                                <button class="btn btn-info flex-shrink-0 " type="submit">
+                                <button class="btn btn-info flex-shrink-0" type="submit">
                                     <i class="fas fa-shopping-basket me-1"></i>
                                     Move to basket
                                 </button>

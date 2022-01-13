@@ -5,18 +5,24 @@
 
 <section class="home-background">
     <div class="container">
-        <div class="row pt-5">
-            <div class="col-2 offset-8">
-                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'all_items' %}">Shop Now</a></div>
-            </div>
-        </div>
         <div class="row">
-            <div class="col-12 col-md-8 offset-md-2">
-                <h4 class="row">Subscribe to our newsletter!</h4>
-                <p class="row">To keep up to date with the latest offers sign up below to our monthly newsletter.</p>
-                <input type="text">
-                <button>Subcribe</button>
+            
+            <div class="col-6 offset-6">
+                <div class="row newsletter-column">
+                    <div class="col-12">
+                        <h4 class="row">Subscribe to our newsletter!</h4>
+                        <p class="row">To keep up to date with the latest offers sign up below to our monthly newsletter.</p>
+                        <input type="text">
+                        <button>Subcribe</button>
+                    </div>
+                </div>
             </div>
+            <div class="row pt-5">
+                <div class="col-2 offset-8">
+                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'all_items' %}">Shop Now</a></div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>

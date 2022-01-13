@@ -11496,8 +11496,20 @@ nav .btn-outline-light:hover {
   cursor: pointer
 }
 
+.newsletter-column {
+  padding: 5px;
+  color: black;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+}
+
 @media screen and (max-width: 600px) {
   .table-column{
     display: none;
+  }
+
+  .order-summary p {
+    font-size: 0.85rem;
   }
 }

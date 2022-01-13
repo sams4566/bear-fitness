@@ -12,25 +12,25 @@
     </div>
 </header>
 <!-- Section-->
-<section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
+<section class="pb-5 pt-1">
+    <div class="container px-4 px-lg-5 mt-1">
         <form action="{% url 'add_item' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row pt-3">SKU:</div>
             <div class="row">{{ form.sku }}</div>
             <div class="row pt-3">Category:</div>
             <div class="row">{{ form.category }}</div>
-            <div class="row pt-3">Item Name:</div>
+            <div class="row pt-3">Product Name:</div>
             <div class="row">{{ form.name }}</div>
             <div class="row pt-3">Summary:</div>
             <div class="row">{{ form.bio }}</div>
             <div class="row pt-3">Cost:</div>
             <div class="row">{{ form.cost }}</div>
-            <div class="row pt-3">Review Rating:</div>
-            <div class="row">{{ form.reviews }}</div>
-            <div class="row pt-3">Image:</div>
+            <div class="row pt-3 pb-2">Image:</div>
             <div class="row">{{ form.image }}</div>
-            <button class="btn btn-primary content-width mx-auto" type="submit">Add Item</button>
+            <div class="row pt-3 pb-3">
+                <button class="btn btn-primary content-width" type="submit">Add Item</button>
+            </div>
         </form>
     </div>
 </section>
