@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponse
 from .models import Item, Category, Review, Rating
 from .forms import ItemForm, ReviewForm 
 
@@ -87,40 +87,46 @@ def item_info(request, item_id):
 
 
 def add_item(request):
-    form = ItemForm()
-    user_id = request.user
-    if request.method == "POST":
-        form = ItemForm(request.POST, request.FILES)
-        if form.is_valid():
-            # print('form is valid', form.is_valid())
-            # print(request.POST)
-            # print(form)
-            # print(dir(form))
-            # print(form.data)
-            # print(user_id)
-            item = form.save()
-            return redirect('item_info', item_id=item.id)
-    template = 'items/add_item.html'
-    context = {
-        'form': form,
-    }
-    return render(request, template, context)
+    if request.user.is_superuser:
+        form = ItemForm()
+        user_id = request.user
+        if request.method == "POST":
+            form = ItemForm(request.POST, request.FILES)
+            if form.is_valid():
+                # print('form is valid', form.is_valid())
+                # print(request.POST)
+                # print(form)
+                # print(dir(form))
+                # print(form.data)
+                # print(user_id)
+                item = form.save()
+                return redirect('item_info', item_id=item.id)
+        template = 'items/add_item.html'
+        context = {
+            'form': form,
+        }
+        return render(request, template, context)
+    else:
+        return redirect(reverse('all_items'))
 
 
 def edit_item(request, item_id):
-    item = get_object_or_404(Item, pk=item_id)
-    form = ItemForm(instance=item)
-    if request.method == "POST":
-        form = ItemForm(request.POST, request.FILES, instance=item)
-        if form.is_valid():
-            item = form.save()
-            return redirect('item_info', item_id=item.id)
-    template = 'items/edit_item.html'
-    context = {
-        'form': form,
-        'item': item,
-    }
-    return render(request, template, context)
+    if request.user.is_superuser:
+        item = get_object_or_404(Item, pk=item_id)
+        form = ItemForm(instance=item)
+        if request.method == "POST":
+            form = ItemForm(request.POST, request.FILES, instance=item)
+            if form.is_valid():
+                item = form.save()
+                return redirect('item_info', item_id=item.id)
+        template = 'items/edit_item.html'
+        context = {
+            'form': form,
+            'item': item,
+        }
+        return render(request, template, context)
+    else:
+        return redirect(reverse('all_items'))
 
 
 def delete_item(request, item_id):

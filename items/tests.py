@@ -39,11 +39,23 @@ class TestItemViews(TestCase):
         self.assertTemplateUsed(response, 'items/all_items.html')
 
     def test_retrieve_add_item_html(self):
+        user = User.objects.create_superuser(
+            username='brian',
+            email='brian@gmail.com',
+            password='hello1'
+        )
+        login = self.client.login(username='brian', password='hello1')
         response = self.client.get('/items/add/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'items/add_item.html')
 
     def test_retrieve_edit_item_html(self):
+        user = User.objects.create_superuser(
+            username='brian',
+            email='brian@gmail.com',
+            password='hello1'
+        )
+        login = self.client.login(username='brian', password='hello1')
         category = Category.objects.create(name='test_category', display_name='Test Category')
         item = Item.objects.create(
             name='Test Item',
@@ -68,7 +80,7 @@ class TestItemViews(TestCase):
         self.assertFalse(list_of_items)
 
     def test_item_added(self):
-        user = User.objects.create_user(
+        user = User.objects.create_superuser(
             username='brian',
             email='brian@gmail.com',
             password='hello1'
@@ -88,7 +100,7 @@ class TestItemViews(TestCase):
         self.assertRedirects(response, '/items/1/')
 
     def test_edited_item(self):
-        user = User.objects.create_user(
+        user = User.objects.create_superuser(
             username='brian',
             email='brian@gmail.com',
             password='hello1'
