@@ -20,13 +20,21 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
+    <!-- Mailchimp -->
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7_dtp.css" rel="stylesheet" type="text/css">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <title>Iron Fitness</title>
 </head>
 <body class="body-container">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand text-white" href="{% url 'home' %}">Iron Fitness</a>
+            <a class="navbar-brand text-white" href="{% url 'home' %}">Iron Fitness <i class="fas fa-dumbbell"></i></a>
             <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse bg-dark" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -61,11 +69,13 @@
                         </ul>
                     </li>
                 </ul>
+                {% if user.is_authenticated %}
                 <form class="d-flex pe-lg-2 pb-2 pb-lg-0">
                     <a class="btn btn-outline-light" href="{% url 'wishlist' user.id %}">
                         Wishlist
                     </a>
                 </form>
+                {% endif %}
                 <form class="d-flex">
                     <a class="btn btn-outline-light" href="{% url 'current_basket' %}">
                         <i class="fas fa-shopping-basket me-1"></i>
@@ -82,16 +92,16 @@
             </div>
         </div>
     </nav>
-    <div class="row">
+    {% for message in messages %}
+    <div class="row bg-dark">
         <div class="col-6 offset-3">
-            {% for message in messages %}
-            <div class="alert alert-dismissable fade show {{ message.tags }}" role="alert" id="msg">
+            <div class="alert alert-dismissable fade show {{ message.tags }} d-flex justify-content-between" role="alert" id="msg">
                 {{ message | safe }}
                 <button class="btn-close" type="button" data-bs-dismiss="alert"></button>
             </div>
-            {% endfor %}
         </div>
     </div>
+    {% endfor %}
     {% block content %}
     {% endblock %}
     <div class="footer-padding"></div>
@@ -99,8 +109,15 @@
     <!-- Footer-->
     <footer class="py-5 bg-dark" id="home-footer">
         <div class="container">
-            <p class="m-0 text-center text-white row">Follow us on Facebook</p>
-            <a class="m-0 text-center text-white row">Privacy Policy</a>
+            <div class="row">
+                <p class="m-0 text-center text-white small">Copyright &copy; Iron Fitness 2021</p>
+            </div>
+            <div class="row">
+                <p class="m-0 text-center text-white small">
+                    <a class="text-white" href="https://www.facebook.com/Iron-Fitness-102442269007879" target="_blank">Follow us on Facebook</a> | 
+                    <a class="text-white" href="https://www.privacypolicygenerator.info/live.php?token=Xmwcak236AI94osgccCBHbhy9rGIlgs1" target="_blank">Privacy Policy</a>
+                </p>
+            </div>
         </div>
     </footer>
 
@@ -116,7 +133,7 @@
             let info = document.getElementById("msg");
             let alert = new bootstrap.Alert(info);
             alert.close();
-        }, 2500);
+        }, 3500);
     </script>
     
     {% block postloadjs %}

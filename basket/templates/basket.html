@@ -13,6 +13,7 @@
 
 <section class="pt-3 pb-5">
     <div class="container">
+        {% if user.is_authenticated %}
         <div class="row">
             <div class="col-12 col-md-8 pb-3">
                 {% for product in basket_items %}
@@ -80,11 +81,13 @@
                         <h2>£{{ total }}</h2>
                     </div>
                 </div>
+                {% if basket_items|length > 0 %}
                 <div class="row pt-2">
                     <div class="d-flex justify-content-center">
                         <a class="btn btn-info flex-shrink-0 col-10" href="{% url 'checkout' %}">Checkout</a>
                     </div>
                 </div>
+                {% endif %}
                 <div class="row pt-4">
                     <div class="d-flex justify-content-center">
                         <a class="btn btn-primary center-text" href="{% url 'all_items' %}">
@@ -97,7 +100,24 @@
                 </div>
             </div>
         </div>
+        {% else %}
+        <div class="row pb-5">
+            <div class="col-12">
+                <div class="row pt-5">
+                    <h2 class="text-center">Login to add items to your basket</h2>
+                </div>
+                <div class="row pt-4 d-flex justify-content-center">
+                    <a class="btn btn-primary content-width" href="{% url 'account_login' %}">Login</a>
+                </div>
+                <div class="row pt-4 d-flex justify-content-center">
+                    <a class="btn btn-primary content-width" href="{% url 'account_signup' %}">Sign up</a>
+
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
+    
 </section>
 
 {% endblock %}

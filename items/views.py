@@ -46,28 +46,30 @@ def item_info(request, item_id):
             review.body = form.cleaned_data["body"]
             review.save()
             return redirect('item_info', item_id=item_id)
-    if not Rating.objects.filter(user=user_id, item=item).exists():
-        rating = Rating()
-        rating.item = item
-        rating.user = request.user
-        rating.save()
-    rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
-    rating = get_object_or_404(Rating, pk=rating_id)
+
     one_star = False
     two_stars = False
     three_stars = False
     four_stars = False
     five_stars = False
-    if rating.one_star == 1:
-        one_star = True
-    if rating.two_stars == 2:
-        two_stars = True
-    if rating.three_stars == 3:
-        three_stars = True
-    if rating.four_stars == 4:
-        four_stars = True
-    if rating.five_stars == 5:
-        five_stars = True
+    if request.user.is_authenticated:
+        if not Rating.objects.filter(user=user_id, item=item).exists():
+            rating = Rating()
+            rating.item = item
+            rating.user = request.user
+            rating.save()
+        rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
+        rating = get_object_or_404(Rating, pk=rating_id)
+        if rating.one_star == 1:
+            one_star = True
+        if rating.two_stars == 2:
+            two_stars = True
+        if rating.three_stars == 3:
+            three_stars = True
+        if rating.four_stars == 4:
+            four_stars = True
+        if rating.five_stars == 5:
+            five_stars = True
     rating_total = item.rating_total
     context = {
         'item': item,
