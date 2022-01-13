@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<!-- Header-->
+<!-- Title-->
 <header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
     <div class="container px-4 px-lg-5 my-4">
         <div class="text-center text-black">
@@ -11,7 +11,7 @@
         </div>
     </div>
 </header>
-<!-- Section-->
+<!-- Edit Product Form -->
 <section class="pb-5 pt-1">
     <div class="container px-4 px-lg-5">
         <form action="{% url 'edit_item' item.id %}" method="POST" enctype="multipart/form-data">
@@ -31,9 +31,10 @@
                 {{ form.image }}
             </div>
             <div class="row pt-4 pb-3">
-                <button class="btn btn-primary content-width" type="submit">Update Item</button>
+                <button class="btn btn-primary content-width" type="submit">Update Product</button>
             </div>
         </form>
+        <!-- Button the redirects back to the Item Info page -->
         <div class="row pb-3">
             <a class="btn btn-outline-dark content-width" href="{% url 'item_info' item.id %}">
                 Cancel

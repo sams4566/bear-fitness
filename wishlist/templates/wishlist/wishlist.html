@@ -3,6 +3,7 @@
 
 {% block content %}
 
+<!-- Title -->
 <header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
     <div class="container px-4 px-lg-5 my-4">
         <div class="text-center text-black">
@@ -13,6 +14,7 @@
 
 <section class="py-3">
     <div class="container px-4 px-lg-5 mt-3">
+        <!-- Message if wishlist is empty -->
         {% if not wishlist_items %}
         <div class="row pb-5">
             <div class="col-12">
@@ -25,11 +27,12 @@
             </div>
         </div>
         {% else %}
+        <!-- List of items in the wishlist -->
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for product in wishlist_items %}
             <div class="col mb-5">
                 <div class="card h-100">
-                    <!-- Product image-->
+                    <!-- Item image -->
                     <a href="{% url 'item_info' product.item.id %}">
                         {% if product.item.image %}
                         <img class="card-img-top" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
@@ -37,16 +40,14 @@
                         <img class="card-img-top" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
                         {% endif %}
                     </a>
-                    <!-- Product details-->
                     <div class="card-body p-4 col-12">
-                        <!-- Product name-->
                         <div class="text-center row">
                             <h5 class="fw-bolder">{{ product.item.name }}</h5>
                         </div>
-                        <!-- Product price-->
                         <div class="text-center row">
                             <p class="text-center">£{{ product.item.cost }}</p>
                         </div>
+                        <!-- Item size selector form -->
                         {% with product.size|upper as placeholder_size %}
                         <div class="row">
                             <div class="col-12">
@@ -77,7 +78,7 @@
                         </div>
                         {% endwith %}
 
-                        <!-- Product actions-->
+                        <!-- Button to move item to the basket -->
                         <form class="d-flex row pt-2" action="{% url 'add_to_basket2' product.item_id %}" method="POST" id="move-to-basket">
                             {% csrf_token %}
                             <div class="text-center">
@@ -89,6 +90,7 @@
                             <input type="hidden" name="wishlist_item_id" value="{{ product.id }}">
                             <input type="hidden" name="item_size" value="{{ product.size }}">
                         </form>
+                        <!-- Button to delete the item from the wishlist -->
                         <form class="d-flex row pt-2" action="{% url 'delete_wishlist_item' product.id %}" method="POST">
                             {% csrf_token %}
                             <div class="text-center">

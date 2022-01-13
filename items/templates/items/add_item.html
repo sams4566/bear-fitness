@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<!-- Header-->
+<!-- Title-->
 <header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
     <div class="container px-4 px-lg-5 my-4">
         <div class="text-center text-black">
@@ -11,7 +11,7 @@
         </div>
     </div>
 </header>
-<!-- Section-->
+<!-- Add Product Form -->
 <section class="pb-5 pt-1">
     <div class="container px-4 px-lg-5 mt-1">
         <form action="{% url 'add_item' %}" method="POST" enctype="multipart/form-data">
@@ -29,7 +29,7 @@
             <div class="row pt-3 pb-2">Image:</div>
             <div class="row">{{ form.image }}</div>
             <div class="row pt-3 pb-3">
-                <button class="btn btn-primary content-width" type="submit">Add Item</button>
+                <button class="btn btn-primary content-width" type="submit">Add Product</button>
             </div>
         </form>
     </div>

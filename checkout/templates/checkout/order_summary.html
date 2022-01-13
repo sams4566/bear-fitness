@@ -3,6 +3,7 @@
 
 {% block content %}
 
+<!-- Title -->
 <header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
     <div class="container px-4 px-lg-5 my-4">
         <div class="text-center text-black">
@@ -15,6 +16,7 @@
     <div class="container px-4 px-lg-2 pb-4">
         <div class="row">
             {% for x in order %}
+            <!-- Order details summary list -->
             <div class="col-12 col-lg-6 order-summary">
                 <div class="row">
                     <h2>Order Details</h2>
@@ -52,6 +54,7 @@
                 </div>
             </div>
             {% endfor %}
+            <!-- Purchased item summary list -->
             <div class="col-12 offset-lg-1 col-lg-5">
                 <div class="row pt-2">
                     <h1>Item Details</h1>
@@ -62,6 +65,7 @@
                     <div class="order-summary-list">
                         <div class="row py-2">
                             <a href="{% url 'item_info' product.item_id %}" class="col-4">
+                                <!-- Item image -->
                                 {% if product.item.image %}
                                 <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
                                 {% else %}
@@ -77,6 +81,7 @@
                         </div>
                     </div>
                     {% endfor %}
+                    <!-- Limits the items on display to 2 -->
                     {% if order_items|length > 2 %}
                     <div class="row pt-1">
                         <button id="load-order-summary-items" class="btn btn-primary content-width mt-2 mx-auto">More
@@ -85,6 +90,7 @@
                     {% endif %}
                 </div>
                 <hr>
+                <!-- Link to all of the users orders -->
                 <div class="row d-flex justify-content-center">
                     <a class="btn btn-info" href="{% url 'orders' user_id %}">
                         Back to Orders

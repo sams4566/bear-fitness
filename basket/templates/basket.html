@@ -3,6 +3,7 @@
 
 {% block content %}
 
+<!-- Title -->
 <header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
     <div class="container px-4 px-lg-5 my-4">
         <div class="text-center text-black">
@@ -15,6 +16,7 @@
     <div class="container">
         {% if user.is_authenticated %}
         {% if not basket_items %}
+        <!-- Message if basket is empty -->
         <div class="row pb-5">
             <div class="col-12">
                 <div class="row pt-5">
@@ -26,6 +28,7 @@
             </div>
         </div>
         {% else %}
+        <!-- List of items in the basket -->
         <div class="row">
             <div class="col-12 col-md-8 pb-3">
                 {% for product in basket_items %}
@@ -79,6 +82,7 @@
                     </div>
                 </div>
                 {% endfor %}
+                <!-- Limits the items on display to 2 -->
                 {% if basket_items|length > 2 %}
                 <div class="row">
                     <button id="load-basket-items" class="btn btn-primary content-width mt-2 mx-auto">More
@@ -86,6 +90,7 @@
                 </div>
                 {% endif %}
             </div>
+            <!-- Total cost and link to Checkout -->
             <div class="col-12 col-md-4 order-first order-md-last">
                 <div class="row">
                     <div class="d-flex justify-content-center">
@@ -118,6 +123,7 @@
         </div>
         {% endif %}
         {% else %}
+        <!-- Message if the user isn't logged in -->
         <div class="row pb-5">
             <div class="col-12">
                 <div class="row pt-5">
