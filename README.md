@@ -6,13 +6,9 @@ The Iron Fitness is a site that provides men's fitness clothing at a competitive
 
 ## User stories
 
-### Epics
+I have listed my user stories in the following agile tool so that it is easy to see where they fit in my project. I have added tags to them so it is easy to see who they are for and for which part of the site.
 
-Below are some of the epics I had throughout the project:
-
-#### Epic 1:
-  - User Story 1: 
-    - Task 1:
+[Story Points](https://github.com/sams4566/iron-fitness/projects/1)
 
 ### Story points
 - Below is a diagram that shows the user stories for the projects timebox and breaks down the number of story points allocated to each:
@@ -25,18 +21,36 @@ Below are some of the epics I had throughout the project:
 
 ## Data Model
 ### Schema
+  - The below database diagram shows the breakdown of my database which helped me to work out the layout of the site and how to structure my python and javascript functions.
+  - For the local database I used 'sqlite3' and for the production database I used 'Postgres' on Heroku.
+  - Having the Items model as the center of the project allowed the flow to be intuative and helpful for UX.
+  - The basket is also similar to a model except that the items in it are delete automatically at the end of the session.
 
-![Schema](http)
+![Schema](https://github.com/sams4566/iron-fitness/tree/main/media/readme/schema.jpg)
 
 ### Site layout
+- __Wireframe__
+  - I researched lots of the different bootstraps themes and looked at many clothing sites such as ASOS and Gymshark to help work out how the site should look.
+  - I subsequently created the below wireframe to further solidify my thoughts.
+
+![Wireframe](https://github.com/sams4566/iron-fitness/tree/main/media/readme/wireframe.jpg)
+
 - __Theme__
-  - To work out the layout of the site I researched lots of the different bootstraps themes and looked at many clothing sites such as ASOS and Gymshark. 
-  - I decided on the 'Shop Homepage' theme (image below) from Start Bootstraps as it made the navigations of the site easy and was similar to other sites I had researched.
-  
-![Theme](http)
+  - I decided to use the [Shop Homepage](https://startbootstrap.com/template/shop-homepage) theme from Start Bootstraps as it made the navigations of the site easy and was similar to my wireframe.
+
+- __Color Scheme__  
+  - I decided to use black, white and grey as the color scheme as they contrast well making it easy for users to see the content.
+  - The black navbar and footer reduces the white space and draws the users eyes to the main content.
+
+- __Font__
+  - After researching several sites for good font combinations, I found the combination of Oswald and Quattrocento on [Page Cloud](https://www.pagecloud.com/blog/best-google-fonts-pairings). 
+  - Oswald was a strong and bold font that I thought would appeal to men and Quattrocento is a thinner font that would look good for large paragraphs.
 
 - __Icons__
   - I used font awesome for some of the icons as they appear as text rather than an image which limits the icon from being altered at different screen sizes.
+
+- __Images__
+  - Images are stored in the repository for the localhost and on AWS when deployed on Heroku.
 
 ## Features
 - __Header and Footer__
