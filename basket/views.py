@@ -1,11 +1,12 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponse
-from django.contrib import messages
 from wishlist.views import delete_wishlist_item
+from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, \
+    redirect, reverse, HttpResponse
 
 
 def current_basket(request):
     """
-    View for displaying the current items stored in the 
+    View for displaying the current items stored in the
     basket_contents function in contexts.py
     """
     return render(request, 'basket.html')
@@ -14,7 +15,7 @@ def current_basket(request):
 def add_to_basket1(request, item_id):
     """
     Allows the user to add an item from item_info.html
-    to the basket. It throws an error if the same item 
+    to the basket. It throws an error if the same item
     with the same size is already in the basket.
     """
     quantity = 1
@@ -30,21 +31,19 @@ def add_to_basket1(request, item_id):
         basket[item_id] = {'chosen_sizes': {size: quantity}}
 
     request.session['basket'] = basket
-    # print(request.session['basket'])
     return redirect(reverse('current_basket'))
 
 
 def add_to_basket2(request, item_id):
     """
     Allows the user to move an item from their wishlist
-    to the basket. It throws an error if the same item 
+    to the basket. It throws an error if the same item
     with the same size is already in the basket.
     """
     wishlist_item_id = request.POST['wishlist_item_id']
     quantity = 1
     size = request.POST['item_size']
     basket = request.session.get('basket', {})
-    print(basket)
 
     if item_id in list(basket.keys()):
         if size not in basket[item_id]['chosen_sizes'].keys():
@@ -64,8 +63,8 @@ def add_to_basket2(request, item_id):
 
 def update_basket(request, item_id):
     """
-    Lets the user change the size of the item in the basket. 
-    It throws an error if the same item with the same size 
+    Lets the user change the size of the item in the basket.
+    It throws an error if the same item with the same size
     is already in the basket.
     """
     quantity = 1

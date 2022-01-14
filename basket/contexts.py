@@ -4,7 +4,7 @@ from items.models import Item
 
 def basket_contents(request):
     """
-    Stores the basket items and allows the basket to 
+    Stores the basket items and allows the basket to
     be available in all documents
     """
     basket_items = []

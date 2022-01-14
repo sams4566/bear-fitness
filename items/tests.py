@@ -25,7 +25,7 @@ class TestItemForm(TestCase):
 
     def test_name_must_be_entered(self):
         """
-        Test the 'ItemForm' cannot be submitted 
+        Test the 'ItemForm' cannot be submitted
         without a name being entered
         """
         category = Category.objects.create(name='test_category')
@@ -72,7 +72,8 @@ class TestItemViews(TestCase):
             password='hello1'
         )
         login = self.client.login(username='brian', password='hello1')
-        category = Category.objects.create(name='test_category', display_name='Test Category')
+        category = Category.objects.create(name='test_category',
+                                           display_name='Test Category')
         item = Item.objects.create(
             name='Test Item',
             cost='50',
@@ -84,10 +85,11 @@ class TestItemViews(TestCase):
 
     def test_deleting_item(self):
         """
-        Test the delete_item view deletes the item 
+        Test the delete_item view deletes the item
         from the model
         """
-        category = Category.objects.create(name='test_category', display_name='Test Category')
+        category = Category.objects.create(name='test_category',
+                                           display_name='Test Category')
         item = Item.objects.create(
             name='Test Item',
             cost='50',
@@ -108,7 +110,8 @@ class TestItemViews(TestCase):
             password='hello1'
         )
         login = self.client.login(username='brian', password='hello1')
-        category = Category.objects.create(name='test_category', display_name='Test Category')
+        category = Category.objects.create(name='test_category',
+                                           display_name='Test Category')
         data = urlencode({
             'name': 'Item name edited',
             'cost': '50',
@@ -118,7 +121,8 @@ class TestItemViews(TestCase):
             'bio': 'Test bio',
             'rating_total': '1',
         })
-        response = self.client.post('/items/add/', data, content_type="application/x-www-form-urlencoded")
+        response = self.client.post('/items/add/', data,
+                                    content_type="application/x-www-form-urlencoded")
         self.assertRedirects(response, '/items/1/')
 
     def test_edited_item(self):
@@ -131,7 +135,8 @@ class TestItemViews(TestCase):
             password='hello1'
         )
         login = self.client.login(username='brian', password='hello1')
-        category = Category.objects.create(name='test_category', display_name='Test Category')
+        category = Category.objects.create(name='test_category',
+                                           display_name='Test Category')
         item = Item.objects.create(
             name='Test Item',
             cost='50',
@@ -150,7 +155,8 @@ class TestItemViews(TestCase):
             'bio': 'Test bio',
             'rating_total': '1',
         })
-        response = self.client.post(f'/items/edit/{item.id}/', data, content_type="application/x-www-form-urlencoded")
+        response = self.client.post(f'/items/edit/{item.id}/', data,
+                                    content_type="application/x-www-form-urlencoded")
         self.assertRedirects(response, f'/items/{item.id}/')
         edited_item = Item.objects.get(id=item.id)
         self.assertEqual(edited_item.name, 'Item name edited')

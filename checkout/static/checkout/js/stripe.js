@@ -3,7 +3,7 @@
 /**
  * Creates the stripe payment input
 */ 
-var stripePublicKey = $('#var_stripe_public_key').text().slice(1, -1)
+var stripePublicKey = $('#var_stripe_public_key').text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
 var card = elements.create('card', {
@@ -28,7 +28,7 @@ var card = elements.create('card', {
         }
     },
 });
-card.mount('#card-element')
+card.mount('#card-element');
 
 /**
  * The function first prevents the 'OrderForm' from being 
@@ -52,7 +52,7 @@ form.addEventListener('submit', function(event) {
     var data = {
         'client_secret': clientSecret,
         'csrfmiddlewaretoken': csrfToken,
-    }
+    };
     var data_view = '/checkout/save_checkout_info/';
 
     $.post(data_view, data).done(function () {
@@ -75,9 +75,9 @@ form.addEventListener('submit', function(event) {
             }
         }).then(function(result) {
             if (result.error) {
-                var paymentError = document.getElementsByClassName('payment-error')
-                var html = `<p>${result.error.message}</p>`
-                $(paymentError).html(html)
+                var paymentError = document.getElementsByClassName('payment-error');
+                var html = `<p>${result.error.message}</p>`;
+                $(paymentError).html(html);
                 console.log(result.error.message);
                 $('#payment-form').fadeToggle(110);
                 $('#loading-background').fadeToggle(110);
@@ -88,6 +88,6 @@ form.addEventListener('submit', function(event) {
             }
         }).fail(function () {
             location.reload();
-        })
+        });
     });
 });

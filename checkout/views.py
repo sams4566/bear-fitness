@@ -1,4 +1,5 @@
-from django.shortcuts import HttpResponse, render, get_object_or_404, redirect, reverse
+import json
+import stripe
 from .forms import OrderForm
 from django.views.decorators.http import require_POST
 from django.conf import settings
@@ -6,14 +7,14 @@ from basket.contexts import basket_contents
 from items.models import Item
 from .models import OrderItem, Order
 from django.contrib.auth.models import User
+from django.shortcuts import HttpResponse, render, get_object_or_404, \
+    redirect, reverse
 
-import json
-import stripe
 
 @require_POST
 def save_checkout_info(request):
     """
-    Adds the users details and current basket to the metadata so that the 
+    Adds the users details and current basket to the metadata so that the
     'WebhookHandler' class can use the information for creating an order
     """
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -27,10 +28,10 @@ def save_checkout_info(request):
 
 def checkout(request):
     """
-    Initally the checkout.html page is displayed listing the 
-    items in the basket and collecting all of the information 
-    requried for a successful payment to take place. Once the 
-    user has clicked 'Complete payment' an order is created 
+    Initally the checkout.html page is displayed listing the
+    items in the basket and collecting all of the information
+    requried for a successful payment to take place. Once the
+    user has clicked 'Complete payment' an order is created
     using the information provided in the 'OrderForm' and basket.
     """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
@@ -44,11 +45,10 @@ def checkout(request):
         stripe_total = round(total_cost * 100)
         intent = stripe.PaymentIntent.create(
             currency=currency,
-            amount=stripe_total, 
+            amount=stripe_total,
         )
         basket = request.session.get('basket', {})
         order_form = OrderForm()
-        # print(intent)
 
     else:
         basket = request.session.get('basket', {})
@@ -86,7 +86,6 @@ def checkout(request):
                     )
                     order_item.save()
             order.order_cost = order_cost
-            # print(order.order_cost)
             order.save()
             order_number = order.order_number
         return redirect('checkout_confirmation', order_number=order_number)
@@ -102,8 +101,8 @@ def checkout(request):
 
 def checkout_confirmation(request, order_number):
     """
-    Once the payment has been successful the current basket is 
-    deleted and the order is saved to the user. The order details 
+    Once the payment has been successful the current basket is
+    deleted and the order is saved to the user. The order details
     are then displayed to the user.
     """
     del request.session['basket']
@@ -122,11 +121,12 @@ def checkout_confirmation(request, order_number):
 
 def orders(request, customer_name_id):
     """
-    A list of the users previously purchased orders are 
+    A list of the users previously purchased orders are
     displayed starting with the most recent first
     """
     user_id = request.user.id
-    orders = Order.objects.all().filter(customer_name_id=user_id).order_by('-date')
+    orders = Order.objects.all().filter(customer_name_id=user_id).order_by(
+        '-date')
 
     template = 'checkout/orders.html'
     context = {

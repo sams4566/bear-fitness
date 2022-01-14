@@ -7,6 +7,6 @@ class ItemsConfig(AppConfig):
 
     def ready(self):
         """
-        Lets the server know signals.py is available 
+        Lets the server know signals.py is available
         """
         import items.signals

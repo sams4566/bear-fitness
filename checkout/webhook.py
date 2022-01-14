@@ -6,13 +6,14 @@ from checkout.webhook_handler import WebhookHandler
 
 import stripe
 
+
 @require_POST
 @csrf_exempt
 def my_webhook_view(request):
     """
-    Listens to which webhook is returns from the 
-    'WebhookHandler' class in webhook_handler.py. Once 
-    a webhook is returned this is displayed in stripe for 
+    Listens to which webhook is returns from the
+    'WebhookHandler' class in webhook_handler.py. Once
+    a webhook is returned this is displayed in stripe for
     the stripe user to view.
     """
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -23,7 +24,7 @@ def my_webhook_view(request):
 
     try:
         event = stripe.Webhook.construct_event(
-        payload, sig_header, webhook_secret
+            payload, sig_header, webhook_secret
         )
     except ValueError as e:
         return HttpResponse(status=400)

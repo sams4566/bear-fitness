@@ -34,7 +34,7 @@
                                             <input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe" class="button text-black bg-info">
                                             <p class="brandingLogo"><a href="http://eepurl.com/hR9_e1"
                                                     title="Mailchimp - email marketing made easy and fun"><img
-                                                        src="https://eep.io/mc-cdn-images/template_images/branding_logo_text_dark_dtp.svg" rel="sponsored"></a>
+                                                        src="https://eep.io/mc-cdn-images/template_images/branding_logo_text_dark_dtp.svg" rel="sponsored" alt="MailChimp Logo"></a>
                                             </p>
                                         </div>
                                     </div>
@@ -55,6 +55,6 @@
 {% endblock %}
 
 {% block postloadjs %}
-    <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
-    <script type='text/javascript' src="{% static 'home/js/home.js' %}"></script>
+    <script src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+    <script src="{% static 'home/js/home.js' %}"></script>
 {% endblock %}

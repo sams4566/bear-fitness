@@ -19,15 +19,16 @@ def wishlist(request, user_id):
     }
     return render(request, template, context)
 
- 
+
 def add_to_wishlist(request, item_id):
     """
     Allows the user to add an item from item_info.html
-    to their wishlist. It throws an error if the same item 
+    to their wishlist. It throws an error if the same item
     with the same size is already in the wishlist.
     """
     user_id = request.user.id
-    wishlist_items = list(Wishlist.objects.all().filter(customer_name_id=user_id))
+    wishlist_items = list(Wishlist.objects.all().filter(
+        customer_name_id=user_id))
     if request.method == 'POST':
         item = get_object_or_404(Item, pk=item_id)
         wishlist_form = Wishlist()
@@ -38,8 +39,8 @@ def add_to_wishlist(request, item_id):
                 if product.size == item_size:
                     messages.add_message(
                         request,
-                        messages.INFO, 
-                        "That size is already in your wishlist.", 
+                        messages.INFO,
+                        "That size is already in your wishlist.",
                     )
                     template = 'wishlist/wishlist.html'
                     context = {
@@ -55,16 +56,18 @@ def add_to_wishlist(request, item_id):
         user_id = request.user.id
         return redirect('wishlist', user_id=user_id)
 
+
 def update_wishlist(request, item_id):
     """
-    Lets the user change the size of the item in the wishlist. 
-    It throws an error if the same item with the same size 
+    Lets the user change the size of the item in the wishlist.
+    It throws an error if the same item with the same size
     is already in the wishlist.
     """
     current_size = request.POST['size_id']
     size = request.POST.get('item_size')
     user_id = request.user.id
-    wishlist_items = list(Wishlist.objects.all().filter(customer_name_id=user_id))
+    wishlist_items = list(Wishlist.objects.all().filter(
+        customer_name_id=user_id))
     item = get_object_or_404(Item, pk=item_id)
     wishlist_form = Wishlist()
     for product in wishlist_items:
@@ -74,8 +77,8 @@ def update_wishlist(request, item_id):
             if product.size == item_size:
                 messages.add_message(
                     request,
-                    messages.INFO, 
-                    "That size is already in your wishlist.", 
+                    messages.INFO,
+                    "That size is already in your wishlist.",
                 )
                 template = 'wishlist/wishlist.html'
                 context = {
@@ -92,6 +95,7 @@ def update_wishlist(request, item_id):
     wishlist_form.item_cost = item.cost
     wishlist_form.save()
     return redirect('wishlist', user_id=user_id)
+
 
 def delete_wishlist_item(request, wishlist_item_id):
     """

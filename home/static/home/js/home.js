@@ -1,8 +1,8 @@
 /*jshint esversion: 6 */
 
 /**
- * Obtains the users email through mailchimp for
- * the newsletter
+ * Javascript provided by MailChimp to obtain 
+ * email for newsletter
 */ 
 (function ($) {
     window.fnames = new Array();
