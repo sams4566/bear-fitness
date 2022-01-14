@@ -1,3 +1,9 @@
+/*jshint esversion: 6 */
+
+/**
+ * Reveals and hides the 'More Items' button when there
+ * are more items available to view in basket.html
+*/ 
 $(function() {
     $(".basket-list").slice(0, 2).show();
     $("#load-basket-items").on('click', function() {

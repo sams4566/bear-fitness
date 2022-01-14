@@ -1,4 +1,8 @@
-// Create payment input
+/*jshint esversion: 6 */
+
+/**
+ * Creates the stripe payment input
+*/ 
 var stripePublicKey = $('#var_stripe_public_key').text().slice(1, -1)
 var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
@@ -26,7 +30,15 @@ var card = elements.create('card', {
 });
 card.mount('#card-element')
 
-// Create payment submission
+/**
+ * The function first prevents the 'OrderForm' from being 
+ * submitted and starts the loading circle. Then the 
+ * save_checkout_info is called to make sure stripe has all
+ * of the necessary information to confirm the payment and 
+ * for an order to be created. Stripe then confirms if the 
+ * payment succeeded or failed and then allows the form to 
+ * be submitted to create an order.
+*/ 
 var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(event) {

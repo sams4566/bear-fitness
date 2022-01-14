@@ -1,3 +1,9 @@
+/*jshint esversion: 6 */
+
+/**
+ * Obtains the users email through mailchimp for
+ * the newsletter
+*/ 
 (function ($) {
     window.fnames = new Array();
     window.ftypes = new Array();

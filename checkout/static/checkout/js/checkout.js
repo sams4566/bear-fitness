@@ -1,3 +1,9 @@
+/*jshint esversion: 6 */
+
+/**
+ * Reveals and hides the 'More Items' button when there
+ * are more items available to view in checkout.html
+*/ 
 $(function() {
     $(".checkout-list").slice(0, 2).show();
     $("#load-checkout-items").on('click', function() {
@@ -8,6 +14,10 @@ $(function() {
     });
 });
 
+/**
+ * Reveals and hides the 'More Orders' button when there
+ * are more orders available to view in the orders.html
+*/ 
 $(function() {
     $(".order-list").slice(0, 4).show();
     $("#load-orders").on('click', function() {
@@ -18,6 +28,11 @@ $(function() {
     });
 });
 
+/**
+ * Reveals and hides the 'More Items' button when there
+ * are more items available to view in 
+ * order_summary.html
+*/ 
 $(function() {
     $(".order-summary-list").slice(0, 2).show();
     $("#load-order-summary-items").on('click', function() {
@@ -28,6 +43,11 @@ $(function() {
     });
 });
 
+/**
+ * Reveals and hides the 'More Items' button when there
+ * are more items available to view in 
+ * checkout_confirmation.html
+*/ 
 $(function() {
     $(".order-confirmation-list").slice(0, 2).show();
     $("#load-order-confirmation-items").on('click', function() {
