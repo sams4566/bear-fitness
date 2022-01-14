@@ -11,11 +11,21 @@ import time
 import json
 
 class WebhookHandler:
+    """
+    A class that helps stripe work out the outcome 
+    of the payment
+    """
 
     def __init__(self, request):
+        """
+        Allows access to attributes of the 'request' from stripe
+        """
         self.request = request
     
     def _user_email_confirmation(self, order):
+        """
+        Creates and sends a confirmation email when an order is created
+        """
         business_email = settings.DEFAULT_FROM_EMAIL
         message = render_to_string(
             'checkout/email_confirmations/message.txt',
@@ -32,16 +42,30 @@ class WebhookHandler:
         )
 
     def event_handle(self, event):
+        """
+        Lets the stripe user know what the error is if the 
+        payment didn't succeed or fail
+        """
         return HttpResponse(
             content='Unhandled event type: {}'.format(event.type),
             status=200)
 
     def payment_intent_payment_failed(self, event):
+        """
+        Lets the stripe user know if the payment failed
+        """
         return HttpResponse(
             content='Payment failed: {}'.format(event.type),
             status=200)
             
     def payment_intent_succeeded(self, event):
+        """
+        The function checks if an order has already been
+        created from the 'checkout' view. If not, an order is
+        created and then lets the the stripe user know if the
+        payment was successful and if the order was created 
+        through the 'checkout' view or in the webhook
+        """
         print('payment success')
         intent = event.data.object
         print(intent)

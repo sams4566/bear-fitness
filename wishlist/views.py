@@ -7,6 +7,9 @@ from django.contrib import messages
 
 
 def wishlist(request, user_id):
+    """
+    Displays a list of items saved to the users wishlist
+    """
     wishlist_items = Wishlist.objects.all().filter(customer_name_id=user_id)
 
     template = 'wishlist/wishlist.html'
@@ -18,6 +21,11 @@ def wishlist(request, user_id):
 
  
 def add_to_wishlist(request, item_id):
+    """
+    Allows the user to add an item from item_info.html
+    to their wishlist. It throws an error if the same item 
+    with the same size is already in the wishlist.
+    """
     user_id = request.user.id
     wishlist_items = list(Wishlist.objects.all().filter(customer_name_id=user_id))
     if request.method == 'POST':
@@ -48,6 +56,11 @@ def add_to_wishlist(request, item_id):
         return redirect('wishlist', user_id=user_id)
 
 def update_wishlist(request, item_id):
+    """
+    Lets the user change the size of the item in the wishlist. 
+    It throws an error if the same item with the same size 
+    is already in the wishlist.
+    """
     current_size = request.POST['size_id']
     size = request.POST.get('item_size')
     user_id = request.user.id
@@ -81,6 +94,10 @@ def update_wishlist(request, item_id):
     return redirect('wishlist', user_id=user_id)
 
 def delete_wishlist_item(request, wishlist_item_id):
+    """
+    The item is deleted from the wishlist when the user
+    clicks the delete button
+    """
     wishlist_item = get_object_or_404(Wishlist, id=wishlist_item_id)
     user_id = wishlist_item.customer_name.id
     wishlist_item.delete()

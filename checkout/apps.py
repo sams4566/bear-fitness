@@ -6,4 +6,5 @@ class CheckoutConfig(AppConfig):
     name = 'checkout'
 
     def ready(self):
+        """ Lets the server know signals.py is available """
         import checkout.signals

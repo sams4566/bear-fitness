@@ -4,6 +4,11 @@ from .forms import ItemForm, ReviewForm
 
 
 def all_items(request):
+    """
+    Displays a list of items depending on the category 
+    selected. If 'All Products' is selected all the items 
+    are displayed in alphabetical order
+    """
     items = Item.objects.all()
     if 'category' in request.GET: 
             category = request.GET['category'].split(',')
@@ -30,6 +35,10 @@ def all_items(request):
 
 
 def item_info(request, item_id):
+    """
+    Displays each individual items details alongside its 
+    similar items, star ratings and reviews.
+    """
     item = get_object_or_404(Item, pk=item_id)
     category = item.category
     user_id = request.user
@@ -87,6 +96,10 @@ def item_info(request, item_id):
 
 
 def add_item(request):
+    """
+    Displays the form for a superuser to add an 
+    item to the 'Item' model
+    """
     if request.user.is_superuser:
         form = ItemForm()
         user_id = request.user
@@ -111,6 +124,10 @@ def add_item(request):
 
 
 def edit_item(request, item_id):
+    """
+    Displays the form for a superuser to edit an 
+    item in the 'Item' model
+    """
     if request.user.is_superuser:
         item = get_object_or_404(Item, pk=item_id)
         form = ItemForm(instance=item)
@@ -130,17 +147,26 @@ def edit_item(request, item_id):
 
 
 def delete_item(request, item_id):
+    """
+    Deletes an item from the 'Item' model
+    """
     product = get_object_or_404(Item, pk=item_id)
     product.delete()
     return redirect(reverse('all_items'))
 
 def delete_review(request, review_id):
+    """
+    Deletes a users review from the 'Review' model
+    """
     review = get_object_or_404(Review, pk=review_id)
     item_id = review.item_id
     review.delete()
     return redirect('item_info', item_id=item_id)
 
 def one_star(request, item_id):
+    """
+    Adds/deletes a one star rating when clicked by the user
+    """
     item = get_object_or_404(Item, pk=item_id)
     user_id = request.user
     rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
@@ -163,6 +189,9 @@ def one_star(request, item_id):
 
 
 def two_stars(request, item_id):
+    """
+    Adds/deletes a two star rating when clicked by the user
+    """
     item = get_object_or_404(Item, pk=item_id)
     user_id = request.user
     rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
@@ -185,6 +214,9 @@ def two_stars(request, item_id):
 
 
 def three_stars(request, item_id):
+    """
+    Adds/deletes a three star rating when clicked by the user
+    """
     item = get_object_or_404(Item, pk=item_id)
     user_id = request.user
     rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
@@ -206,6 +238,9 @@ def three_stars(request, item_id):
     return redirect('item_info', item_id=item_id)
 
 def four_stars(request, item_id):
+    """
+    Adds/deletes a four star rating when clicked by the user
+    """
     item = get_object_or_404(Item, pk=item_id)
     user_id = request.user
     rating_id = Rating.objects.filter(user=user_id, item=item)[0].id
@@ -227,6 +262,9 @@ def four_stars(request, item_id):
     return redirect('item_info', item_id=item_id)
 
 def five_stars(request, item_id):
+    """
+    Adds/deletes a five star rating when clicked by the user
+    """
     item = get_object_or_404(Item, pk=item_id)
     user_id = request.user
     rating_id = Rating.objects.filter(user=user_id, item=item)[0].id

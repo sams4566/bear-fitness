@@ -6,10 +6,15 @@ from checkout.webhook_handler import WebhookHandler
 
 import stripe
 
-# Using Django
 @require_POST
 @csrf_exempt
 def my_webhook_view(request):
+    """
+    Listens to which webhook is returns from the 
+    'WebhookHandler' class in webhook_handler.py. Once 
+    a webhook is returned this is displayed in stripe for 
+    the stripe user to view.
+    """
     stripe.api_key = settings.STRIPE_SECRET_KEY
     webhook_secret = settings.STRIPE_WEBHOOK_SECRET
     payload = request.body
@@ -21,10 +26,8 @@ def my_webhook_view(request):
         payload, sig_header, webhook_secret
         )
     except ValueError as e:
-        # Invalid payload
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
         return HttpResponse(status=400)
 
     handler = WebhookHandler(request)
