@@ -1,82 +1,75 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <!-- Title -->
 <header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
-    <div class="container px-4 px-lg-5 my-4">
-        <div class="text-center text-black">
-            <h1 class="display-4 fw-bolder">My Orders</h1>
-        </div>
+  <div class="container px-4 px-lg-5 my-4">
+    <div class="text-center text-black">
+      <h1 class="display-4 fw-bolder">My Orders</h1>
     </div>
+  </div>
 </header>
-
 <section class="container pb-5 pt-3 px-4 px-lg-2">
-    {% if not orders %}
-    <!-- Message if no orders have been placed -->
-    <div class="row pb-5">
-        <div class="col-12">
-            <div class="row pt-5">
-                <h2 class="text-center">Currently no orders have been placed</h2>
-            </div>
-            <div class="row pt-4 d-flex justify-content-center">
-                <a class="btn btn-primary content-width" href="{% url 'all_items' %}">View Products</a>
-            </div>
-        </div>
+  {% if not orders %}
+  <!-- Message if no orders have been placed -->
+  <div class="row pb-5">
+    <div class="col-12">
+      <div class="row pt-5">
+        <h2 class="text-center">Currently no orders have been placed</h2>
+      </div>
+      <div class="row pt-4 d-flex justify-content-center">
+        <a class="btn btn-primary content-width" href="{% url 'all_items' %}">View Products</a>
+      </div>
     </div>
-    {% else %}
-    <!-- List of orders previously placed -->
-    <div class="row">
-        <div class="offset-md-1 col-md-10">
-            <div class="row d-flex justify-content-center">
-                <table class="table border">
-                    <thead>
-                        <tr>
-                            <th>Order Number</th>
-                            <th>Date</th>
-                            <th>Total Cost</th>
-                            <th class="table-column">Items</th>
-                            <th class="table-column">Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for order in orders %}
-                        <tr class="order-list clickable" onclick="window.location='{% url 'order_summary' order.order_number %}'">
-                            <td>
-                                {{ order.order_number|truncatechars:10 }}
-                            </td>
-                            <td>
-                                {{ order.date|date:"j M, y" }}
-                            </td>
-                            <td>£{{ order.order_cost }}</td>
-                            <td class="text-uppercase table-column">
-                                {% for item in order.orderitems.all %}
-                                    <h6 class="p-0 m-0">{{ item.item.name }}-{{ item.item_size }}</h6>
-                                {% endfor %}
-                            </td>
-                            <td class="table-column">
-                                {{ order.email }}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <!-- Limits the number of orders on display to 4 -->
-            {% if orders|length > 4 %}
-            <div class="row">
-                <button id="load-orders" class="btn btn-primary content-width mt-2 mx-auto">More
-                    Orders</button>
-            </div>
-            {% endif %}
-        </div>
+  </div>
+  {% else %}
+  <!-- List of orders previously placed -->
+  <div class="row">
+    <div class="offset-md-1 col-md-10">
+      <div class="row d-flex justify-content-center">
+        <table class="table border">
+          <thead>
+            <tr>
+              <th>Order Number</th>
+              <th>Date</th>
+              <th>Total Cost</th>
+              <th class="table-column">Items</th>
+              <th class="table-column">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in orders %}
+            <tr class="order-list clickable" onclick="window.location='{% url 'order_summary' order.order_number %}'">
+              <td>
+                {{ order.order_number|truncatechars:10 }}
+              </td>
+              <td>
+                {{ order.date|date:"j M, y" }}
+              </td>
+              <td>£{{ order.order_cost }}</td>
+              <td class="text-uppercase table-column">
+                {% for item in order.orderitems.all %}
+                <h6 class="p-0 m-0">{{ item.item.name }}-{{ item.item_size }}</h6>
+                {% endfor %}
+              </td>
+              <td class="table-column">
+                {{ order.email }}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- Limits the number of orders on display to 4 -->
+      {% if orders|length > 4 %}
+      <div class="row">
+        <button id="load-orders" class="btn btn-primary content-width mt-2 mx-auto">More Orders</button>
+      </div>
+      {% endif %}
     </div>
-    {% endif %}
+  </div>
+  {% endif %}
 </section>
 
-{% endblock %}
-
-{% block postloadjs %}
-    <script src="{% static 'checkout/js/checkout.js' %}"></script>
+{% endblock %} {% block postloadjs %}
+  <script src="{% static 'checkout/js/checkout.js' %}"></script>
 {% endblock %}

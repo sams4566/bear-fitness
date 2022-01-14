@@ -1,10 +1,10 @@
 /* General */
 body {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
 }
 
 p {
-  font-family: 'Quattrocento', sans-serif;
+  font-family: "Quattrocento", sans-serif;
 }
 
 .center-text {
@@ -16,7 +16,9 @@ p {
 }
 
 /* base.html */
-nav li, nav a, nav ul {
+nav li,
+nav a,
+nav ul {
   color: white !important;
 }
 
@@ -89,7 +91,7 @@ nav .btn-outline-light:hover {
 }
 
 /* all_items.html */
-.background-photo { 
+.background-photo {
   background: no-repeat center center;
   background-size: cover;
   height: 100%;
@@ -117,7 +119,6 @@ nav .btn-outline-light:hover {
 }
 
 .wishlist-selector {
-  width: 30px;
   height: 30px;
   width: max-content;
   font-size: 0.75rem;
@@ -147,7 +148,6 @@ nav .btn-outline-light:hover {
 }
 
 .basket-selector {
-  width: 30px;
   height: 30px;
   width: max-content;
   font-size: 0.75rem;
@@ -175,7 +175,6 @@ nav .btn-outline-light:hover {
   width: 100%;
   right: 0;
   bottom: 0;
-
 }
 
 .loading-circle {
@@ -215,7 +214,7 @@ nav .btn-outline-light:hover {
 
 .clickable:hover {
   background-color: lightgrey;
-  cursor: pointer
+  cursor: pointer;
 }
 
 /* order_summary.html */
@@ -237,7 +236,7 @@ nav .btn-outline-light:hover {
 
 /* Media Queries */
 @media screen and (max-width: 600px) {
-  .table-column{
+  .table-column {
     display: none;
   }
 

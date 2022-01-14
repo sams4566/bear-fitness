@@ -49,8 +49,8 @@ class Item(models.Model):
             Avg('three_stars'))['three_stars__avg'] or 0
         self.four_stars_total = self.item_rating.aggregate(
             Avg('four_stars'))['four_stars__avg'] or 0
-        self.five_stars_total = self.item_rating.aggregate
-        (Avg('five_stars'))['five_stars__avg'] or 0
+        self.five_stars_total = self.item_rating.aggregate(
+            Avg('five_stars'))['five_stars__avg'] or 0
         self.rating_total = (self.one_star_total + self.two_stars_total +
                              self.three_stars_total + self.four_stars_total +
                              self.five_stars_total)

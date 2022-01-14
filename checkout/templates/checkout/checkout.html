@@ -1,109 +1,97 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <!-- Title -->
 <header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
-    <div class="container px-4 px-lg-5 my-4">
-        <div class="text-center text-black">
-            <h1 class="display-4 fw-bolder">Checkout</h1>
-        </div>
+  <div class="container px-4 px-lg-5 my-4">
+    <div class="text-center text-black">
+      <h1 class="display-4 fw-bolder">Checkout</h1>
     </div>
+  </div>
 </header>
 
 <section class="container">
-    <div class="row pb-5">
-        <div class="col-12 col-lg-6 pb-1">
-            <!-- Total cost summary -->
-            <div class="row pt-2">
-                <h1>Total cost:</h1>
+  <div class="row pb-5">
+    <div class="col-12 col-lg-6 pb-1">
+      <!-- Total cost summary -->
+      <div class="row pt-2">
+        <h1>Total cost:</h1>
+      </div>
+      <div class="row">
+        <h2>£{{ total }}</h2>
+      </div>
+      <hr />
+      <!-- List of items about to be purchased -->
+      <div class="row">
+        {% for product in basket_items %}
+        <div class="checkout-list">
+          <div class="row py-2">
+            <a href="{% url 'item_info' product.item_id %}" class="col-4">
+              <!-- Item image -->
+              {% if product.item.image %}
+              <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
+              {% else %}
+              <img class="card-img-top mb-5 mb-md-0" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
+              {% endif %}
+            </a>
+            <div class="col-8">
+              <div class="small mb-1 row">SKU: {{ product.item.sku }}</div>
+              <h3 class="fw-bolder row">{{ product.item.name }}</h3>
+              <h5 class="row">£{{ product.item.cost }}</h5>
+              <h5 class="text-uppercase row">{{ product.size }}</h5>
             </div>
-            <div class="row">
-                <h2>£{{ total }}</h2>
-            </div>
-            <hr>
-            <!-- List of items about to be purchased -->
-            <div class="row">
-                {% for product in basket_items %}
-                <div class="checkout-list">
-                    <div class="row py-2">
-                        <a href="{% url 'item_info' product.item_id %}" class="col-4">
-                            <!-- Item image -->
-                            {% if product.item.image %}
-                            <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
-                            {% else %}
-                            <img class="card-img-top mb-5 mb-md-0" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
-                            {% endif %}
-                        </a>
-                        <div class="col-8">
-                            <div class="small mb-1 row">SKU: {{ product.item.sku }}</div>
-                            <h3 class="fw-bolder row">{{ product.item.name }}</h3>
-                            <h5 class="row">£{{ product.item.cost }}</h5>
-                            <h5 class="text-uppercase row">{{ product.size }}</h5>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                <!-- Limits the items on display to 2 -->
-                {% if basket_items|length > 2 %}
-                <div class="row pt-1">
-                    <button id="load-checkout-items" class="btn btn-primary content-width mt-2 mx-auto">More
-                        Items</button>
-                </div>
-                {% endif %}
-            </div>
-            <hr>
+          </div>
         </div>
-        <!-- Form to complete purchase -->
-        <div class="col-12 col-lg-6 pb-5 pt-lg-1 pt-0">
-            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
-                {% csrf_token %}
-                <fieldset>
-                    <legend>User Information</legend>
-                    {{ order_form.full_name | as_crispy_field}}
-                    {{ order_form.telephone | as_crispy_field }}
-                    {{ order_form.email | as_crispy_field }}
-                </fieldset>
-                <fieldset>
-                    <legend>Postal Address</legend>
-                    {{ order_form.address_line1 | as_crispy_field }}
-                    {{ order_form.address_line2 | as_crispy_field }}
-                    {{ order_form.city | as_crispy_field }}
-                    {{ order_form.county | as_crispy_field }}
-                    {{ order_form.country | as_crispy_field }}
-                    {{ order_form.postcode | as_crispy_field }}
-                </fieldset>
-                <fieldset>
-                    <legend>Card Details</legend>
-                    <div id="card-element"></div>
-                    <input type="hidden" name="client_secret" value="{{ client_secret }}">
-                </fieldset>
-                <button class="btn btn-success flex-shrink-0 my-3" type="submit" id="submit-button">
-                    Complete Payment
-                </button>
-                <div class="payment-error"></div>
-                
-                <a class="btn btn-primary flex-shrink-0 content-width" href="{% url 'current_basket' %}">
-                    Change Basket
-                </a>
-            </form>
+        {% endfor %}
+        <!-- Limits the items on display to 2 -->
+        {% if basket_items|length > 2 %}
+        <div class="row pt-1">
+          <button id="load-checkout-items" class="btn btn-primary content-width mt-2 mx-auto">More Items</button>
         </div>
+        {% endif %}
+      </div>
+      <hr />
     </div>
+    <!-- Form to complete purchase -->
+    <div class="col-12 col-lg-6 pb-5 pt-lg-1 pt-0">
+      <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+        {% csrf_token %}
+        <fieldset>
+          <legend>User Information</legend>
+          {{ order_form.full_name | as_crispy_field}} {{ order_form.telephone | as_crispy_field }} {{ order_form.email | as_crispy_field }}
+        </fieldset>
+        <fieldset>
+          <legend>Postal Address</legend>
+          {{ order_form.address_line1 | as_crispy_field }} {{ order_form.address_line2 | as_crispy_field }} {{ order_form.city | as_crispy_field }} {{ order_form.county | as_crispy_field }} {{ order_form.country | as_crispy_field }} {{
+          order_form.postcode | as_crispy_field }}
+        </fieldset>
+        <fieldset>
+          <legend>Card Details</legend>
+          <div id="card-element"></div>
+          <input type="hidden" name="client_secret" value="{{ client_secret }}" />
+        </fieldset>
+        <button class="btn btn-success flex-shrink-0 my-3" type="submit" id="submit-button">
+          Complete Payment
+        </button>
+        <div class="payment-error"></div>
+
+        <a class="btn btn-primary flex-shrink-0 content-width" href="{% url 'current_basket' %}">
+          Change Basket
+        </a>
+      </form>
+    </div>
+  </div>
 </section>
 <!-- Loading circle while the payment is taking place -->
 <div id="loading-background">
-    <div class="loading-circle">
-        <i class="fa-2x fas fa-circle-notch fa-spin"></i>
-    </div>
+  <div class="loading-circle">
+    <i class="fa-2x fas fa-circle-notch fa-spin"></i>
+  </div>
 </div>
 
-{% endblock %}
-
-{% block postloadjs %}
-    {{ block.super }}
-    {{ client_secret|json_script:"var_client_secret" }}
-    {{ stripe_public_key|json_script:"var_stripe_public_key" }}
-    <script src="{% static 'checkout/js/stripe.js' %}"></script>
-    <script src="{% static 'checkout/js/checkout.js' %}"></script>
+{% endblock %} {% block postloadjs %} 
+  {{ block.super }} 
+  {{ client_secret|json_script:"var_client_secret" }} 
+  {{ stripe_public_key|json_script:"var_stripe_public_key" }}
+  <script src="{% static 'checkout/js/stripe.js' %}"></script>
+  <script src="{% static 'checkout/js/checkout.js' %}"></script>
 {% endblock %}

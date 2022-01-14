@@ -1,46 +1,43 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <!-- Title-->
 <header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
-    <div class="container px-4 px-lg-5 my-4">
-        <div class="text-center text-black">
-            <h1 class="display-4 fw-bolder">Edit Product</h1>
-        </div>
+  <div class="container px-4 px-lg-5 my-4">
+    <div class="text-center text-black">
+      <h1 class="display-4 fw-bolder">Edit Product</h1>
     </div>
+  </div>
 </header>
 <!-- Edit Product Form -->
 <section class="pb-5 pt-1">
-    <div class="container px-4 px-lg-5">
-        <form action="{% url 'edit_item' item.id %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="row pt-3">SKU:</div>
-            <div class="row">{{ form.sku }}</div>
-            <div class="row pt-3">Category:</div>
-            <div class="row">{{ form.category }}</div>
-            <div class="row pt-3">Product Name:</div>
-            <div class="row">{{ form.name }}</div>
-            <div class="row pt-3">Summary:</div>
-            <div class="row">{{ form.bio }}</div>
-            <div class="row pt-3">Cost:</div>
-            <div class="row">{{ form.cost }}</div>
-            <div class="row pt-3">Image:</div>
-            <div class="pt-1">
-                {{ form.image }}
-            </div>
-            <div class="row pt-4 pb-3">
-                <button class="btn btn-primary content-width" type="submit">Update Product</button>
-            </div>
-        </form>
-        <!-- Button the redirects back to the Item Info page -->
-        <div class="row pb-3">
-            <a class="btn btn-outline-dark content-width" href="{% url 'item_info' item.id %}">
-                Cancel
-            </a>
-        </div>
+  <div class="container px-4 px-lg-5">
+    <form action="{% url 'edit_item' item.id %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="row pt-3">SKU:</div>
+      <div class="row">{{ form.sku }}</div>
+      <div class="row pt-3">Category:</div>
+      <div class="row">{{ form.category }}</div>
+      <div class="row pt-3">Product Name:</div>
+      <div class="row">{{ form.name }}</div>
+      <div class="row pt-3">Summary:</div>
+      <div class="row">{{ form.bio }}</div>
+      <div class="row pt-3">Cost:</div>
+      <div class="row">{{ form.cost }}</div>
+      <div class="row pt-3">Image:</div>
+      <div class="pt-1">
+        {{ form.image }}
+      </div>
+      <div class="row pt-4 pb-3">
+        <button class="btn btn-primary content-width" type="submit">Update Product</button>
+      </div>
+    </form>
+    <!-- Button the redirects back to the Item Info page -->
+    <div class="row pb-3">
+      <a class="btn btn-outline-dark content-width" href="{% url 'item_info' item.id %}">
+        Cancel
+      </a>
     </div>
+  </div>
 </section>
 
 {% endblock %}

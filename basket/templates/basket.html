@@ -1,150 +1,136 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <!-- Title -->
 <header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
-    <div class="container px-4 px-lg-5 my-4">
-        <div class="text-center text-black">
-            <h1 class="display-4 fw-bolder">Basket</h1>
-        </div>
+  <div class="container px-4 px-lg-5 my-4">
+    <div class="text-center text-black">
+      <h1 class="display-4 fw-bolder">Basket</h1>
     </div>
+  </div>
 </header>
-
 <section class="pt-3 pb-5">
-    <div class="container">
-        {% if user.is_authenticated %}
-        {% if not basket_items %}
-        <!-- Message if basket is empty -->
-        <div class="row pb-5">
-            <div class="col-12">
-                <div class="row pt-5">
-                    <h2 class="text-center">You basket is currently empty</h2>
-                </div>
-                <div class="row pt-4 d-flex justify-content-center">
-                    <a class="btn btn-primary content-width" href="{% url 'all_items' %}">View Products</a>
-                </div>
-            </div>
+  <div class="container">
+    {% if user.is_authenticated %} {% if not basket_items %}
+    <!-- Message if basket is empty -->
+    <div class="row pb-5">
+      <div class="col-12">
+        <div class="row pt-5">
+          <h2 class="text-center">You basket is currently empty</h2>
         </div>
-        {% else %}
-        <!-- List of items in the basket -->
-        <div class="row">
-            <div class="col-12 col-md-8 pb-3">
-                {% for product in basket_items %}
-                <div class="basket-list">
-                    <div class="row py-2">
-                        <a href="{% url 'item_info' product.item_id %}" class="col-4 offset-2">
-                            {% if product.item.image %}
-                            <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
-                            {% else %}
-                            <img class="card-img-top mb-5 mb-md-0" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
-                            {% endif %}
-                        </a>
-                        <div class="col-6">
-                            <h6 class="small mb-1 row">SKU: {{ product.item.sku }}</h6>
-                            <h5 class="fw-bolder row">{{ product.item.name }}</h5>
-                            <h6 class="row">£{{ product.item.cost }}</h6>
-                            <form class="row" action="{% url 'update_basket' product.item_id %}" method="POST">
-                                {% csrf_token %}
-                                <div class="col-12">
-                                    <div class="row">
-                                        <select name="item_size" class="col-1 basket-selector">
-                                            <option value="none" selected disabled hidden>
-                                                <p id="sizes_selection">{{ product.placeholder_size }}</p>
-                                            </option>
-                                            <option value="xs">XS</option>
-                                            <option value="s">S</option>
-                                            <option value="m">M</option>
-                                            <option value="l">L</option>
-                                            <option value="xl">XL</option>
-                                        </select>
-                                        <div class="col-3">
-                                            <button
-                                                class="btn btn-outline-dark flex-shrink-0 content-width basket-select-update"
-                                                type="submit">
-                                                Update Size
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="size_id" value="{{ product.size }}">
-                            </form>
-                            <form class="d-flex row pt-2" action="{% url 'delete_basket_item' product.item_id %}"
-                                method="POST">
-                                {% csrf_token %}
-                                <button class="btn btn-danger flex-shrink-0 basket-delete" type="submit">
-                                    Delete
-                                </button>
-                                <input type="hidden" name="size_id" value="{{ product.size }}">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                <!-- Limits the items on display to 2 -->
-                {% if basket_items|length > 2 %}
-                <div class="row">
-                    <button id="load-basket-items" class="btn btn-primary content-width mt-2 mx-auto">More
-                        Items</button>
-                </div>
-                {% endif %}
-            </div>
-            <!-- Total cost and link to Checkout -->
-            <div class="col-12 col-md-4 order-first order-md-last">
-                <div class="row">
-                    <div class="d-flex justify-content-center">
-                        <h1>Total cost:</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="d-flex justify-content-center">
-                        <h2>£{{ total }}</h2>
-                    </div>
-                </div>
-                {% if basket_items|length > 0 %}
-                <div class="row pt-2">
-                    <div class="d-flex justify-content-center">
-                        <a class="btn btn-info flex-shrink-0 col-10" href="{% url 'checkout' %}">Checkout</a>
-                    </div>
-                </div>
-                {% endif %}
-                <div class="row pt-4">
-                    <div class="d-flex justify-content-center">
-                        <a class="btn btn-primary center-text" href="{% url 'all_items' %}">
-                            Continue Shopping
-                        </a>
-                    </div>
-                </div>
-                <div class="row pt-4">
-                    <hr>
-                </div>
-            </div>
+        <div class="row pt-4 d-flex justify-content-center">
+          <a class="btn btn-primary content-width" href="{% url 'all_items' %}">View Products</a>
         </div>
-        {% endif %}
-        {% else %}
-        <!-- Message if the user isn't logged in -->
-        <div class="row pb-5">
-            <div class="col-12">
-                <div class="row pt-5">
-                    <h2 class="text-center">Login to add items to your basket</h2>
-                </div>
-                <div class="row pt-4 d-flex justify-content-center">
-                    <a class="btn btn-primary content-width" href="{% url 'account_login' %}">Login</a>
-                </div>
-                <div class="row pt-4 d-flex justify-content-center">
-                    <a class="btn btn-primary content-width" href="{% url 'account_signup' %}">Sign up</a>
-
-                </div>
-            </div>
-        </div>
-        {% endif %}
+      </div>
     </div>
-    
+    {% else %}
+    <!-- List of items in the basket -->
+    <div class="row">
+      <div class="col-12 col-md-8 pb-3">
+        {% for product in basket_items %}
+        <div class="basket-list">
+          <div class="row py-2">
+            <a href="{% url 'item_info' product.item_id %}" class="col-4 offset-2">
+              {% if product.item.image %}
+              <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
+              {% else %}
+              <img class="card-img-top mb-5 mb-md-0" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
+              {% endif %}
+            </a>
+            <div class="col-6">
+              <h6 class="small mb-1 row">SKU: {{ product.item.sku }}</h6>
+              <h5 class="fw-bolder row">{{ product.item.name }}</h5>
+              <h6 class="row">£{{ product.item.cost }}</h6>
+              <form class="row" action="{% url 'update_basket' product.item_id %}" method="POST">
+                {% csrf_token %}
+                <div class="col-12">
+                  <div class="row">
+                    <select name="item_size" class="col-1 basket-selector">
+                      <option value="none" selected disabled hidden>
+                        <p id="sizes_selection">{{ product.placeholder_size }}</p>
+                      </option>
+                      <option value="xs">XS</option>
+                      <option value="s">S</option>
+                      <option value="m">M</option>
+                      <option value="l">L</option>
+                      <option value="xl">XL</option>
+                    </select>
+                    <div class="col-3">
+                      <button class="btn btn-outline-dark flex-shrink-0 content-width basket-select-update" type="submit">
+                        Update Size
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" name="size_id" value="{{ product.size }}" />
+              </form>
+              <form class="d-flex row pt-2" action="{% url 'delete_basket_item' product.item_id %}" method="POST">
+                {% csrf_token %}
+                <button class="btn btn-danger flex-shrink-0 basket-delete" type="submit">
+                  Delete
+                </button>
+                <input type="hidden" name="size_id" value="{{ product.size }}" />
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- Limits the items on display to 2 -->
+        {% if basket_items|length > 2 %}
+        <div class="row">
+          <button id="load-basket-items" class="btn btn-primary content-width mt-2 mx-auto">More Items</button>
+        </div>
+        {% endif %}
+      </div>
+      <!-- Total cost and link to Checkout -->
+      <div class="col-12 col-md-4 order-first order-md-last">
+        <div class="row">
+          <div class="d-flex justify-content-center">
+            <h1>Total cost:</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="d-flex justify-content-center">
+            <h2>£{{ total }}</h2>
+          </div>
+        </div>
+        {% if basket_items|length > 0 %}
+        <div class="row pt-2">
+          <div class="d-flex justify-content-center">
+            <a class="btn btn-info flex-shrink-0 col-10" href="{% url 'checkout' %}">Checkout</a>
+          </div>
+        </div>
+        {% endif %}
+        <div class="row pt-4">
+          <div class="d-flex justify-content-center">
+            <a class="btn btn-primary center-text" href="{% url 'all_items' %}">
+              Continue Shopping
+            </a>
+          </div>
+        </div>
+        <div class="row pt-4">
+          <hr />
+        </div>
+      </div>
+    </div>
+    {% endif %} {% else %}
+    <!-- Message if the user isn't logged in -->
+    <div class="row pb-5">
+      <div class="col-12">
+        <div class="row pt-5">
+          <h2 class="text-center">Login to add items to your basket</h2>
+        </div>
+        <div class="row pt-4 d-flex justify-content-center">
+          <a class="btn btn-primary content-width" href="{% url 'account_login' %}">Login</a>
+        </div>
+        <div class="row pt-4 d-flex justify-content-center">
+          <a class="btn btn-primary content-width" href="{% url 'account_signup' %}">Sign up</a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
 </section>
 
-{% endblock %}
-
-{% block postloadjs %}
-    <script src="{% static 'basket/js/basket.js' %}"></script>
+{% endblock %} {% block postloadjs %}
+<script src="{% static 'basket/js/basket.js' %}"></script>
 {% endblock %}

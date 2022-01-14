@@ -1,108 +1,101 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <!-- Title -->
 <header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
-    <div class="container px-4 px-lg-5 my-4">
-        <div class="text-center text-black">
-            <h1 class="display-4 fw-bolder">Order Summary</h1>
-        </div>
+  <div class="container px-4 px-lg-5 my-4">
+    <div class="text-center text-black">
+      <h1 class="display-4 fw-bolder">Order Summary</h1>
     </div>
+  </div>
 </header>
-
 <section class="pb-5 pt-4">
-    <div class="container px-4 px-lg-2 pb-4">
+  <div class="container px-4 px-lg-2 pb-4">
+    <div class="row">
+      {% for x in order %}
+      <!-- Order details summary list -->
+      <div class="col-12 col-lg-6 order-summary">
         <div class="row">
-            {% for x in order %}
-            <!-- Order details summary list -->
-            <div class="col-12 col-lg-6 order-summary">
-                <div class="row">
-                    <h2>Order Details</h2>
-                    <h6>Order Number:</h6>
-                    <p>{{ x.order_number }}</p>
-                    <h6>Date Purchased:</h6>
-                    <p>{{ x.date }}</p>
-                    <h6>Total cost:</h6>
-                    <p>£{{ x.order_cost }}</p>
-                    <h6>Full Name:</h6>
-                    <p>{{ x.full_name }}</p>
-                    <h6>Email:</h6>
-                    <p>{{ x.email }}</p>
-                    <h6>Phone Number:</h6>
-                    <p>{{ x.telephone }}</p>
-                    <h2>Delivery Address</h2>
-                    <h6>Address Line 1:</h6>
-                    <p>{{ x.address_line1 }}</p>
-                    {% if x.address_line2 %}
-                    <h6>Address Line 2:</h6>
-                    <p>{{ x.address_line2 }}</p>
-                    {% endif %}
-                    <h6>City:</h6>
-                    <p>{{ x.city }}</p>
-                    {% if x.county %}
-                    <h6>County:</h6>
-                    <p>{{ x.county }}</p>
-                    {% endif %}
-                    <h6>Country:</h6>
-                    <p>{{ x.country }}</p>
-                    {% if x.postcode %}
-                    <h6>Postcode:</h6>
-                    <p>{{ x.postcode }}</p>
-                    {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-            <!-- Purchased item summary list -->
-            <div class="col-12 offset-lg-1 col-lg-5">
-                <div class="row pt-2">
-                    <h1>Item Details</h1>
-                </div>
-                <hr>
-                <div class="row">
-                    {% for product in order_items %}
-                    <div class="order-summary-list">
-                        <div class="row py-2">
-                            <a href="{% url 'item_info' product.item_id %}" class="col-4">
-                                <!-- Item image -->
-                                {% if product.item.image %}
-                                <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
-                                {% else %}
-                                <img class="card-img-top mb-5 mb-md-0" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
-                                {% endif %}
-                            </a>
-                            <div class="col-8">
-                                <div class="small mb-1 row">SKU: {{ product.item.sku }}</div>
-                                <h3 class="fw-bolder row">{{ product.item.name }}</h3>
-                                <h5 class="row">£{{ product.item.cost }}</h5>
-                                <h5 class="text-uppercase row">{{ product.size }}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                    <!-- Limits the items on display to 2 -->
-                    {% if order_items|length > 2 %}
-                    <div class="row pt-1">
-                        <button id="load-order-summary-items" class="btn btn-primary content-width mt-2 mx-auto">More
-                            Items</button>
-                    </div>
-                    {% endif %}
-                </div>
-                <hr>
-                <!-- Link to all of the users orders -->
-                <div class="row d-flex justify-content-center">
-                    <a class="btn btn-info" href="{% url 'orders' user_id %}">
-                        Back to Orders
-                    </a>
-                </div>
-            </div>
+          <h2>Order Details</h2>
+          <h6>Order Number:</h6>
+          <p>{{ x.order_number }}</p>
+          <h6>Date Purchased:</h6>
+          <p>{{ x.date }}</p>
+          <h6>Total cost:</h6>
+          <p>£{{ x.order_cost }}</p>
+          <h6>Full Name:</h6>
+          <p>{{ x.full_name }}</p>
+          <h6>Email:</h6>
+          <p>{{ x.email }}</p>
+          <h6>Phone Number:</h6>
+          <p>{{ x.telephone }}</p>
+          <h2>Delivery Address</h2>
+          <h6>Address Line 1:</h6>
+          <p>{{ x.address_line1 }}</p>
+          {% if x.address_line2 %}
+          <h6>Address Line 2:</h6>
+          <p>{{ x.address_line2 }}</p>
+          {% endif %}
+          <h6>City:</h6>
+          <p>{{ x.city }}</p>
+          {% if x.county %}
+          <h6>County:</h6>
+          <p>{{ x.county }}</p>
+          {% endif %}
+          <h6>Country:</h6>
+          <p>{{ x.country }}</p>
+          {% if x.postcode %}
+          <h6>Postcode:</h6>
+          <p>{{ x.postcode }}</p>
+          {% endif %}
         </div>
+      </div>
+      {% endfor %}
+      <!-- Purchased item summary list -->
+      <div class="col-12 offset-lg-1 col-lg-5">
+        <div class="row pt-2">
+          <h1>Item Details</h1>
+        </div>
+        <hr />
+        <div class="row">
+          {% for product in order_items %}
+          <div class="order-summary-list">
+            <div class="row py-2">
+              <a href="{% url 'item_info' product.item_id %}" class="col-4">
+                <!-- Item image -->
+                {% if product.item.image %}
+                <img class="card-img-top mb-5 mb-md-0" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
+                {% else %}
+                <img class="card-img-top mb-5 mb-md-0" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
+                {% endif %}
+              </a>
+              <div class="col-8">
+                <div class="small mb-1 row">SKU: {{ product.item.sku }}</div>
+                <h3 class="fw-bolder row">{{ product.item.name }}</h3>
+                <h5 class="row">£{{ product.item.cost }}</h5>
+                <h5 class="text-uppercase row">{{ product.size }}</h5>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          <!-- Limits the items on display to 2 -->
+          {% if order_items|length > 2 %}
+          <div class="row pt-1">
+            <button id="load-order-summary-items" class="btn btn-primary content-width mt-2 mx-auto">More Items</button>
+          </div>
+          {% endif %}
+        </div>
+        <hr />
+        <!-- Link to all of the users orders -->
+        <div class="row d-flex justify-content-center">
+          <a class="btn btn-info" href="{% url 'orders' user_id %}">
+            Back to Orders
+          </a>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
-{% endblock %}
-
-{% block postloadjs %}
-    <script src="{% static 'checkout/js/checkout.js' %}"></script>
+{% endblock %} {% block postloadjs %}
+  <script src="{% static 'checkout/js/checkout.js' %}"></script>
 {% endblock %}

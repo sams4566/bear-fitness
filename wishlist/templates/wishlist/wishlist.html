@@ -1,111 +1,106 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <!-- Title -->
 <header class="bg-dark py-3 background-photo" style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url({{ MEDIA_URL }}deadlift.jpg);">
-    <div class="container px-4 px-lg-5 my-4">
-        <div class="text-center text-black">
-            <h1 class="display-4 fw-bolder">Wishlist</h1>
-        </div>
+  <div class="container px-4 px-lg-5 my-4">
+    <div class="text-center text-black">
+      <h1 class="display-4 fw-bolder">Wishlist</h1>
     </div>
+  </div>
 </header>
-
 <section class="py-3">
-    <div class="container px-4 px-lg-5 mt-3">
-        <!-- Message if wishlist is empty -->
-        {% if not wishlist_items %}
-        <div class="row pb-5">
-            <div class="col-12">
-                <div class="row pt-5">
-                    <h2 class="text-center">You wishlist is currently empty</h2>
-                </div>
-                <div class="row pt-4 d-flex justify-content-center">
-                    <a class="btn btn-primary content-width" href="{% url 'all_items' %}">View Products</a>
-                </div>
-            </div>
+  <div class="container px-4 px-lg-5 mt-3">
+    <!-- Message if wishlist is empty -->
+    {% if not wishlist_items %}
+    <div class="row pb-5">
+      <div class="col-12">
+        <div class="row pt-5">
+          <h2 class="text-center">You wishlist is currently empty</h2>
         </div>
-        {% else %}
-        <!-- List of items in the wishlist -->
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            {% for product in wishlist_items %}
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Item image -->
-                    <a href="{% url 'item_info' product.item.id %}">
-                        {% if product.item.image %}
-                        <img class="card-img-top" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
-                        {% else %}
-                        <img class="card-img-top" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
-                        {% endif %}
-                    </a>
-                    <div class="card-body p-4 col-12">
-                        <div class="text-center row">
-                            <h5 class="fw-bolder">{{ product.item.name }}</h5>
-                        </div>
-                        <div class="text-center row">
-                            <p class="text-center">£{{ product.item.cost }}</p>
-                        </div>
-                        <!-- Item size selector form -->
-                        {% with product.size|upper as placeholder_size %}
-                        <div class="row">
-                            <div class="col-12">
-                                <form action="{% url 'update_wishlist' product.item_id %}" method="POST">
-                                    {% csrf_token %}
-                                    <div class="row pb-1 d-flex justify-content-center">
-                                        <select name="item_size" class="col-1 col-md-1 offset-md-2 wishlist-selector content-width">
-                                            <option value="none" selected disabled hidden>
-                                                <p id="sizes_selection">{{ placeholder_size }}</p>
-                                            </option>
-                                            <option value="xs">XS</option>
-                                            <option value="s">S</option>
-                                            <option value="m">M</option>
-                                            <option value="l">L</option>
-                                            <option value="xl">XL</option>
-                                        </select>
-                                        <div class="col-md-6 pt-2 pt-md-0 d-flex justify-content-center">
-                                            <button class="btn btn-outline-dark wishlist-select-update" type="submit">
-                                                Update Size
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                    </div>
-                                    <input type="hidden" name="size_id" value="{{ product.size }}">
-                                </form>
-                            </div>
-                        </div>
-                        {% endwith %}
-
-                        <!-- Button to move item to the basket -->
-                        <form class="d-flex row pt-2" action="{% url 'add_to_basket2' product.item_id %}" method="POST" id="move-to-basket">
-                            {% csrf_token %}
-                            <div class="text-center">
-                                <button class="btn btn-info flex-shrink-0" type="submit">
-                                    <i class="fas fa-shopping-basket me-1"></i>
-                                    Move to basket
-                                </button>
-                            </div>
-                            <input type="hidden" name="wishlist_item_id" value="{{ product.id }}">
-                            <input type="hidden" name="item_size" value="{{ product.size }}">
-                        </form>
-                        <!-- Button to delete the item from the wishlist -->
-                        <form class="d-flex row pt-2" action="{% url 'delete_wishlist_item' product.id %}" method="POST">
-                            {% csrf_token %}
-                            <div class="text-center">
-                                <button class="btn btn-danger flex-shrink-0" type="submit">
-                                    Delete
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+        <div class="row pt-4 d-flex justify-content-center">
+          <a class="btn btn-primary content-width" href="{% url 'all_items' %}">View Products</a>
         </div>
-        {% endif %}
+      </div>
     </div>
+    {% else %}
+    <!-- List of items in the wishlist -->
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+      {% for product in wishlist_items %}
+      <div class="col mb-5">
+        <div class="card h-100">
+          <!-- Item image -->
+          <a href="{% url 'item_info' product.item.id %}">
+            {% if product.item.image %}
+            <img class="card-img-top" src="{{ product.item.image.url }}" alt="{{ product.item.name }}" />
+            {% else %}
+            <img class="card-img-top" src="{{ MEDIA_URL }}dumbbell.jpg" alt="..." />
+            {% endif %}
+          </a>
+          <div class="card-body p-4 col-12">
+            <div class="text-center row">
+              <h5 class="fw-bolder">{{ product.item.name }}</h5>
+            </div>
+            <div class="text-center row">
+              <p class="text-center">£{{ product.item.cost }}</p>
+            </div>
+            <!-- Item size selector form -->
+            {% with product.size|upper as placeholder_size %}
+            <div class="row">
+              <div class="col-12">
+                <form action="{% url 'update_wishlist' product.item_id %}" method="POST">
+                  {% csrf_token %}
+                  <div class="row pb-1 d-flex justify-content-center">
+                    <select name="item_size" class="col-1 col-md-1 offset-md-2 wishlist-selector content-width">
+                      <option value="none" selected disabled hidden>
+                        <p id="sizes_selection">{{ placeholder_size }}</p>
+                      </option>
+                      <option value="xs">XS</option>
+                      <option value="s">S</option>
+                      <option value="m">M</option>
+                      <option value="l">L</option>
+                      <option value="xl">XL</option>
+                    </select>
+                    <div class="col-md-6 pt-2 pt-md-0 d-flex justify-content-center">
+                      <button class="btn btn-outline-dark wishlist-select-update" type="submit">
+                        Update Size
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row"></div>
+                  <input type="hidden" name="size_id" value="{{ product.size }}" />
+                </form>
+              </div>
+            </div>
+            {% endwith %}
+
+            <!-- Button to move item to the basket -->
+            <form class="d-flex row pt-2" action="{% url 'add_to_basket2' product.item_id %}" method="POST" id="move-to-basket">
+              {% csrf_token %}
+              <div class="text-center">
+                <button class="btn btn-info flex-shrink-0" type="submit">
+                  <i class="fas fa-shopping-basket me-1"></i>
+                  Move to basket
+                </button>
+              </div>
+              <input type="hidden" name="wishlist_item_id" value="{{ product.id }}" />
+              <input type="hidden" name="item_size" value="{{ product.size }}" />
+            </form>
+            <!-- Button to delete the item from the wishlist -->
+            <form class="d-flex row pt-2" action="{% url 'delete_wishlist_item' product.id %}" method="POST">
+              {% csrf_token %}
+              <div class="text-center">
+                <button class="btn btn-danger flex-shrink-0" type="submit">
+                  Delete
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
 </section>
 
 {% endblock %}
