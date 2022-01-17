@@ -146,9 +146,66 @@ I have listed my user stories in the following agile tool so that it is easy to 
 - Produce a breakdown table for users of how many of the star ratings were one star, two star etc.
 - Have the home page products be items on sale.
 
+## E-commerce Business Model
+
+|              |**WHO**      | **What**               | **HOW**          |
+|              |(B2C or B2B) | (Products, Digital     | (Single Payment  |
+|              |             |  Products or Services) | or Subscription) |
+|--------------|-------------|------------------------|------------------|
+| Iron Fitness | B2C         | Products               | Single Payment   |
+
+![Business Model](https://github.com/sams4566/iron-fitness/blob/main/media/readme/business-model.jpg)
+
+- __Who is the customer?__
+B2C: The customer's will primarily be men who are looking for clothes to work out in. These customers usually make the choice to buy on their own and are impulse buyers.
+
+Features: 
+- Login/logout
+- Orders for the user
+
+Potential Database:
+- User
+
+- __What will they buy?__
+Products: They will buy base-layers, hoodies & jackets, joggers, shorts, tank-tops & stringers and t-shirts & tops.
+
+Features:
+- List of orders
+- Filter results
+- Similar items
+- Wishlist
+
+Potential Databases:
+- Category
+- Item
+- Rating
+- Review
+- Wishlist
+
+- __How will they pay?__
+Single Payment: They will pay online using using a credit or debit card. This works for Iron Fitness this suits businesses that sell products or one-time services. Transactions for this pay type are usually finished after the first payment.
+
+Features:
+- Easy payment system
+- Basket for items
+
+Potential Databases:
+- Basket
+- Orders
+
+Potential Databases:
+![Potential Database](https://github.com/sams4566/iron-fitness/blob/main/media/readme/potential-databases.jpg)
+
 ## Marketing
+- I created a Facebook page to help generate business for the site and to spread the word (Pictures below).
+- Using organic social media will be a key way in developing the business. I aim to have a presence on other social media sites such as Twitter, Instagram and LinkedIn as these are the main social media channels young adult men would use.
+- Using paid social media will also be a key target as focussing on advertising to users who have already visited the site will increase revenue. This can cost a significant amount but long term will produce good results.
+- Email marketing will be a key part in increasing website traffic as using sites like MailChimp to collect emails can be relatively inexpensive. The newsletter sign-up is the first stage of retrieving emails.
+- Using paid adverts such as Google ads will not initially be a priority due to the cost but will be in the future.
 
-
+[Facebook 1](https://github.com/sams4566/iron-fitness/blob/main/media/readme/facebook1.jpg)
+[Facebook 2](https://github.com/sams4566/iron-fitness/blob/main/media/readme/facebook2.jpg)
+[Facebook 3](https://github.com/sams4566/iron-fitness/blob/main/media/readme/facebook3.jpg)
 
 ## Technologies used
 
