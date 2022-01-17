@@ -105,7 +105,9 @@ def checkout_confirmation(request, order_number):
     deleted and the order is saved to the user. The order details
     are then displayed to the user.
     """
-    del request.session['basket']
+    basket = request.session.get('basket', {})
+    if basket:
+        del request.session['basket']
     order = get_object_or_404(Order, order_number=order_number)
     order.customer_name = request.user
     order.save()

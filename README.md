@@ -55,10 +55,95 @@ I have listed my user stories in the following agile tool so that it is easy to 
 ## Features
 - __Header and Footer__
   - Both the header and footer are styled to allow users to easily navigate the site and are stuck at the top and bottom of each page.
+  - The header forms a dropdown menu at lower screen sizes to allow users to stop the options from being bunched up.
+  - The footer has a link to the companies Facebook page and their privacy policy as it is important that users have easy access to both these links.
+  - The header and footer are the same in all pages as they are part of the base.html file.
 
 ![Header and Footer](http)
 
+- __Authentication__
+  - Users will be able to sign-up, sign-in and sign-out using the below screens.
+  - Admins are the only users who are able to add and edit products alongside viewing all of the options in the Admin.
+  - If users aren't logged in they won't be able to add products to a basket or wishlist alongside leaving a rating or review of a product.
+  - I used the built in django.allauth package to impliment these functions.
+
+![Authentication](http)
+
+- __Home page__
+  - The home page quickly lets the user know that the page allows users to buy clothing.
+  - The newsletter sign-up is on the front page so that it is one of the first things a user thinks about when they enter the page. Having easy access to signing up will increase the number of emails retrieved for marketing.
+  - The large view clothing button organicly leads users on to seeing the products available.
+
+![Home page](http)
+
+- __List of products pages__
+  - The list of products page lays out the list of products in an organic fashion with the number of products per line reducing on lower screen sizes.
+  - Depending on the option choosen by the user in the clothing dropdown menu the products and title displayed will be filtered.
+
+![List of products pages](http)
+
+- __Product Info page__
+  - The product info page displays all of the key product information in an effective layout that allows the user to quickly read the key information.
+  - The user has the option of giving the product a rating if they are logged by clicking one of the stars alongside leaving a review at the bottom of the page.
+  - The user can also add the item with their choosen size to their wishlist or basket.
+  - If the user is an Admin they can edit and add products to the system.
+  - The list of similar products helps guide the user to other products to increase their interaction with the site.
+
+![Product Info page](http)
+
+- __Add and Edit Products__
+  - An Admin has the ability to edit and add products to the site to keep the site up to date.
+  - When a user tries to edit a product the information that has previously been entered is prepopulated.
+  - A default image is also set in place if a picture isn't added to a product.
+
+![Add and Edit Products](http)
+
+- __Wishlist__
+  - The user can add items to a wishlist if they don't want to make a decision about paying for the product straight away. 
+  - Items be deleted from the wishlist and their sizes can be edited.
+  - User can move items to there basket at any point and an error message appears if the item is already in their basket.
+
+![Wishlist](http)
+
+- __Basket__
+  - Users can quickly see the total cost of the items in their basket when they first enter the basket.
+  - If there are more than 2 items in the basket a 'More Items' button appears. This prevents the page from being to cramped.
+  - Items sizes can be edited and deleted from the basket if the customer changes their mind. 
+
+![Basket](http)
+
+- __Checkout__
+  - The checkout form is a generic form that users will be familiar with when paying for products on other sites.
+  - User can double check the total cost and size of each item before filling out the form.
+  - If the user enters card details that are declined an error message appears to let them know the issue. The user details also aren't deleted meaning they can quickly change their card details and pay for their items.
+  - A loading screen appears while their card details are being checked to stop the user from exiting the screen before the payment is complete.
+
+![Checkout](http)
+
+- __Order Confirmation__
+  - Once the payment has been completed users are directed to an order confirmation page that displays the key information for their order.
+  - The 'Your payment was successful' message also clears up any ambiguaty regarding whether the payment went through.
+  - A 'View Orders' button directs the user to all the orders they have made.
+
+![Order Confirmation](http)
+
+- __List of Orders__
+  - User can see a list of their order on this page and can click into each to see each orders specific details.
+
+![List of Orders](http)
+
+- __Admin__
+  - The admin page allows site managers to add, edit and delete orders, users, products, categories, ratings and reviews.
+
+![Admin](http)
+
 ### Future features
+
+- Add filters for products categories such as filtering by price, recently added and alphabetically.
+- Add a search bar so that users can find specific items.
+- Allow only users who have bought items to give items reviews and ratings.
+- Produce a breakdown table for users of how many of the star ratings were one star, two star etc.
+- Have the home page products be items on sale.
 
 ## Technologies used
 
@@ -69,9 +154,17 @@ I have listed my user stories in the following agile tool so that it is easy to 
   - **Python** - I used python as the main back end language. It was used to write all of the different functions that occur when requested by the user.
 
 ### Extentions
-  - **Django** - The site was built using the Django full-stack framework where I used many of the built in shortcuts and variables to create the websites backend. Out of the django extentions I used both AllAuth and Coverage. AllAuth was used to confirm authentication with users on the site and Coverage was used to find out how much of the back end code I had automatically tested.
+  - **Django** - The site was built using the Django full-stack framework where I used many of the built in shortcuts and variables to create the websites backend. Below are the django extensions used:
+    - django-allauth - used to confirm authentication with users on the site
+    - django-crispy-forms - used to format the layout of forms
+    - django-countries - to provide a list of countries in the checkout form
+    - django-storages - used to connect to Amazon S3 for storing media and static files.
+    - coverage - used to find out how much of the back end code I had automatically tested
+  - **Stripe** - Stripe was the API used to confirm payments
+  - **Amazon S3** - Amazon S3 was used to store all the media and static files to be used when the site is deployed on Heroku.
   - **Bootstraps** - I used bootstraps to allow the site to be structured and built quickly. 
   - **jQuery** - jQuery was chosen to allow the javascript code to be implemented easily. 
+  - Postgres - I used Postgres as the database for the Heroku deployed website as it is well integrated with Heroku.
 
 ## Testing
 
@@ -79,22 +172,23 @@ I have listed my user stories in the following agile tool so that it is easy to 
 
 #### Bug 1
 
+
 #### Bug 2
 
 #### Bug 3
 
 ### Automated Testing
 
-The site was tested using the built-in django 'TestCase' library in the items/tests.py file. I ran ##### tests to test the sites basic functionality including testing:
+The site was tested using the built-in django 'TestCase' library in the items/tests.py file. I ran 8 tests to test the sites basic functionality including testing:
   - Information was successfully entered into the items/models.py data models.
   - Form data couldn't be left empty
-  - Items could be added, edited and deleted#########
+  - Items could be added, edited and deleted
 
 To run the tests you can type: `python3 manage.py test`
 
 The coverage report for how much of the code I've covered with tests is below:
 
-![Coverage](http)
+![Coverage](https://github.com/sams4566/iron-fitness/blob/main/media/readme/coverage.jpg)
 
 ### Manuel Testing
 I tested the site on several occations throughout its development to make sure all the apps and urls were working correctly.

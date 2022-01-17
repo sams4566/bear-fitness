@@ -117,7 +117,7 @@ class TestItemViews(TestCase):
             'cost': '50',
             'category': category.id,
             'sku': '123',
-            'image': 'dumbbell.jpg',
+            'image': 'no-image.jpg',
             'bio': 'Test bio',
             'rating_total': '1',
         })
@@ -142,7 +142,7 @@ class TestItemViews(TestCase):
             cost='50',
             category=category,
             sku='123',
-            image='/media/dumbbell.jpg',
+            image='/media/no-image.jpg',
             bio='Test bio',
             rating_total='1',
         )
@@ -151,7 +151,7 @@ class TestItemViews(TestCase):
             'cost': '50',
             'category': category.id,
             'sku': '123',
-            'image': 'dumbbell.jpg',
+            'image': 'no-image.jpg',
             'bio': 'Test bio',
             'rating_total': '1',
         })
