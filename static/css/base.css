@@ -90,6 +90,14 @@ nav .btn-outline-light:hover {
   margin-top: 0px;
 }
 
+.home-logo {
+  font-size: 4rem;
+}
+
+.home-button {
+  font-size: 1.5rem;
+}
+
 /* all_items.html */
 .background-photo {
   background: no-repeat center center;

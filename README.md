@@ -26,14 +26,14 @@ I have listed my user stories in the following agile tool so that it is easy to 
   - Having the Items model as the center of the project allowed the flow to be intuative and helpful for UX.
   - The basket is also similar to a model except that the items in it are delete automatically at the end of the session.
 
-![Schema](https://github.com/sams4566/iron-fitness/tree/main/media/readme/schema.jpg)
+![Schema](https://github.com/sams4566/iron-fitness/blob/main/media/readme/schema.jpg)
 
 ### Site layout
 - __Wireframe__
   - I researched lots of the different bootstraps themes and looked at many clothing sites such as ASOS and Gymshark to help work out how the site should look.
   - I subsequently created the below wireframe to further solidify my thoughts.
 
-![Wireframe](https://github.com/sams4566/iron-fitness/tree/main/media/readme/wireframe.jpg)
+![Wireframe](https://github.com/sams4566/iron-fitness/blob/main/media/readme/wireframe.jpg)
 
 - __Theme__
   - I decided to use the [Shop Homepage](https://startbootstrap.com/template/shop-homepage) theme from Start Bootstraps as it made the navigations of the site easy and was similar to my wireframe.

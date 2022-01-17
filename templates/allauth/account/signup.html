@@ -17,36 +17,7 @@
     <div class="col-12 col-md-6 offset-md-3">
       <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
-        <div class="row">
-          <label for="id_email">E-mail:</label>
-        </div>
-        <div class="row">
-          <input type="email" name="email" required="" id="id_email">
-        </div>
-        <div class="row">
-          <label for="id_email2">E-mail (again):</label>
-        </div>
-        <div class="row">
-          <input type="email" name="email2" required="" id="id_email2">
-        </div>
-        <div class="row">
-          <label for="id_username">Username:</label>
-        </div>
-        <div class="row">
-          <input type="text" name="username" autofocus="autofocus" minlength="5" maxlength="150" required="" id="id_username">
-        </div>
-        <div class="row">
-          <label for="id_password1">Password:</label>
-        </div>
-        <div class="row">
-          <input type="password" name="password1" required="" id="id_password1">
-        </div>
-        <div class="row">
-          <label for="id_password2">Password (again):</label>
-        </div>
-        <div class="row">
-          <input type="password" name="password2" required="" id="id_password2">
-        </div>
+        {{ form | crispy }}
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}

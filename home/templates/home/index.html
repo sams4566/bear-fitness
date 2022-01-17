@@ -4,6 +4,14 @@
   <div class="container">
     <div class="row pt-4 px-4 px-lg-5">
       <div class="col-12 col-md-6 offset-md-6">
+        <!-- Title -->
+        <div class="row">
+          <h1 class="text-center home-logo">Iron Fitness <i class="fas fa-dumbbell"></i></h1>
+        </div>
+        <!-- Button for viewing clothing -->
+        <div class="row pt-2 pb-3 d-flex justify-content-center">
+          <a class="btn btn-primary content-width home-button" href="{% url 'all_items' %}">View Clothing</a>
+        </div>
         <div class="row newsletter-column">
           <div class="col-12">
             <!-- Mailchimp Signup Form -->
@@ -45,10 +53,6 @@
               </form>
             </div>
           </div>
-        </div>
-        <!-- Button for viewing clothing -->
-        <div class="row pt-4 d-flex justify-content-center">
-          <a class="btn btn-primary content-width" href="{% url 'all_items' %}">View Clothing</a>
         </div>
       </div>
     </div>
