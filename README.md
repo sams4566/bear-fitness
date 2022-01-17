@@ -142,8 +142,11 @@ I have listed my user stories in the following agile tool so that it is easy to 
 - Add filters for products categories such as filtering by price, recently added and alphabetically.
 - Add a search bar so that users can find specific items.
 - Allow only users who have bought items to give items reviews and ratings.
+- Add a quantity option so user can buy more than one of the same product at a time.
 - Produce a breakdown table for users of how many of the star ratings were one star, two star etc.
 - Have the home page products be items on sale.
+
+## Marketing
 
 ## Technologies used
 
@@ -171,11 +174,13 @@ I have listed my user stories in the following agile tool so that it is easy to 
 ### Bugs
 
 #### Bug 1
-
+  - The following error was showing when I tried to click on the item info page for any of the items in the 'Base layer' category: `ValueError at /items/5/ - The 'image' attribute has no file associated with it.` The reason for the issue was that an item without a picture was added to base layers and the 'Related Items' section of the item info page didn't have the {% if not product.image %} tags.
 
 #### Bug 2
+  - Two of the automated tests I created stopped working after I added the review and rating models. I needed to login the user on both tests to fix the issue as the item_info redirect view required this.
 
 #### Bug 3
+ - Users that weren’t super users were able to add and edit items by typing in the correct url. I stopped this by adding `if request.user.is_superuser:` to the start of both the add_item and edit_item functions
 
 ### Automated Testing
 
@@ -191,28 +196,61 @@ The coverage report for how much of the code I've covered with tests is below:
 ![Coverage](https://github.com/sams4566/iron-fitness/blob/main/media/readme/coverage.jpg)
 
 ### Manuel Testing
-I tested the site on several occations throughout its development to make sure all the apps and urls were working correctly.
+I tested the site on several occations throughout its development to make sure all the apps and urls were working correctly. I tested the site on several different browsers such as Google Chrome, Safari and Mozilla Firefox and between a width of 320px to 2000px the site is easily readable on all devices.
+
+#### Check user logged out
+- On the navbar, the wishlist is not visible. PASS
+- Under account section of the navbar, there is not an option to 'Add Item'
+- When the basket is clicked a message directing the user to login to add items to their basket appears. PASS
+- On the user info page, adding a rating by clicking one of the stars doesn't change the rating total. PASS
+- On the user info page, there is no option to leave a review. PASS
+- On the user info page, there is no option to add an item to your wishlist or basket. PASS
+- On the user info page, there is no option to edit or delete an item along. PASS
+
+#### Checkout page test
+- The checkout page displays all of the items added to the basket. PASS
+- The total cost correctly adds all the items in the basket together. PASS
+- Clicking the 'Change Basket' button returns the user to the basket page. PASS
+- If parts of the checkout form that have an astrik next to it aren't filled out an error appears. PASS
+- A loading circle appears when I have filled out the form correctly and pressed submit. PASS
+- An error message under the card payment box appears in red if the card was declined. PASS
+- The user is directed to an order confirmation page when the payment is confirmed correct. PASS
+- Check if an an order is still created when a user exits the payment page before the loading circle has disappeared. PASS
+
+#### Other Manuel tests
+Below are a list of some of the other key tests I completed before submitting the project:
+- Check admins could add, edit and delete items on the site.
+- Ensure users that aren't admins cannot add, edit and delete items from the system through typing the correct url
+- Ensure all of the star rating buttons work correctly and modify the rating total correctly
+- Make sure the 'More Items' buttons work correctly and don't prevent the user from seeing all their items.
+- Ensure admins have access to the admin page and can modify orders correctly with the order totals updating correctly if an item is added or deleted.
+- Check error messages appear if there is a duplicate item in the wishlist or basket.
 
 ### User Testing
+For user testing I asked two friends to do a number of manual tests such as adding a star rating, adding items to their basket and paying for them. This helped me realise the site had to have a 'Change Basket' button on the checkout page to make the site more user friendly.
 
 ### Security
 
-- **Authentication** - I used Django's AllAuth package to ensure users have to login to make edits to the site.
+- **Authentication** - I used Django's AllAuth package to ensure users have to login to make edits to the site. Throughout my code I also made sure that users can only accesss their own orders and details. If the user is an admin they have access to edit all parts of the site including user order and product information.
 
-- **Debug** - When the site is in production on Heroku debug is set to `False` ensuring the user doesn't get information about the certain urls aren't working.
+- **Debug** - When the site is in production on Heroku debug is set to `False` ensuring the user doesn't get information about why certain urls aren't working.
+
+- **Environment Variables** - I stored private infomation in environment variables in both gitpod for when accessing the database locally and in the 'Config Vars' Section in Heroku for when the site is deployed on Heroku. This ensured that any information that could cause the website to be hacked is hidden.
+
+- **Stripe** - Payments are confirmed securely through stripe which only creates an order when stripe returns that the payment was successful. 
 
 ### Validators 
 
   - HTML
-    - [W3C Validator](https://validator.w3.org/)
+    - No errors were returned when passing through the official [W3C Validator](https://validator.w3.org/)
   - CSS
-    - [(Jigsaw) Validator](https://jigsaw.w3.org/css-validator/)
+    - No errors were found when passing through the official [(Jigsaw) Validator](https://jigsaw.w3.org/css-validator/)
   - JavaScript
-    - [JSHint JavaScript Validator](https://jigsaw.w3.org/css-validator/)
+    - No significant issues were found when passing through the [JSHint JavaScript Validator](https://jigsaw.w3.org/css-validator/)
   - Python
-    - [PEP8 Online](http://pep8online.com/)
+    - No errors were returned when passing through [PEP8 Online](http://pep8online.com/)
   - Accessibility
-    - 
+    - The site was tested through Lighthouse in Google Chrome's developer tools and confirmed a high level of accessibility.
 
 ![Accessibility](http)
 

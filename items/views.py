@@ -147,8 +147,9 @@ def delete_item(request, item_id):
     """
     Deletes an item from the 'Item' model
     """
-    product = get_object_or_404(Item, pk=item_id)
-    product.delete()
+    if request.user.is_superuser:
+        product = get_object_or_404(Item, pk=item_id)
+        product.delete()
     return redirect(reverse('all_items'))
 
 
