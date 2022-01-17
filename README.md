@@ -63,7 +63,7 @@ I have listed my user stories in the following agile tool so that it is easy to 
 
 - __Authentication__
   - Users will be able to sign-up, sign-in and sign-out using the below screens.
-  - Admins are the only users who are able to add and edit products alongside viewing all of the options in the Admin.
+  - Admins are the only users who are able to add and edit products alongside viewing all of the options in the Django Admin Panel.
   - If users aren't logged in they won't be able to add products to a basket or wishlist alongside leaving a rating or review of a product.
   - I used the built in django.allauth package to impliment these functions.
 
@@ -132,8 +132,8 @@ I have listed my user stories in the following agile tool so that it is easy to 
 
 ![List of Orders](http)
 
-- __Admin__
-  - The admin page allows site managers to add, edit and delete orders, users, products, categories, ratings and reviews.
+- __Django Admin Panel__
+  - The Django Admin Panel allows site managers to add, edit and delete orders, users, products, categories, ratings and reviews.
 
 ![Admin](http)
 
@@ -147,6 +147,8 @@ I have listed my user stories in the following agile tool so that it is easy to 
 - Have the home page products be items on sale.
 
 ## Marketing
+
+
 
 ## Technologies used
 
@@ -223,7 +225,7 @@ Below are a list of some of the other key tests I completed before submitting th
 - Ensure users that aren't admins cannot add, edit and delete items from the system through typing the correct url
 - Ensure all of the star rating buttons work correctly and modify the rating total correctly
 - Make sure the 'More Items' buttons work correctly and don't prevent the user from seeing all their items.
-- Ensure admins have access to the admin page and can modify orders correctly with the order totals updating correctly if an item is added or deleted.
+- Ensure admins have access to the Django Admin Panel and can modify orders correctly with the order totals updating correctly if an item is added or deleted.
 - Check error messages appear if there is a duplicate item in the wishlist or basket.
 
 ### User Testing
@@ -259,13 +261,88 @@ For user testing I asked two friends to do a number of manual tests such as addi
 ### Cloning the repository
 
   - Navigate to the main page of this repository
-  - Click on the 'Code dropdown menu to the left of the green 'Gitpod' button.
-  - Copy the HTTPS url and then open your own workspace.
-  - Go to the terminal of your new workspace and type `git clone` + 'copied url'.
-  - To install all of the required modules use `pip3 freeze --local > requirements.txt` in the terminal.
+  - Click on the 'Code' dropdown menu to the left of the green 'Gitpod' button.
+  - Copy the 'HTTPS url' and then open your own workspace.
+  - Go to the terminal of your new workspace and type `git clone` + 'HTTPS url'.
+  - Move all the files within the 'iron_fitness' folder into your route directory and delete the empty 'iron_fitness' folder
+  - To install all of the required modules use `pip3 install -r requirements.txt` in the terminal.
   - Type `python manage.py runserver` to run the site.
+  - After this you will have to migrate the changes to integrate them to the new database. Add both of the below statements to the terminal:
+    - `python3 manage.py makemigrations`
+    - `python3 manage.py migrate`
+  - To get access to the Django Admin Panel type the below to your terminal and fill in the details:
+    - `python3 manage.py createsuperuser` 
+  - Finally, add an `env.py` file similar to the below:
+```
+  import os
+  os.environ['DEVELOPMENT'] = 'True'
+  os.environ['SECRET_KEY'] = 'enter_secret_key'
+  os.environ['STRIPE_PUBLIC_KEY'] = 'enter_stripe_public_key'
+  os.environ['STRIPE_SECRET_KEY'] = 'enter_stripe_secret_key'
+  os.environ['STRIPE_WEBHOOK_SECRET'] = 'enter_stripe_webhook_secret'`
+```
+
+### Setting up Stripe
+  - Login to Stripe and sign up for free.
+  - To retrieve the stripe STRIPE_PUBLIC_KEY and STRIPE_SECRET_KEY when you first login to stripe if you click on the 'Developers' tab and then click on the 'API Key' tab you will find both of them.
+  - To set up a webhook first, click on the 'Webhooks' tab in the 'Developers' tab
+  - Click on 'Add Endpoint' and add your 'home page url' + '/checkout/webhook' similar to https://8000-teal-capybara-nch0igqc.ws-eu25.gitpod.io/checkout/webhook/
+  - For the 'Events to send' setting, click 'Select all event'
+  - Click 'Add Endpoint
+  - Retrieve the 'STRIPE_WEBHOOK_SECRET' by clicking 'Reveal' on the 'Signing section' of the webhook dashboard.
 
 ### Deployment to Heroku
+  - Create a 'Procfile' with the following in it making sure you add in your application name: `web: gunicorn application_name.wsgi:application`
+  - Login to Heroku on their website and create a new app.
+  - Click on the 'Resources' tab and add 'Heroku Postgres' to the Add-ons section.
+  - Navigate to the 'Settings' tab in Heroku and click on the 'Reveal Config Vars' section and add in the below config vars:
+
+|**Environment Variable**|**Value**                                           |
+|------------------------|------------------------------------------------    |
+| AWS_ACCESS_KEY_ID      | The access key provided by AWS                     |
+| AWS_SECRET_ACCESS_KEY  | The secret key provided by AWS                     |
+| DATABASE_URL           | Automatically Generated by Postgres                |
+| EMAIL_HOST_PASSWORD    | The password for the address that sends out emails |
+| EMAIL_HOST_USER        | The email address for sending out emails           |
+| SECRET_KEY             | Django secret key                                  |
+| STRIPE_PUBLIC_KEY      | Publishable Key provided by Stripe                 |
+| STRIPE_SECRET_KEY      | Secret Key provided by Stripe                      |
+| STRIPE_WEBHOOK_SECRET  | Webhook Signing Secret provided by Stripe          |
+| USE_AWS                | True                                               |
+| DISABLE_COLLECTSTATIC  | 1                                                  |
+
+  - Add in the correct 'ALLOWED_HOSTS' urls to settings.py
+  - Now login to Heroku in the terminal of your workspace using `heroku login -i`
+  - Type `heroku git:remote -a heroku_app_name` into your terminal then `git push heroku main`. This will deploy your app.
+  - To migrate the databases to the Heroku Postgres database enter the below statements to your workspace terminal:
+    - `heroku run python3 manage.py makemigrations`
+    - `heroku run python3 manage.py migrate`
+
+### Set-up Amazon S3
+  - Once you're signed into Amazon AWS, navigate to S3 and create a new bucket.
+  - In the permissions tab within your bucket add the below to the CORS configuration:
+
+```
+[
+  {
+    "AllowedHeaders": [
+      "Authorization"
+    ],
+    "AllowedMethods": [
+      "GET"
+    ],
+    "AllowedOrigins": [
+      "*"
+    ],
+    "ExposeHeaders": []
+  }
+]
+```
+  - Then click on 'Policy generator' under the Bucket Policy Tab and add in the ARN + '/*' (which looks similar to arn:aws:s3:::your-bucket-name/*) to the generated policies 'Resource' section. Then add the generated policy to the 'Bucket Policy Editor'.
+  - Now navigate to the AWS app 'IAM' and create a 'Group' making sure you add in your existing S3 Bucket details.
+  - Once you have done this, create a 'New Policy' and 'New User' and add them to your 'Group'.
+  - After this, go back to the config variables in the Heroku app and delete the 'DISABLE_COLLECTSTATIC' variable.
+  - Deploy again to heroku by entering `git push heroku main` in your terminal and you should be fully set up.
 
 ## Credits
 
