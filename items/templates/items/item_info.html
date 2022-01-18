@@ -20,65 +20,65 @@
             {% if user.is_authenticated %}
             <form action="{% url 'one_star' item.id %}" method="POST">
               {% csrf_token %} {% if one_star %}
-              <button class="text-dark star-icon"><i class="fas fa-star star-green"></i></button>
+              <button class="text-dark star-icon" aria-label="One Star Rating"><i class="fas fa-star star-green"></i></button>
               {% else %}
-              <button class="text-dark star-icon"><i class="far fa-star"></i></button>
+              <button class="text-dark star-icon" aria-label="One Star Rating"><i class="far fa-star"></i></button>
               {% endif %}
             </form>
             {% else %}
-            <button class="text-dark star-icon"><i class="far fa-star"></i></button>
+            <button class="text-dark star-icon" aria-label="One Star Rating"><i class="far fa-star"></i></button>
             {% endif %}
           </div>
           <div class="col-1 ps-0 ms-0">
             {% if user.is_authenticated %}
             <form action="{% url 'two_stars' item.id %}" method="POST">
               {% csrf_token %} {% if two_stars %}
-              <button class="text-dark star-icon"><i class="fas fa-star star-green"></i></button>
+              <button class="text-dark star-icon" aria-label="Two Star Rating"><i class="fas fa-star star-green"></i></button>
               {% else %}
-              <button class="text-dark star-icon"><i class="far fa-star"></i></button>
+              <button class="text-dark star-icon" aria-label="Two Star Rating"><i class="far fa-star"></i></button>
               {% endif %}
             </form>
             {% else %}
-            <button class="text-dark star-icon"><i class="far fa-star"></i></button>
+            <button class="text-dark star-icon" aria-label="Two Star Rating"><i class="far fa-star"></i></button>
             {% endif %}
           </div>
           <div class="col-1 ps-0 ms-0">
             {% if user.is_authenticated %}
             <form action="{% url 'three_stars' item.id %}" method="POST">
               {% csrf_token %} {% if three_stars %}
-              <button class="text-dark star-icon"><i class="fas fa-star star-green"></i></button>
+              <button class="text-dark star-icon" aria-label="Three Star Rating"><i class="fas fa-star star-green"></i></button>
               {% else %}
-              <button class="text-dark star-icon"><i class="far fa-star"></i></button>
+              <button class="text-dark star-icon" aria-label="Three Star Rating"><i class="far fa-star"></i></button>
               {% endif %}
             </form>
             {% else %}
-            <button class="text-dark star-icon"><i class="far fa-star"></i></button>
+            <button class="text-dark star-icon" aria-label="Three Star Rating"><i class="far fa-star"></i></button>
             {% endif %}
           </div>
           <div class="col-1 ps-0 ms-0">
             {% if user.is_authenticated %}
             <form action="{% url 'four_stars' item.id %}" method="POST">
               {% csrf_token %} {% if four_stars %}
-              <button class="text-dark star-icon"><i class="fas fa-star star-green"></i></button>
+              <button class="text-dark star-icon" aria-label="Four Star Rating"><i class="fas fa-star star-green"></i></button>
               {% else %}
-              <button class="text-dark star-icon"><i class="far fa-star"></i></button>
+              <button class="text-dark star-icon" aria-label="Four Star Rating"><i class="far fa-star"></i></button>
               {% endif %}
             </form>
             {% else %}
-            <button class="text-dark star-icon"><i class="far fa-star"></i></button>
+            <button class="text-dark star-icon" aria-label="Four Star Rating"><i class="far fa-star"></i></button>
             {% endif %}
           </div>
           <div class="col-1 ps-0 ms-0">
             {% if user.is_authenticated %}
             <form action="{% url 'five_stars' item.id %}" method="POST">
               {% csrf_token %} {% if five_stars %}
-              <button class="text-dark star-icon"><i class="fas fa-star star-green"></i></button>
+              <button class="text-dark star-icon" aria-label="Five Star Rating"><i class="fas fa-star star-green"></i></button>
               {% else %}
-              <button class="text-dark star-icon"><i class="far fa-star"></i></button>
+              <button class="text-dark star-icon" aria-label="Five Star Rating"><i class="far fa-star"></i></button>
               {% endif %}
             </form>
             {% else %}
-            <button class="text-dark star-icon"><i class="far fa-star"></i></button>
+            <button class="text-dark star-icon" aria-label="Five Star Rating"><i class="far fa-star"></i></button>
             {% endif %}
           </div>
           <div class="col-4 rating-total ps-3 ms-2">| {{ rating_total }}/5</div>
@@ -233,8 +233,8 @@
             <div class="mb-2 ms-1">
               <div class="row">
                 <p class="fw-bold mb-0">
-                  {{ review.user }}
-                  <span class="text-muted fw-light">
+                  {{ review.user }}:
+                  <span class="text-muted">
                     {{ review.review_date }}
                   </span>
                 </p>
