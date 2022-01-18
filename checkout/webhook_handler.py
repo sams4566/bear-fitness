@@ -51,6 +51,14 @@ class WebhookHandler:
             content='Unhandled event type: {}'.format(event.type),
             status=200)
 
+    def payment_intent_intent_failed(self, event):
+        """
+        Lets the stripe user know if the payment failed
+        """
+        return HttpResponse(
+            content='Payment failed: {}'.format(event.type),
+            status=200)
+
     def payment_intent_succeeded(self, event):
         """
         The function checks if an order has already been
@@ -124,11 +132,3 @@ class WebhookHandler:
             return HttpResponse(
                 content='PaymentIntent was successful: {}'.format(event.type),
                 status=200)
-
-    def payment_intent_intent_failed(self, event):
-        """
-        Lets the stripe user know if the payment failed
-        """
-        return HttpResponse(
-            content='Payment failed: {}'.format(event.type),
-            status=200)

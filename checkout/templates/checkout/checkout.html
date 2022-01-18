@@ -57,15 +57,17 @@
         {% csrf_token %}
         <fieldset>
           <legend>User Information</legend>
-          {{ order_form.full_name | as_crispy_field}} {{ order_form.telephone | as_crispy_field }} {{ order_form.email | as_crispy_field }}
+          {{ order_form.full_name | as_crispy_field }}
+          {{ order_form.telephone | as_crispy_field }}
+          {{ order_form.email | as_crispy_field }}
         </fieldset>
         <fieldset>
           <legend>Postal Address</legend>
-          {{ order_form.address_line1 | as_crispy_field }} 
-          {{ order_form.address_line2 | as_crispy_field }} 
-          {{ order_form.city | as_crispy_field }} 
-          {{ order_form.county | as_crispy_field }} 
-          {{ order_form.country | as_crispy_field }} 
+          {{ order_form.address_line1 | as_crispy_field }}
+          {{ order_form.address_line2 | as_crispy_field }}
+          {{ order_form.city | as_crispy_field }}
+          {{ order_form.county | as_crispy_field }}
+          {{ order_form.country | as_crispy_field }}
           {{ order_form.postcode | as_crispy_field }}
         </fieldset>
         <fieldset>

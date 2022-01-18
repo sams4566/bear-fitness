@@ -55,7 +55,7 @@ def add_to_basket2(request, item_id):
     else:
         basket[item_id] = {'chosen_sizes': {size: quantity}}
         if wishlist_item_id:
-                delete_wishlist_item(request, wishlist_item_id)
+            delete_wishlist_item(request, wishlist_item_id)
 
     request.session['basket'] = basket
     return redirect(reverse('current_basket'))
