@@ -6,18 +6,19 @@ The Iron Fitness is a site that provides men's fitness clothing at a competitive
 
 ## User stories
 
-I have listed my user stories in the following agile tool so that it is easy to see where they fit in my project. I have added tags to them so it is easy to see who they are for and for which part of the site.
+### Iterations
+I have listed my user stories in five iterations within the projects tab in this repository so that it is easy to see where they fit in my project. I have added the tags 'Must Have', 'Should Have' and 'Could Have' to each of the user stories to understand which is a higher priority.
 
-[Story Points](https://github.com/sams4566/iron-fitness/projects/1)
+- [Authentication Iteration](https://github.com/sams4566/iron-fitness/projects/1)
+- [Items Iteration](https://github.com/sams4566/iron-fitness/projects/2)
+- [Basket & Wishlist Iteration](https://github.com/sams4566/iron-fitness/projects/3)
+- [Checkout Iteration](https://github.com/sams4566/iron-fitness/projects/4)
+- [Administration Iteration](https://github.com/sams4566/iron-fitness/projects/5)
 
 ### Story points
-- Below is a diagram that shows the user stories for the projects timebox and breaks down the number of story points allocated to each:
+- Below is a diagram that shows the user stories for the Items Iterations timebox and breaks down the number of story points allocated to each:
 
-![Story Points](http)
-
-- User stories were also documented throughout the project using the 'Issues' tab in the github repository. Below is a screenshot of the table used:
-
-![User Stories](http)
+![Story Points](https://github.com/sams4566/iron-fitness/blob/main/media/readme/story-points.jpg)
 
 ## Data Model
 ### Schema
@@ -148,50 +149,44 @@ I have listed my user stories in the following agile tool so that it is easy to 
 
 ## E-commerce Business Model
 
-|              |**WHO**      | **What**               | **HOW**          |
-|              |(B2C or B2B) | (Products, Digital     | (Single Payment  |
-|              |             |  Products or Services) | or Subscription) |
-|--------------|-------------|------------------------|------------------|
-| Iron Fitness | B2C         | Products               | Single Payment   |
-
 ![Business Model](https://github.com/sams4566/iron-fitness/blob/main/media/readme/business-model.jpg)
 
-- __Who is the customer?__
+__Who is the customer?__
 B2C: The customer's will primarily be men who are looking for clothes to work out in. These customers usually make the choice to buy on their own and are impulse buyers.
 
-Features: 
-- Login/logout
-- Orders for the user
+- Features: 
+  - Login/logout
+  - Orders for the user
 
-Potential Database:
-- User
+- Potential Database:
+  - User
 
-- __What will they buy?__
+__What will they buy?__
 Products: They will buy base-layers, hoodies & jackets, joggers, shorts, tank-tops & stringers and t-shirts & tops.
 
-Features:
-- List of orders
-- Filter results
-- Similar items
-- Wishlist
+- Features:
+  - List of orders
+  - Filter results
+  - Similar items
+  - Wishlist
 
-Potential Databases:
-- Category
-- Item
-- Rating
-- Review
-- Wishlist
+- Potential Databases:
+  - Category
+  - Item
+  - Rating
+  - Review
+  - Wishlist
 
-- __How will they pay?__
+__How will they pay?__
 Single Payment: They will pay online using using a credit or debit card. This works for Iron Fitness this suits businesses that sell products or one-time services. Transactions for this pay type are usually finished after the first payment.
 
-Features:
-- Easy payment system
-- Basket for items
+- Features:
+  - Easy payment system
+  - Basket for items
 
-Potential Databases:
-- Basket
-- Orders
+- Potential Databases:
+  - Basket
+  - Orders
 
 Potential Databases:
 ![Potential Database](https://github.com/sams4566/iron-fitness/blob/main/media/readme/potential-databases.jpg)
@@ -206,6 +201,8 @@ Potential Databases:
 [Facebook 1](https://github.com/sams4566/iron-fitness/blob/main/media/readme/facebook1.jpg)
 [Facebook 2](https://github.com/sams4566/iron-fitness/blob/main/media/readme/facebook2.jpg)
 [Facebook 3](https://github.com/sams4566/iron-fitness/blob/main/media/readme/facebook3.jpg)
+[MailChimp](https://github.com/sams4566/iron-fitness/blob/main/media/readme/mailchimp.jpg)
+
 
 ## Technologies used
 
@@ -259,7 +256,7 @@ I tested the site on several occations throughout its development to make sure a
 
 #### Check user logged out
 - On the navbar, the wishlist is not visible. PASS
-- Under account section of the navbar, there is not an option to 'Add Item'
+- Under account section of the navbar, there is not an option to 'Add Item'. PASS
 - When the basket is clicked a message directing the user to login to add items to their basket appears. PASS
 - On the user info page, adding a rating by clicking one of the stars doesn't change the rating total. PASS
 - On the user info page, there is no option to leave a review. PASS
