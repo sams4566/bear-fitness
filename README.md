@@ -2,7 +2,51 @@
 
 The Iron Fitness is a site that provides men's fitness clothing at a competitive price. User's can browse different styles and see a variety of different sizes in each. User's have the option to buy items quickly through adding their chosen items to their basket and proceeding to the checkout where they pay for the item through an online payment. Users can also save items to a wishlist if they want to browse the store and potentially buy them at another time.
 
-![Welcome Image](http)
+![Welcome Image](https://github.com/sams4566/iron-fitness/blob/main/media/readme/welcome-image.jpg)
+
+## E-commerce Business Model
+
+![Business Model](https://github.com/sams4566/iron-fitness/blob/main/media/readme/business-model.jpg)
+
+__B2C__
+The customer's will primarily be men who are looking for clothes to work out in. These customers usually make the choice to buy on their own and are impulse buyers.
+
+- Features to add: 
+  - Login/logout
+  - List of orders made by the user
+
+- Potential Database (image below):
+  - User
+
+__Products__
+The customers will buy base-layers, hoodies & jackets, joggers, shorts, tank-tops & stringers and t-shirts & tops.
+
+- Features:
+  - List of items
+  - Filter results
+  - Similar items
+  - Wishlist
+
+- Potential Databases (image below):
+  - Category
+  - Item
+  - Rating
+  - Review
+  - Wishlist
+
+__Single Payment__
+Customers will pay online using using a credit or debit card. The single payment method works for businesses that sell products or one-time services, making this ideal for 'Iron Fitness'. Transactions for this pay type are usually finished after the first payment.
+
+- Features:
+  - Easy payment system
+  - Basket for items
+
+- Potential Databases (image below):
+  - Basket
+  - Orders
+
+Potential Databases:
+![Potential Database](https://github.com/sams4566/iron-fitness/blob/main/media/readme/potential-databases.jpg)
 
 ## User stories
 
@@ -60,7 +104,7 @@ I have listed my user stories in five iterations within the projects tab in this
   - The footer has a link to the companies Facebook page and their privacy policy as it is important that users have easy access to both these links.
   - The header and footer are the same in all pages as they are part of the base.html file.
 
-![Header and Footer](http)
+![Header and Footer](https://github.com/sams4566/iron-fitness/blob/main/media/readme/header-footer.jpg)
 
 - __Authentication__
   - Users will be able to sign-up, sign-in and sign-out using the below screens.
@@ -68,20 +112,20 @@ I have listed my user stories in five iterations within the projects tab in this
   - If users aren't logged in they won't be able to add products to a basket or wishlist alongside leaving a rating or review of a product.
   - I used the built in django.allauth package to impliment these functions.
 
-![Authentication](http)
+![Authentication](https://github.com/sams4566/iron-fitness/blob/main/media/readme/authentication.jpg)
 
 - __Home page__
   - The home page quickly lets the user know that the page allows users to buy clothing.
   - The newsletter sign-up is on the front page so that it is one of the first things a user thinks about when they enter the page. Having easy access to signing up will increase the number of emails retrieved for marketing.
   - The large view clothing button organicly leads users on to seeing the products available.
 
-![Home page](http)
+![Home page](https://github.com/sams4566/iron-fitness/blob/main/media/readme/home.jpg)
 
 - __List of products pages__
   - The list of products page lays out the list of products in an organic fashion with the number of products per line reducing on lower screen sizes.
   - Depending on the option choosen by the user in the clothing dropdown menu the products and title displayed will be filtered.
 
-![List of products pages](http)
+![All products](https://github.com/sams4566/iron-fitness/blob/main/media/readme/all-products.jpg)
 
 - __Product Info page__
   - The product info page displays all of the key product information in an effective layout that allows the user to quickly read the key information.
@@ -90,28 +134,30 @@ I have listed my user stories in five iterations within the projects tab in this
   - If the user is an Admin they can edit and add products to the system.
   - The list of similar products helps guide the user to other products to increase their interaction with the site.
 
-![Product Info page](http)
+![Product Info 1](https://github.com/sams4566/iron-fitness/blob/main/media/readme/product-info1.jpg)
+---
+![Product Info 2](https://github.com/sams4566/iron-fitness/blob/main/media/readme/product-info2.jpg)
 
 - __Add and Edit Products__
   - An Admin has the ability to edit and add products to the site to keep the site up to date.
   - When a user tries to edit a product the information that has previously been entered is prepopulated.
   - A default image is also set in place if a picture isn't added to a product.
 
-![Add and Edit Products](http)
+![Edit Product](https://github.com/sams4566/iron-fitness/blob/main/media/readme/edit-product.jpg)
 
 - __Wishlist__
   - The user can add items to a wishlist if they don't want to make a decision about paying for the product straight away. 
   - Items be deleted from the wishlist and their sizes can be edited.
   - User can move items to there basket at any point and an error message appears if the item is already in their basket.
 
-![Wishlist](http)
+![Wishlist](https://github.com/sams4566/iron-fitness/blob/main/media/readme/wishlist.jpg)
 
 - __Basket__
   - Users can quickly see the total cost of the items in their basket when they first enter the basket.
   - If there are more than 2 items in the basket a 'More Items' button appears. This prevents the page from being to cramped.
   - Items sizes can be edited and deleted from the basket if the customer changes their mind. 
 
-![Basket](http)
+![Basket](https://github.com/sams4566/iron-fitness/blob/main/media/readme/basket.jpg)
 
 - __Checkout__
   - The checkout form is a generic form that users will be familiar with when paying for products on other sites.
@@ -119,24 +165,24 @@ I have listed my user stories in five iterations within the projects tab in this
   - If the user enters card details that are declined an error message appears to let them know the issue. The user details also aren't deleted meaning they can quickly change their card details and pay for their items.
   - A loading screen appears while their card details are being checked to stop the user from exiting the screen before the payment is complete.
 
-![Checkout](http)
+![Checkout](https://github.com/sams4566/iron-fitness/blob/main/media/readme/checkout.jpg)
 
 - __Order Confirmation__
   - Once the payment has been completed users are directed to an order confirmation page that displays the key information for their order.
   - The 'Your payment was successful' message also clears up any ambiguaty regarding whether the payment went through.
   - A 'View Orders' button directs the user to all the orders they have made.
 
-![Order Confirmation](http)
+![Order Confirmation](https://github.com/sams4566/iron-fitness/blob/main/media/readme/order-confirmation.jpg)
 
 - __List of Orders__
   - User can see a list of their order on this page and can click into each to see each orders specific details.
 
-![List of Orders](http)
+![List of Orders](https://github.com/sams4566/iron-fitness/blob/main/media/readme/orders.jpg)
 
 - __Django Admin Panel__
   - The Django Admin Panel allows site managers to add, edit and delete orders, users, products, categories, ratings and reviews.
 
-![Admin](http)
+![Admin](https://github.com/sams4566/iron-fitness/blob/main/media/readme/admin.jpg)
 
 ### Future features
 
@@ -147,50 +193,6 @@ I have listed my user stories in five iterations within the projects tab in this
 - Produce a breakdown table for users of how many of the star ratings were one star, two star etc.
 - Have the home page products be items on sale.
 
-## E-commerce Business Model
-
-![Business Model](https://github.com/sams4566/iron-fitness/blob/main/media/readme/business-model.jpg)
-
-__Who is the customer?__
-B2C: The customer's will primarily be men who are looking for clothes to work out in. These customers usually make the choice to buy on their own and are impulse buyers.
-
-- Features: 
-  - Login/logout
-  - Orders for the user
-
-- Potential Database:
-  - User
-
-__What will they buy?__
-Products: They will buy base-layers, hoodies & jackets, joggers, shorts, tank-tops & stringers and t-shirts & tops.
-
-- Features:
-  - List of orders
-  - Filter results
-  - Similar items
-  - Wishlist
-
-- Potential Databases:
-  - Category
-  - Item
-  - Rating
-  - Review
-  - Wishlist
-
-__How will they pay?__
-Single Payment: They will pay online using using a credit or debit card. This works for Iron Fitness this suits businesses that sell products or one-time services. Transactions for this pay type are usually finished after the first payment.
-
-- Features:
-  - Easy payment system
-  - Basket for items
-
-- Potential Databases:
-  - Basket
-  - Orders
-
-Potential Databases:
-![Potential Database](https://github.com/sams4566/iron-fitness/blob/main/media/readme/potential-databases.jpg)
-
 ## Marketing
 - I created a Facebook page to help generate business for the site and to spread the word (Pictures below).
 - Using organic social media will be a key way in developing the business. I aim to have a presence on other social media sites such as Twitter, Instagram and LinkedIn as these are the main social media channels young adult men would use.
@@ -198,11 +200,10 @@ Potential Databases:
 - Email marketing will be a key part in increasing website traffic as using sites like MailChimp to collect emails can be relatively inexpensive. The newsletter sign-up is the first stage of retrieving emails.
 - Using paid adverts such as Google ads will not initially be a priority due to the cost but will be in the future.
 
-[Facebook 1](https://github.com/sams4566/iron-fitness/blob/main/media/readme/facebook1.jpg)
-[Facebook 2](https://github.com/sams4566/iron-fitness/blob/main/media/readme/facebook2.jpg)
-[Facebook 3](https://github.com/sams4566/iron-fitness/blob/main/media/readme/facebook3.jpg)
-[MailChimp](https://github.com/sams4566/iron-fitness/blob/main/media/readme/mailchimp.jpg)
-
+- [Facebook 1](https://github.com/sams4566/iron-fitness/blob/main/media/readme/facebook1.jpg)
+- [Facebook 2](https://github.com/sams4566/iron-fitness/blob/main/media/readme/facebook2.jpg)
+- [Facebook 3](https://github.com/sams4566/iron-fitness/blob/main/media/readme/facebook3.jpg)
+- [MailChimp](https://github.com/sams4566/iron-fitness/blob/main/media/readme/mailchimp.jpg)
 
 ## Technologies used
 
@@ -403,7 +404,12 @@ For user testing I asked two friends to do a number of manual tests such as addi
 ### Content/Tutorials
   - [The Django Documentation](https://docs.djangoproject.com/en/4.0/)
   - Bootstrap Themes - [Shop Homepage](https://startbootstrap.com/template/shop-homepage) and [Shop Item](https://startbootstrap.com/template/shop-item)
+  - [Stripe Documentation](https://stripe.com/docs)
+  - [Amazon S3 Documentation](https://docs.aws.amazon.com/s3/index.html)
 
 ### Media
-  - [Gymshark](https://uk.gymshark.com/) - for items images and information.
+  - [Gymshark](https://uk.gymshark.com/) - for product images and information.
+  - [Home page background photo](https://www.bbc.co.uk/news/business-45246999)
+  - [Deadlift Photo](https://mirafit.co.uk/blog/types-of-deadlifts/)
+  - [No image available photo](https://www.trendsetter.com/xtr541g74-d.html)
 
