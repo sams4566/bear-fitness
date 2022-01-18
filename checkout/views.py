@@ -1,5 +1,3 @@
-import json
-import stripe
 from .forms import OrderForm
 from django.views.decorators.http import require_POST
 from django.conf import settings
@@ -9,6 +7,8 @@ from .models import OrderItem, Order
 from django.contrib.auth.models import User
 from django.shortcuts import HttpResponse, render, get_object_or_404, \
     redirect, reverse
+import json
+import stripe
 
 
 @require_POST

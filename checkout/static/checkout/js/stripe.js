@@ -83,7 +83,7 @@ form.addEventListener('submit', function(event) {
                 $('#loading-background').fadeToggle(110);
             } else {
                 if (result.paymentIntent.status === 'succeeded') {
-                    // form.submit();
+                    form.submit();
                 }
             }
         }).fail(function () {
