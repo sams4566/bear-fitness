@@ -187,10 +187,11 @@ STRIPE_CURRENCY = 'gbp'
 # AWS Configuration
 if 'USE_AWS' in os.environ:
     # Cashe Control
-    # AWS_S3_OBJECT_PARAMETERS = {
-    #     'Expires': 'Thu, 1 Jan 2099 19:00:00 GMT',
-    #     'CacheControl': 'max-age=94608000',
-    # }
+    AWS_S3_OBJECT_PARAMETERS = {
+        # 'Expires': 'Thu, 1 Jan 2099 19:00:00 GMT',
+        # 'CacheControl': 'max-age=94608000',
+        'CacheControl': 'no-cache',
+    }
 
     # Configuration for bucket
     AWS_STORAGE_BUCKET_NAME = 'iron-fitness1'
