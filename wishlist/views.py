@@ -63,9 +63,16 @@ def update_wishlist(request, item_id):
     It throws an error if the same item with the same size
     is already in the wishlist.
     """
+    user_id = request.user.id
+    if not request.POST.get('item_size'):
+        messages.add_message(
+            request,
+            messages.INFO,
+            "That size is already in your wishlist.",
+        )
+        return redirect('wishlist', user_id=user_id)
     current_size = request.POST['size_id']
     size = request.POST.get('item_size')
-    user_id = request.user.id
     wishlist_items = list(Wishlist.objects.all().filter(
         customer_name_id=user_id))
     item = get_object_or_404(Item, pk=item_id)

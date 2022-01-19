@@ -71,6 +71,9 @@ def update_basket(request, item_id):
     basket = request.session.get('basket', {})
     current_size = request.POST['size_id']
     size = request.POST.get('item_size')
+    if not request.POST.get('item_size'):
+        messages.error(request, "That item is already in your basket")
+        return redirect(reverse('current_basket'))
 
     if item_id in list(basket.keys()):
         if size not in basket[item_id]['chosen_sizes'].keys():

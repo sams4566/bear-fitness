@@ -8,8 +8,7 @@ Iron Fitness is a site that provides men's fitness clothing at a competitive pri
 
 ![Business Model](https://github.com/sams4566/iron-fitness/blob/main/media/readme/business-model.jpg)
 
-__B2C__
-The customer's will primarily be young adult men who are looking for clothes to work out in. These customers usually make the choice to buy on their own and are impulse buyers.
+__B2C__ - The customer's will primarily be young adult men who are looking for clothes to work out in. These customers usually make the choice to buy on their own and are impulse buyers.
 
 - Features to add: 
   - Login/logout
@@ -18,8 +17,7 @@ The customer's will primarily be young adult men who are looking for clothes to 
 - Potential Database (image below):
   - User
 
-__Products__
-The customers will buy base-layers, hoodies & jackets, joggers, shorts, tank-tops & stringers and t-shirts & tops.
+__Products__ - The customers will buy base-layers, hoodies & jackets, joggers, shorts, tank-tops & stringers and t-shirts & tops.
 
 - Features:
   - List of items
@@ -34,8 +32,7 @@ The customers will buy base-layers, hoodies & jackets, joggers, shorts, tank-top
   - Review
   - Wishlist
 
-__Single Payment__
-Customers will pay online using a credit or debit card. The single payment method works for businesses that sell products or one-time services, making this ideal for 'Iron Fitness'.
+__Single Payment__ - Customers will pay online using a credit or debit card. The single payment method works for businesses that sell products or one-time services, making this ideal for 'Iron Fitness'.
 
 - Features:
   - Easy payment system
