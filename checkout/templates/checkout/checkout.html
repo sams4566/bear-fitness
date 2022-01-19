@@ -98,6 +98,6 @@
   {{ block.super }} 
   {{ client_secret|json_script:"var_client_secret" }} 
   {{ stripe_public_key|json_script:"var_stripe_public_key" }}
-  <script src="{% static 'checkout/js/stripe.js' %}"></script>
+  <script src="{% static 'checkout/js/payment.js' %}"></script>
   <script src="{% static 'checkout/js/checkout.js' %}"></script>
 {% endblock %}
